@@ -1,0 +1,2789 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📘 Formation CCNA — Cours + 250 Exercices Corrigés</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Kalam:wght@300;400;700&family=Patrick+Hand&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<!-- Integration de Mermaid pour les schemas dynamiques -->
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { fontFamily: 'Patrick Hand' } });
+</script>
+
+<style>
+:root{
+  --paper:#f7f1e1;--paper-2:#fffdf6;--paper-3:#fdf8ea;
+  --ink:#1f2d4d;--ink-soft:#55638a;
+  --blue:#2a5db0;--red:#c0392b;--green:#1e7a4c;
+  --orange:#d97706;--purple:#7c3aed;
+  --highlight:#ffe680;--tape:rgba(255,233,160,.85);
+  --shadow: 0 6px 18px rgba(31,45,77,.12), 0 2px 4px rgba(31,45,77,.08);
+  --shadow-sm: 0 3px 8px rgba(31,45,77,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{
+  font-family:'Patrick Hand','Kalam',cursive,system-ui,sans-serif;
+  color:var(--ink);background-color:var(--paper);
+  background-image:
+    repeating-linear-gradient(to bottom, transparent 0 31px, rgba(203,218,234,.55) 31px 32px),
+    radial-gradient(circle at 20% 10%, rgba(255,255,255,.6), transparent 60%);
+  background-attachment:fixed;line-height:1.65;font-size:17px;overflow-x:hidden;
+}
+::selection{background:var(--highlight);color:var(--ink)}
+::-webkit-scrollbar{width:12px;height:12px}
+::-webkit-scrollbar-track{background:var(--paper)}
+::-webkit-scrollbar-thumb{background:#c9b895;border-radius:8px;border:2px solid var(--paper)}
+::-webkit-scrollbar-thumb:hover{background:#b3a07b}
+
+/* COVER */
+.cover{
+  position:relative;max-width:1180px;margin:26px auto 0;padding:44px 40px 38px;
+  background:linear-gradient(135deg,#fffdf6 0%, #fdf6e3 100%);
+  border:2px solid var(--ink);
+  border-radius: 255px 18px 225px 18px / 18px 225px 18px 255px;
+  box-shadow: var(--shadow);overflow:hidden;
+}
+.cover::before{content:"";position:absolute;inset:8px;border:2px dashed rgba(42,93,176,.35);
+  border-radius: 240px 14px 210px 14px / 14px 210px 14px 240px;pointer-events:none}
+.cover::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;
+  background:radial-gradient(circle, rgba(255,230,128,.45), transparent 70%);border-radius:50%;pointer-events:none}
+.cover-tape{position:absolute;top:-14px;left:50%;transform:translateX(-50%) rotate(-2deg);
+  width:190px;height:34px;background:var(--tape);
+  border-left:1px dashed rgba(0,0,0,.12);border-right:1px dashed rgba(0,0,0,.12);
+  box-shadow:0 2px 5px rgba(0,0,0,.08)}
+.cover h1{font-family:'Caveat',cursive;font-size:clamp(2.4rem,5.5vw,4rem);font-weight:700;
+  line-height:1.05;letter-spacing:.5px}
+.cover h1 .accent{color:var(--red);text-decoration:underline wavy var(--red) 3px;text-underline-offset:8px}
+.cover h1 .accent2{color:var(--blue)}
+.cover .sub{font-family:'Kalam',cursive;font-size:clamp(1.05rem,2vw,1.35rem);
+  color:var(--ink-soft);margin-top:10px;max-width:820px}
+.cover .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.badge{font-family:'Kalam',cursive;font-size:.85rem;font-weight:700;padding:5px 14px;
+  border:2px solid var(--ink);border-radius: 20px 6px 18px 6px / 6px 18px 6px 20px;
+  background:var(--paper-2);box-shadow:2px 2px 0 rgba(31,45,77,.18)}
+.badge.b-deb{border-color:var(--green);color:var(--green);background:#eaf7ef}
+.badge.b-int{border-color:var(--orange);color:var(--orange);background:#fdf3e3}
+.badge.b-av{color:var(--purple);border-color:var(--purple);background:#f3ecfd}
+.badge.b-ccna{color:var(--red);border-color:var(--red);background:#fdecea}
+.badge.b-pro{color:#fff;border-color:var(--blue);background:var(--blue)}
+
+/* TOPBAR */
+.topbar{position:sticky;top:0;z-index:80;backdrop-filter:blur(8px);
+  background:rgba(247,241,225,.92);border-bottom:2px solid var(--ink);margin-top:28px;padding:10px 20px}
+.topbar-inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.topbar .logo{font-family:'Caveat',cursive;font-weight:700;font-size:1.7rem;
+  color:var(--ink);white-space:nowrap}
+.topbar .logo span{color:var(--red)}
+.search-wrap{flex:1;min-width:200px;position:relative}
+.search-wrap input{width:100%;font-family:'Patrick Hand',cursive;font-size:1rem;
+  padding:9px 14px 9px 38px;border:2px solid var(--ink);
+  border-radius: 40px 8px 40px 8px / 8px 40px 8px 40px;
+  background:var(--paper-2);color:var(--ink);outline:none;transition:box-shadow .2s, border-color .2s}
+.search-wrap input:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(42,93,176,.15)}
+.search-wrap::before{content:"🔍";position:absolute;left:12px;top:50%;transform:translateY(-50%);
+  font-size:1rem;opacity:.65}
+.progress-wrap{display:flex;align-items:center;gap:10px;font-family:'Kalam',cursive;
+  font-size:.85rem;font-weight:700;color:var(--ink-soft);white-space:nowrap}
+.progress-bar{width:130px;height:12px;border:2px solid var(--ink);border-radius:20px;
+  background:var(--paper-2);overflow:hidden;position:relative}
+.progress-bar > i{display:block;height:100%;width:0%;
+  background:repeating-linear-gradient(45deg, var(--green), var(--green) 6px, #34a06a 6px, #34a06a 12px);
+  transition:width .4s ease}
+.btn{font-family:'Kalam',cursive;font-weight:700;font-size:.9rem;padding:7px 14px;
+  border:2px solid var(--ink);background:var(--paper-2);color:var(--ink);cursor:pointer;
+  border-radius: 22px 6px 20px 6px / 6px 20px 6px 22px;
+  box-shadow:2px 2px 0 rgba(31,45,77,.22);
+  transition:transform .12s, box-shadow .12s, background .2s;white-space:nowrap}
+.btn:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 rgba(31,45,77,.28);background:#fff8dc}
+.btn:active{transform:translate(1px,1px);box-shadow:1px 1px 0 rgba(31,45,77,.22)}
+.btn.primary{background:var(--ink);color:#fffdf6}
+.btn.primary:hover{background:#2b3d66}
+.btn.green{background:var(--green);color:#fffdf6;border-color:var(--green)}
+.btn.green:hover{background:#176540}
+
+/* LAYOUT */
+.layout{max-width:1180px;margin:26px auto 80px;padding:0 20px;
+  display:grid;grid-template-columns:280px 1fr;gap:34px;align-items:start}
+@media (max-width:920px){.layout{grid-template-columns:1fr;gap:20px}}
+
+/* SIDEBAR */
+.sidebar{position:sticky;top:88px;align-self:start;max-height:calc(100vh - 110px);
+  overflow-y:auto;padding:18px 14px 18px 18px;background:var(--paper-2);
+  border:2px solid var(--ink);
+  border-radius: 14px 4px 16px 4px / 4px 16px 4px 14px;
+  box-shadow: var(--shadow-sm);transform:rotate(-0.4deg)}
+@media (max-width:920px){.sidebar{position:relative;top:0;max-height:none;transform:none}}
+.sidebar h3{font-family:'Caveat',cursive;font-size:1.5rem;color:var(--red);
+  border-bottom:2px dashed var(--ink);padding-bottom:6px;margin-bottom:12px}
+.sidebar .mod{font-family:'Kalam',cursive;font-size:.78rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.5px;color:var(--ink-soft);
+  margin:12px 0 6px;padding-left:4px;border-left:4px solid var(--orange)}
+.sidebar a{display:flex;align-items:center;gap:8px;font-family:'Patrick Hand',cursive;
+  font-size:.95rem;color:var(--ink);text-decoration:none;padding:5px 8px;
+  border-radius:6px;transition:background .15s, transform .15s;line-height:1.25}
+.sidebar a:hover{background:var(--highlight);transform:translateX(3px)}
+.sidebar a.active{background:var(--blue);color:#fffdf6}
+.sidebar a .n{font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:600;
+  background:var(--ink);color:#fffdf6;padding:1px 6px;border-radius:4px;flex-shrink:0}
+.sidebar a.active .n{background:#fffdf6;color:var(--blue)}
+.sidebar a.done::after{content:"✔";color:var(--green);margin-left:auto;font-weight:700}
+.sidebar a.active.done::after{color:#b9ffd4}
+
+/* POSTERS */
+.posters{display:flex;flex-direction:column;gap:44px}
+.poster{position:relative;background:var(--paper-2);border:2px solid var(--ink);
+  border-radius: 18px 5px 20px 5px / 5px 20px 5px 18px;
+  box-shadow: var(--shadow);padding:34px 30px 30px;
+  background-image:repeating-linear-gradient(to bottom, transparent 0 31px, rgba(203,218,234,.35) 31px 32px);
+  transition:transform .25s, box-shadow .25s, opacity .3s}
+.poster:nth-child(odd){transform:rotate(-.35deg)}
+.poster:nth-child(even){transform:rotate(.35deg)}
+.poster:hover{transform:rotate(0deg) translateY(-3px);box-shadow:0 12px 28px rgba(31,45,77,.16)}
+.poster.hidden{display:none}
+
+.pin{position:absolute;top:-14px;left:34px;width:26px;height:26px;border-radius:50%;
+  background:radial-gradient(circle at 32% 30%, #ff9f9f, #d64545 60%, #8a2626);
+  box-shadow: 0 4px 6px rgba(0,0,0,.28), inset -2px -3px 6px rgba(0,0,0,.25);z-index:3}
+.pin::after{content:"";position:absolute;left:50%;top:70%;width:3px;height:12px;
+  transform:translateX(-50%);background:linear-gradient(#666,#222);border-radius:2px;
+  box-shadow:0 2px 3px rgba(0,0,0,.4)}
+.poster:nth-child(3n+2) .pin{left:auto;right:44px;
+  background:radial-gradient(circle at 32% 30%, #9fd6ff, #3b82c4 60%, #1c4e7a)}
+.poster:nth-child(3n+3) .pin{left:auto;right:60px;
+  background:radial-gradient(circle at 32% 30%, #ffe08a, #d99e1f 60%, #8a6410)}
+
+.tape{position:absolute;width:110px;height:26px;background:var(--tape);
+  box-shadow: 0 2px 5px rgba(0,0,0,.08);z-index:2;
+  border-left:1px dashed rgba(0,0,0,.10);border-right:1px dashed rgba(0,0,0,.10)}
+.tape.t1{top:-13px;right:90px;transform:rotate(3.5deg)}
+.tape.t2{bottom:-13px;left:70px;transform:rotate(-2.5deg)}
+
+.poster-head{display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  border-bottom:3px solid var(--ink);padding-bottom:10px;margin-bottom:18px;position:relative}
+.poster-head::after{content:"";position:absolute;left:0;bottom:-7px;width:120px;height:4px;
+  background:var(--red);border-radius:4px}
+.poster-num{font-family:'Caveat',cursive;font-weight:700;font-size:2rem;line-height:1;
+  color:#fffdf6;background:var(--red);padding:4px 12px;
+  border-radius: 14px 4px 14px 4px / 4px 14px 4px 14px;
+  box-shadow:2px 2px 0 rgba(31,45,77,.35);transform:rotate(-3deg);flex-shrink:0}
+.poster h2{font-family:'Caveat',cursive;font-size:clamp(1.6rem,3vw,2.3rem);
+  font-weight:700;color:var(--blue);line-height:1.1;flex:1;min-width:180px}
+.poster-head .lvl{font-family:'Kalam',cursive;font-size:.78rem;font-weight:700;
+  padding:3px 11px;border-radius:16px;border:2px solid currentColor;white-space:nowrap}
+.lvl.deb{color:var(--green);background:#eaf7ef}
+.lvl.int{color:var(--orange);background:#fdf3e3}
+.lvl.av{color:var(--purple);background:#f3ecfd}
+.lvl.ccna{color:var(--red);background:#fdecea}
+
+.poster h3{font-family:'Caveat',cursive;font-size:1.55rem;color:var(--red);
+  margin:22px 0 10px;display:flex;align-items:center;gap:8px}
+.poster h3::before{content:"✎";color:var(--orange);font-size:1.2rem}
+.poster h4{font-family:'Kalam',cursive;font-size:1.12rem;color:var(--blue);margin:16px 0 6px}
+.poster p{margin:8px 0;color:var(--ink)}
+.poster ul, .poster ol{margin:8px 0 8px 24px}
+.poster li{margin:5px 0}
+.poster li::marker{color:var(--orange);font-weight:700}
+.poster strong{color:var(--red);font-weight:700}
+.poster em{color:var(--blue);font-style:normal;font-weight:700}
+.poster code{font-family:'JetBrains Mono',monospace;font-size:.85em;
+  background:rgba(255,230,128,.55);padding:1px 6px;border-radius:4px;color:#7a3b00}
+
+.callout{position:relative;margin:16px 0;padding:14px 18px 14px 20px;
+  border:2px solid var(--ink);border-left-width:8px;
+  border-radius: 10px 4px 12px 4px / 4px 12px 4px 10px;
+  background:var(--paper-3);box-shadow:2px 2px 0 rgba(31,45,77,.12);
+  font-family:'Kalam',cursive;font-size:.98rem}
+.callout::before{content:attr(data-icon);position:absolute;left:-16px;top:-14px;font-size:1.4rem;
+  background:var(--paper-2);width:30px;height:30px;
+  display:flex;align-items:center;justify-content:center;
+  border:2px solid var(--ink);border-radius:50%;box-shadow:2px 2px 0 rgba(31,45,77,.2)}
+.callout.astuce{border-left-color:var(--green);background:#eaf7ef}
+.callout.piege{border-left-color:var(--red);background:#fdecea}
+.callout.retenir{border-left-color:var(--orange);background:#fdf3e3}
+.callout.info{border-left-color:var(--blue);background:#e9f0fb}
+.callout .label{display:inline-block;font-weight:700;margin-right:6px}
+.callout.astuce .label{color:var(--green)}
+.callout.piege .label{color:var(--red)}
+.callout.retenir .label{color:var(--orange)}
+.callout.info .label{color:var(--blue)}
+
+.simple{position:relative;margin:16px 0;padding:16px 20px 16px 22px;
+  border:2px dashed var(--blue);
+  border-radius: 12px 4px 14px 4px / 4px 14px 4px 12px;
+  background:#eef4fc;font-family:'Kalam',cursive;font-size:1rem}
+.simple::before{content:"🎓 En clair :";position:absolute;top:-13px;left:16px;
+  background:var(--blue);color:#fffdf6;font-family:'Kalam',cursive;font-weight:700;font-size:.85rem;
+  padding:2px 12px;border-radius:14px;box-shadow:2px 2px 0 rgba(31,45,77,.25)}
+.simple p{margin:6px 0;color:#1c2b4a;font-size:.98rem}
+
+.tbl-wrap{overflow-x:auto;margin:14px 0;padding-bottom:4px}
+table{border-collapse:collapse;width:100%;font-family:'Patrick Hand',cursive;font-size:.95rem;
+  background:var(--paper-2);border:2px solid var(--ink);
+  border-radius: 10px 4px 12px 4px / 4px 12px 4px 10px;overflow:hidden;
+  box-shadow:2px 2px 0 rgba(31,45,77,.12)}
+table thead th{background:var(--ink);color:#fffdf6;font-family:'Kalam',cursive;font-weight:700;
+  padding:9px 12px;text-align:left;border-right:1px solid rgba(255,255,255,.15);
+  letter-spacing:.3px;font-size:.9rem}
+table thead th:last-child{border-right:none}
+table tbody td{padding:8px 12px;border-bottom:1px dashed rgba(31,45,77,.22);
+  border-right:1px dashed rgba(31,45,77,.15);vertical-align:top}
+table tbody td:last-child{border-right:none}
+table tbody tr:nth-child(even){background:rgba(255,230,128,.14)}
+table tbody tr:hover{background:rgba(255,230,128,.35)}
+table tbody tr:last-child td{border-bottom:none}
+
+pre{margin:14px 0;padding:16px 18px;background:#1f2d4d;color:#f5f0e0;
+  border:2px solid var(--ink);
+  border-radius: 12px 4px 14px 4px / 4px 14px 4px 12px;
+  overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:.82rem;line-height:1.7;
+  box-shadow: 3px 3px 0 rgba(31,45,77,.28);position:relative}
+pre::before{content:"⌨  CLI";position:absolute;top:-1px;right:-1px;
+  background:var(--orange);color:#fffdf6;font-family:'Kalam',cursive;
+  font-size:.72rem;font-weight:700;padding:2px 10px;border-radius:0 4px 0 8px}
+pre code{background:none;color:inherit;padding:0;font-size:inherit}
+pre .cmt{color:#7fd6a0;opacity:.85}
+pre .kw{color:#ffd479}
+
+.schema{font-family:'JetBrains Mono',monospace;font-size:.82rem;background:#fffdf6;
+  border:2px dashed var(--blue);
+  border-radius: 12px 4px 14px 4px / 4px 14px 4px 12px;
+  padding:16px 18px;margin:14px 0;white-space:pre;overflow-x:auto;color:var(--ink);
+  line-height:1.5;box-shadow:2px 2px 0 rgba(42,93,176,.15)}
+
+.done-toggle{position:absolute;top:22px;right:22px;display:flex;align-items:center;gap:6px;
+  font-family:'Kalam',cursive;font-size:.82rem;font-weight:700;color:var(--ink-soft);
+  background:var(--paper-3);border:2px solid var(--ink);border-radius:20px;
+  padding:4px 12px 4px 8px;cursor:pointer;user-select:none;
+  transition:background .2s, color .2s;z-index:4}
+.done-toggle:hover{background:var(--highlight)}
+.done-toggle input{appearance:none;-webkit-appearance:none;width:16px;height:16px;
+  border:2px solid var(--ink);border-radius:4px;background:var(--paper-2);
+  cursor:pointer;position:relative;transition:background .15s}
+.done-toggle input:checked{background:var(--green);border-color:var(--green)}
+.done-toggle input:checked::after{content:"✔";position:absolute;inset:0;
+  color:#fffdf6;font-size:12px;display:flex;align-items:center;justify-content:center;font-weight:900}
+.poster.is-done{border-color:var(--green)}
+.poster.is-done .poster-head::after{background:var(--green)}
+
+/* EXERCICES */
+.exercices{margin-top:26px;padding:20px 22px;background:#fdf8ea;
+  border:2px solid var(--orange);border-left:8px solid var(--orange);
+  border-radius: 14px 4px 16px 4px / 4px 16px 4px 14px;
+  box-shadow:3px 3px 0 rgba(217,119,6,.18);position:relative}
+.exercices::before{content:"📝";position:absolute;top:-18px;left:20px;
+  font-size:1.7rem;background:var(--paper-2);width:40px;height:40px;
+  display:flex;align-items:center;justify-content:center;
+  border:2px solid var(--orange);border-radius:50%;box-shadow:2px 2px 0 rgba(217,119,6,.25)}
+.exercices h3{font-family:'Caveat',cursive;font-size:1.7rem;color:var(--orange);
+  margin:6px 0 14px;border-bottom:2px dashed var(--orange);padding-bottom:6px}
+.exercices h3::before{content:"→";color:var(--orange)}
+.exercices .part{font-family:'Kalam',cursive;font-weight:700;color:var(--red);
+  font-size:1.05rem;margin:16px 0 6px;padding-left:10px;border-left:4px solid var(--red)}
+.exercices ol{margin-left:22px}
+.exercices ol > li{margin:10px 0;padding:6px 0;font-family:'Patrick Hand',cursive}
+.exercices ol > li strong{color:var(--orange)}
+.exercices .qcm{list-style-type:none;margin-left:8px}
+.exercices .qcm li{margin:3px 0;padding-left:4px}
+
+/* INJECTED CSS FOR ANIMATIONS & IMAGES & NEW EXERCISES */
+.anim-box { background: #fffdf6; border: 2px dashed var(--ink); border-radius: 12px; padding: 20px; margin: 20px 0; position: relative; overflow: hidden; display: flex; justify-content: space-between; align-items: center; height: 140px; box-shadow: inset 0 2px 10px rgba(0,0,0,0.05); }
+.anim-pc, .anim-router, .anim-switch { display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; z-index: 2; border: 2px solid var(--ink); }
+.anim-pc { width: 60px; height: 50px; background: var(--ink); border-radius: 6px; position: relative; font-size: 0.9rem; }
+.anim-pc::after { content: ""; position: absolute; bottom: -8px; left: 10px; right: 10px; height: 8px; background: var(--ink-soft); }
+.anim-router { width: 60px; height: 60px; background: var(--blue); border-radius: 50%; }
+.anim-switch { width: 70px; height: 35px; background: var(--orange); border-radius: 4px; }
+.anim-cable { position: absolute; top: 50%; left: 10%; right: 10%; height: 3px; background: var(--ink-soft); z-index: 1; transform: translateY(-50%); }
+.anim-packet { position: absolute; top: 50%; left: 15%; width: 28px; height: 20px; background: var(--red); border-radius: 4px; z-index: 3; transform: translateY(-50%); color: white; font-size: 0.65rem; display: flex; align-items: center; justify-content: center; font-weight: bold; border: 1px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
+.anim-packet-move { animation: moveRight 3s infinite ease-in-out; }
+.anim-packet-bpdu { animation: moveBPDU 2s infinite ease-in-out; background: var(--purple); }
+@keyframes moveRight { 0% { left: 10%; opacity: 0; } 10% { opacity: 1; } 90% { left: 85%; opacity: 1; } 100% { opacity: 0; left: 85%; } }
+@keyframes moveBPDU { 0% { left: 20%; top: 30%; opacity: 0;} 20% { opacity: 1; } 80% { left: 75%; top: 65%; opacity: 1;} 100% { opacity: 0; left: 75%; top: 65%; } }
+.mermaid { background: white; padding: 15px; border-radius: 12px; border: 2px solid var(--ink); margin: 20px 0; display: flex; justify-content: center; overflow-x: auto; box-shadow: 2px 2px 0 rgba(31,45,77,.15); }
+.diff-facile { border-left-color: var(--green) !important; color: var(--green) !important; }
+.diff-moyen { border-left-color: var(--orange) !important; color: var(--orange) !important; }
+.diff-difficile { border-left-color: var(--red) !important; color: var(--red) !important; }
+.diff-expert { border-left-color: var(--purple) !important; color: var(--purple) !important; }
+.course-img { width: 100%; border-radius: 12px; border: 2px solid var(--ink); margin: 15px 0; box-shadow: 2px 2px 0 rgba(31,45,77,.15); display:block; }
+
+.corriges{margin-top:14px;padding:0;background:#eaf7ef;
+  border:2px solid var(--green);border-left:8px solid var(--green);
+  border-radius: 14px 4px 16px 4px / 4px 16px 4px 14px;
+  box-shadow:3px 3px 0 rgba(30,122,76,.18);overflow:hidden}
+.corriges summary{cursor:pointer;padding:14px 22px;font-family:'Caveat',cursive;
+  font-size:1.5rem;color:var(--green);font-weight:700;list-style:none;
+  background:linear-gradient(to right, rgba(30,122,76,.08), transparent);
+  transition:background .2s;user-select:none;position:relative}
+.corriges summary:hover{background:rgba(30,122,76,.15)}
+.corriges summary::-webkit-details-marker{display:none}
+.corriges summary::before{content:"✅ ";font-size:1.3rem}
+.corriges summary::after{content:"▼";position:absolute;right:22px;top:50%;
+  transform:translateY(-50%);transition:transform .3s;font-size:.9rem;color:var(--green)}
+.corriges[open] summary::after{transform:translateY(-50%) rotate(180deg)}
+.corriges .corps{padding:8px 24px 20px;font-family:'Patrick Hand',cursive;
+  border-top:1px dashed rgba(30,122,76,.4)}
+.corriges .corps ol{margin-left:22px}
+.corriges .corps li{margin:10px 0;line-height:1.7}
+.corriges .corps li strong{color:var(--green)}
+.corriges .corps .rep{background:rgba(255,255,255,.8);padding:2px 8px;
+  border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.85em;color:#0d4a2b;
+  display:inline-block;margin:2px 0}
+.corriges .corps code{background:rgba(255,230,128,.55);padding:1px 6px;
+  border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.85em;color:#7a3b00}
+
+@media (max-width:620px){
+  .poster{padding:28px 18px 22px}
+  .cover{padding:34px 20px 28px;margin:14px 12px 0;
+    border-radius:120px 12px 110px 12px / 12px 110px 12px 120px}
+  .cover-tape{width:120px;height:26px}
+  .pin{left:20px !important;right:auto !important;width:20px;height:20px}
+  .tape{width:80px;height:20px}
+  .poster-num{font-size:1.5rem}
+  .done-toggle{top:14px;right:12px;font-size:.72rem;padding:3px 9px 3px 6px}
+  .layout{padding:0 12px}
+}
+
+.no-result{display:none;text-align:center;padding:50px 20px;
+  font-family:'Caveat',cursive;font-size:2rem;color:var(--ink-soft)}
+.no-result.show{display:block}
+.no-result span{display:block;font-size:1.2rem;font-family:'Kalam',cursive;color:var(--red);margin-top:8px}
+
+#toTop{position:fixed;right:22px;bottom:22px;width:54px;height:54px;border-radius:50%;
+  border:2px solid var(--ink);background:var(--paper-2);color:var(--ink);font-size:1.4rem;
+  cursor:pointer;box-shadow:3px 3px 0 rgba(31,45,77,.28);display:none;
+  align-items:center;justify-content:center;z-index:90;transition:transform .2s, background .2s}
+#toTop:hover{background:var(--highlight);transform:translateY(-3px)}
+#toTop.show{display:flex}
+
+footer{max-width:1180px;margin:0 auto 40px;padding:24px 30px;text-align:center;
+  font-family:'Kalam',cursive;color:var(--ink-soft);border-top:2px dashed var(--ink)}
+footer strong{color:var(--red)}
+footer .sig{font-family:'Caveat',cursive;font-size:1.6rem;color:var(--blue);margin-top:6px}
+
+@media print{
+  body{background:#fff;background-image:none;font-size:10px}
+  .topbar,.sidebar,#toTop,.done-toggle,footer,.no-result{display:none !important}
+  .layout{display:block;max-width:none;margin:0;padding:0}
+  .cover{box-shadow:none;margin:0 0 14px;page-break-after:always;border-radius:0}
+  .poster{box-shadow:none;transform:none !important;page-break-inside:avoid;
+    page-break-after:always;border-radius:0;border:1px solid #333;background:#fff;background-image:none}
+  .pin,.tape{display:none}
+  pre{background:#f3f3f3;color:#111;border:1px solid #333;box-shadow:none}
+  pre::before{background:#555}
+  table{box-shadow:none}
+  .poster-head h2{color:#000}
+  .corriges{page-break-inside:avoid}
+  a{color:#000;text-decoration:none}
+}
+
+/* CHATBOT CSS */
+#chat-widget { position: fixed; bottom: 80px; right: 22px; z-index: 999999; font-family: 'Patrick Hand', cursive; display: flex; flex-direction: column; align-items: flex-end; }
+#chat-toggle { width: 50px; height: 50px; border-radius: 50%; background: var(--blue); color: white; font-size: 1.5rem; border: 2px solid var(--ink); cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; transition: transform 0.2s, box-shadow 0.2s; }
+#chat-toggle:hover { transform: scale(1.08); box-shadow: 0 6px 14px rgba(0,0,0,0.4); }
+#chat-panel { position: absolute; bottom: 55px; right: 0; width: 340px; height: 430px; max-height: 65vh; background: var(--paper-2); border: 2px solid var(--ink); border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.3); display: flex; flex-direction: column; overflow: hidden; transform-origin: bottom right; transition: transform 0.3s ease, opacity 0.3s ease; }
+#chat-panel.hidden { transform: scale(0); opacity: 0; pointer-events: none; }
+#chat-header { background: var(--blue); color: white; padding: 10px 15px; font-weight: bold; font-size: 1.2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--ink); }
+#chat-close { background: transparent; border: none; color: white; font-size: 1.3rem; cursor: pointer; font-weight: bold; transition: color 0.2s; padding: 0 5px; }
+#chat-close:hover { color: var(--red); }
+#chat-messages { flex: 1; padding: 12px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background: var(--paper); }
+.cmsg { padding: 8px 12px; border-radius: 12px; max-width: 85%; font-size: 0.98rem; line-height: 1.4; border: 2px solid var(--ink); word-wrap: break-word;}
+.cmsg.bot { background: white; align-self: flex-start; border-bottom-left-radius: 4px; box-shadow: 2px 2px 0 rgba(31,45,77,.1); }
+.cmsg.user { background: var(--green); color: white; align-self: flex-end; border-bottom-right-radius: 4px; border-color: #176540; box-shadow: -2px 2px 0 rgba(31,45,77,.1); }
+.cmsg.error { background: #fdecea; color: var(--red); border-color: var(--red); }
+#chat-input-container { padding: 10px; background: white; border-top: 2px solid var(--ink); display: flex; gap: 8px; }
+#chat-input { flex: 1; padding: 8px 12px; border: 2px solid var(--ink); border-radius: 20px; outline: none; font-family: 'Patrick Hand', cursive; font-size: 1rem; }
+#chat-input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(42,93,176,.15); }
+#chat-send { background: var(--blue); color: white; border: 2px solid var(--ink); border-radius: 20px; padding: 5px 15px; cursor: pointer; font-family: 'Patrick Hand', cursive; font-weight: bold; font-size: 0.95rem; transition: background 0.2s; }
+#chat-send:hover { background: #1c4e7a; }
+@media (max-width: 480px) { #chat-panel { width: 90vw; height: 60vh; position: fixed; right: 5vw; bottom: 75px; } }
+</style>
+</head>
+<body>
+
+<!-- ============ COUVERTURE ============ -->
+<header class="cover" id="top">
+  <div class="cover-tape"></div>
+  <h1>📘 Formation <span class="accent">CCNA</span> Complète <span class="accent2">en Français</span></h1>
+  <p class="sub">
+    Cours détaillé + explications simples + schémas + commandes CLI, avec
+    <strong>12 à 15 exercices corrigés par chapitre</strong> (≈ 250 exercices au total).
+    Du <strong>débutant</strong> au <strong>niveau CCNA 200-301</strong>.
+  </p>
+  <div class="badges">
+    <span class="badge b-deb">🟢 Débutant</span>
+    <span class="badge b-int">🟠 Intermédiaire</span>
+    <span class="badge b-av">🟣 Avancé</span>
+    <span class="badge b-ccna">🔴 Niveau CCNA</span>
+    <span class="badge b-pro">🚀 Animé & Détaillé</span>
+    <span class="badge">🇫🇷 100 % en français</span>
+    <span class="badge">📝 ~250 exercices corrigés</span>
+  </div>
+</header>
+
+<!-- ============ TOP BAR ============ -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="logo">CCNA<span>.</span>notebook</div>
+    <div class="search-wrap">
+      <input type="search" id="search" placeholder="Rechercher… (VLAN, OSPF, exercice…)" autocomplete="off">
+    </div>
+    <div class="progress-wrap" title="Progression">
+      <span id="progLabel">0 / 18</span>
+      <div class="progress-bar"><i id="progFill"></i></div>
+    </div>
+    <button class="btn green" id="openAllCorr" title="Ouvrir tous les corrigés">📖 Corrigés</button>
+    <button class="btn" id="resetBtn" title="Reset">↺</button>
+    <button class="btn primary" onclick="window.print()">🖨️</button>
+  </div>
+</div>
+
+<!-- ============ LAYOUT ============ -->
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <h3>📑 Index du cahier</h3>
+    <div class="mod">Module 1 — Bases</div>
+    <a href="#p1"><span class="n">01</span> Introduction aux réseaux</a>
+    <a href="#p2"><span class="n">02</span> Modèle OSI &amp; TCP/IP</a>
+    <div class="mod">Module 2 — Adresses IP</div>
+    <a href="#p3"><span class="n">03</span> Adressage IPv4</a>
+    <a href="#p4"><span class="n">04</span> IPv6</a>
+    <div class="mod">Module 3 — Commutation</div>
+    <a href="#p5"><span class="n">05</span> Équipements réseau</a>
+    <a href="#p6"><span class="n">06</span> Switch &amp; STP</a>
+    <a href="#p7"><span class="n">07</span> VLANs</a>
+    <div class="mod">Module 4 — Routage</div>
+    <a href="#p8"><span class="n">08</span> Routage IP</a>
+    <a href="#p9"><span class="n">09</span> OSPF</a>
+    <div class="mod">Module 5 — Services</div>
+    <a href="#p10"><span class="n">10</span> ACL</a>
+    <a href="#p11"><span class="n">11</span> NAT &amp; PAT</a>
+    <a href="#p12"><span class="n">12</span> DHCP &amp; DNS</a>
+    <a href="#p13"><span class="n">13</span> Sécurité</a>
+    <div class="mod">Module 6 — CCNA</div>
+    <a href="#p14"><span class="n">14</span> Wi-Fi</a>
+    <a href="#p15"><span class="n">15</span> SDN &amp; Automatisation</a>
+    <a href="#p16"><span class="n">16</span> Dépannage</a>
+    <a href="#p17"><span class="n">17</span> Labs pratiques</a>
+    <a href="#p18"><span class="n">18</span> Checklist examen</a>
+  </aside>
+
+  <main class="posters" id="posters">
+
+  <!-- ================= POSTER 01 ================= -->
+  <article class="poster" id="p1" data-title="introduction réseaux lan wan man pan topologie">
+    <div class="pin"></div><div class="tape t1"></div>
+    <label class="done-toggle"><input type="checkbox" data-id="p1"> Vu</label>
+    <header class="poster-head">
+      <span class="poster-num">01</span>
+      <h2>Introduction aux réseaux</h2>
+      <span class="lvl deb">Débutant</span>
+    </header>
+
+    <h3>Imagine…</h3>
+    <p>Tu es chez toi. Tu as un PC, une imprimante, un téléphone. Tu veux que tout ce petit monde puisse <strong>se parler</strong>, partager des fichiers, ou aller sur Internet en même temps. Ça, c'est un <strong>réseau</strong> !</p>
+
+    <div class="simple">
+      <p><strong>Un réseau</strong> = au moins 2 appareils reliés entre eux pour <em>partager</em> des choses (fichiers, imprimante, connexion Internet…).</p>
+      <p>Si tu branches 2 PC avec un câble → c'est déjà un mini-réseau. 🎯</p>
+    </div>
+
+    <h3>Les 4 tailles de réseaux</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Type</th><th>Distance</th><th>Exemple concret</th></tr></thead>
+      <tbody>
+        <tr><td><strong>PAN</strong></td><td>&lt;10 m</td><td>Casque Bluetooth 🎧</td></tr>
+        <tr><td><strong>LAN</strong></td><td>1 bâtiment</td><td>Wi-Fi de la maison 🏠</td></tr>
+        <tr><td><strong>MAN</strong></td><td>1 ville</td><td>Réseau d'une mairie 🏙️</td></tr>
+        <tr><td><strong>WAN</strong></td><td>Pays / monde</td><td>Internet 🌍</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Topologies physiques</h3>
+    <ul>
+      <li><strong>Étoile ⭐</strong> — tous vers un switch central. <em>Standard aujourd'hui.</em></li>
+      <li><strong>Bus 🚌</strong> — un seul câble partagé. Obsolète.</li>
+      <li><strong>Anneau 💍</strong> — chaque nœud relié à 2 voisins. Vieux.</li>
+      <li><strong>Maillée 🕸️</strong> — plusieurs liens par nœud. Utilisée sur Internet.</li>
+    </ul>
+
+    <h3>Schéma de la Topologie Étoile (Généré par IA) 📸</h3>
+    <p>Voici une représentation visuelle d'un réseau moderne, où tous les terminaux convergent vers un Switch central.</p>
+    <img src="star_topology.png" alt="Topologie Étoile avec Switch Central" class="course-img" onerror="this.style.display='none'">
+
+    <h3>Client-Serveur vs Pair-à-Pair</h3>
+    <p><strong>Client-Serveur</strong> : un serveur central sert tout le monde 🍽️<br>
+    <strong>Pair-à-Pair (P2P)</strong> : tout le monde est égal, chacun partage 🍕</p>
+
+    <div class="callout retenir" data-icon="⭐">
+      <span class="label">À retenir :</span>
+      <strong>LAN</strong> = Local (petit) · <strong>WAN</strong> = Wide (grand). <em>Internet = le plus grand WAN du monde.</em>
+    </div>
+
+    
+    <div class="expert-details" style="margin-top: 20px; padding: 15px; border-left: 4px solid var(--purple); background: #f3ecfd; border-radius: 8px;">
+      <h3 style="color: var(--purple); margin-top: 0; font-family:'Caveat',cursive; font-size:1.6rem;">🔬 Détails Techniques (Niveau CCNA)</h3>
+      <p><strong>Architecture et Redondance :</strong> Dans les réseaux d'entreprise (WAN), on utilise des topologies <strong>Maillées (Full Mesh)</strong> pour assurer une tolérance aux pannes maximale. Le nombre total de liens se calcule via <code>N(N-1)/2</code>.</p>
+      <p><strong>Équipement Central :</strong> Le <strong>Switch (Commutateur L2)</strong> est au cœur de la topologie Étoile. Si ce switch tombe en panne, tout le réseau local (domaine de diffusion) est coupé (Single Point of Failure).</p>
+    </div>
+    
+    <section class="exercices">
+      <h3>Exercices — Chapitre 01 (14 questions)</h3>
+
+      <div class="part">Partie A — QCM</div>
+      <ol>
+        <li>Quel type de réseau couvre une ville ?
+          <ul class="qcm"><li>a) PAN &nbsp; b) LAN &nbsp; c) MAN &nbsp; d) WAN</li></ul>
+        </li>
+        <li>Internet est un exemple de :
+          <ul class="qcm"><li>a) PAN &nbsp; b) LAN &nbsp; c) MAN &nbsp; d) WAN</li></ul>
+        </li>
+        <li>Un casque Bluetooth est un exemple de :
+          <ul class="qcm"><li>a) PAN &nbsp; b) LAN &nbsp; c) MAN &nbsp; d) WAN</li></ul>
+        </li>
+        <li>Quelle topologie utilise un switch central ?
+          <ul class="qcm"><li>a) Bus &nbsp; b) Étoile &nbsp; c) Anneau &nbsp; d) Maillée</li></ul>
+        </li>
+        <li>Lequel n'est PAS un type de réseau géographique ?
+          <ul class="qcm"><li>a) PAN &nbsp; b) LAN &nbsp; c) WAN &nbsp; d) SAN-WEB</li></ul>
+        </li>
+      </ol>
+
+      <div class="part">Partie B — Vrai / Faux</div>
+      <ol start="6">
+        <li>Dans un réseau pair-à-pair, il y a toujours un serveur central.</li>
+        <li>Une imprimante peut être une ressource partagée sur un réseau.</li>
+        <li>Un réseau peut contenir uniquement 2 ordinateurs.</li>
+      </ol>
+
+      <div class="part">Partie C — Définitions & calculs</div>
+      <ol start="9">
+        <li>Donne la signification de : LAN · WAN · MAN · PAN.</li>
+        <li>Cite 3 ressources que l'on peut partager sur un réseau.</li>
+        <li>Cite 2 avantages et 2 inconvénients de la topologie en étoile.</li>
+      </ol>
+
+      <div class="part">Partie D — Application & analyse</div>
+      <ol start="12">
+        <li>Une école de 30 PC dans un même bâtiment veut partager une imprimante. Quel type de réseau ? Pourquoi ?</li>
+        <li>Pourquoi dit-on qu'Internet est un « réseau de réseaux » ?</li>
+        <li>Tu veux relier deux immeubles séparés de 5 km. LAN ou WAN ? Explique.</li>
+      </ol>
+      
+      <hr style="margin: 20px 0; border: 1px dashed var(--orange);">
+      <h3>🎯 Nouveaux Exercices (Niveaux Pro)</h3>
+      <div class="part diff-facile">🟢 Niveau 1 : Facile</div>
+      <ol start="15">
+        <li>Quel équipement matériel est typiquement placé au centre d'une topologie en étoile ?</li>
+      </ol>
+      <div class="part diff-moyen">🟠 Niveau 2 : Moyen</div>
+      <ol start="16">
+        <li>Si le commutateur central (switch) d'une topologie étoile tombe en panne, quel est l'impact sur le réseau ?</li>
+      </ol>
+      <div class="part diff-difficile">🔴 Niveau 3 : Difficile</div>
+      <ol start="17">
+        <li>Dans une topologie maillée complète (Full Mesh) avec 6 routeurs, combien de liens (câbles) au total sont nécessaires ? Justifiez par la formule mathématique.</li>
+      </ol>
+      <div class="part diff-expert">💀 Niveau 4 : Expert</div>
+      <ol start="18">
+        <li>Un client vous demande de concevoir un réseau pour 3 sites géographiquement distants (Paris, Lyon, Marseille). Quelle topologie (logique et physique) et quel type de réseau (LAN/MAN/WAN) recommandez-vous pour assurer une redondance maximale (aucune coupure si un lien lâche) ?</li>
+      </ol>
+    </section>
+
+    <details class="corriges">
+      <summary>Voir les corrigés (Chapitre 01)</summary>
+      <div class="corps">
+        <ol>
+          <li><strong>c) MAN.</strong> Metropolitan Area Network — couvre l'échelle d'une ville.</li>
+          <li><strong>d) WAN.</strong> Internet relie des pays entiers.</li>
+          <li><strong>a) PAN.</strong> Personal Area Network — autour d'une personne.</li>
+          <li><strong>b) Étoile.</strong> Tous les nœuds convergent vers un switch central.</li>
+          <li><strong>d) SAN-WEB</strong> n'existe pas. SAN est un réseau de stockage mais "SAN-WEB" n'a aucun sens.</li>
+          <li><strong>FAUX.</strong> En P2P chaque PC est à la fois client ET serveur, sans chef.</li>
+          <li><strong>VRAI.</strong> Une imprimante partagée est justement l'exemple typique.</li>
+          <li><strong>VRAI.</strong> Un réseau = minimum 2 appareils connectés.</li>
+          <li><strong>LAN</strong> = Local Area Network · <strong>WAN</strong> = Wide Area Network · <strong>MAN</strong> = Metropolitan Area Network · <strong>PAN</strong> = Personal Area Network.</li>
+          <li>Exemples : imprimante, fichiers, connexion Internet, disque dur, scanner, accès base de données.</li>
+          <li><strong>Avantages :</strong> panne isolée (un câble cassé n'affecte qu'un PC) ; facile à administrer et dépanner. <strong>Inconvénients :</strong> dépendance au switch central (si le switch tombe, tout tombe) ; plus de câblage qu'un bus.</li>
+          <li><strong>LAN.</strong> 30 PC dans le même bâtiment = réseau local. Un switch + un routeur suffisent.</li>
+          <li>Internet relie des milliers de réseaux hétérogènes (FAI, entreprises, universités, particuliers) grâce à un langage commun : <em>TCP/IP</em>. C'est donc littéralement un réseau… de réseaux.</li>
+          <li><strong>WAN</strong> (ou MAN). 5 km dépasse largement le périmètre d'un LAN. Il faudra soit de la fibre optique, soit un lien opérateur (MPLS, VPN).</li>
+          <hr style="margin:10px 0;border:1px dashed #ccc;">
+          <li><strong>Le Switch (Commutateur).</strong></li>
+          <li>Tout le réseau LAN concerné tombe en panne, car les PC ne peuvent plus communiquer entre eux.</li>
+          <li>Formule : N(N-1)/2. Pour 6 routeurs : 6*(5)/2 = <strong>15 liens</strong>.</li>
+          <li>Type de réseau : <strong>WAN</strong>. Pour une redondance maximale, une <strong>topologie maillée (Full Mesh)</strong> est recommandée via des liens opérateurs privés (MPLS) ou VPN IPsec. Si le lien Paris-Lyon tombe, Paris peut joindre Lyon en passant par Marseille.</li>
+        </ol>
+      </div>
+    </details>
+  </article>
+
+  <!-- ================= POSTER 02 ================= -->
+  <article class="poster" id="p2" data-title="osi tcp/ip couches encapsulation tcp udp">
+    <div class="pin"></div><div class="tape t2"></div>
+    <label class="done-toggle"><input type="checkbox" data-id="p2"> Vu</label>
+    <header class="poster-head">
+      <span class="poster-num">02</span>
+      <h2>Modèle OSI &amp; TCP/IP</h2>
+      <span class="lvl deb">Débutant → Inter.</span>
+    </header>
+
+    <h3>L'idée toute simple 🌟</h3>
+    <p>Quand tu envoies un message WhatsApp 💬, ça paraît simple. Mais en réalité il y a <strong>plein d'étapes</strong> en coulisses. Pour s'y retrouver, on a découpé tout ça en <strong>couches</strong>.</p>
+
+    <h3>Les 7 couches OSI — version simple 🍰</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>#</th><th>Nom</th><th>Ce qu'elle fait (en clair)</th><th>Exemples</th></tr></thead>
+      <tbody>
+        <tr><td><strong>7</strong></td><td>Application</td><td>Ce que TOI tu vois (navigateur, mail)</td><td>HTTP, DNS, FTP</td></tr>
+        <tr><td><strong>6</strong></td><td>Présentation</td><td>Chiffre / formate les données</td><td>HTTPS, JPEG</td></tr>
+        <tr><td><strong>5</strong></td><td>Session</td><td>Ouvre et ferme la conversation</td><td>NetBIOS</td></tr>
+        <tr><td><strong>4</strong></td><td>Transport</td><td>Découpe et vérifie les morceaux</td><td>TCP, UDP</td></tr>
+        <tr><td><strong>3</strong></td><td>Réseau</td><td>Trouve le chemin (adresse IP)</td><td>IP, ICMP</td></tr>
+        <tr><td><strong>2</strong></td><td>Liaison</td><td>Parle au voisin direct (adresse MAC)</td><td>Ethernet</td></tr>
+        <tr><td><strong>1</strong></td><td>Physique</td><td>Envoie des 0 et des 1 sur le câble</td><td>Câbles, Wi-Fi</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="callout astuce" data-icon="💡">
+      <span class="label">Pour retenir (7 → 1) :</span>
+      <strong>P</strong>our <strong>L</strong>e <strong>R</strong>éseau <strong>T</strong>out <strong>S</strong>e <strong>T</strong>ransporte <strong>A</strong>vec <strong>P</strong>récision.
+    </div>
+
+    <h3>TCP vs UDP 🚚🏍️</h3>
+    <ul>
+      <li><strong>TCP</strong> = camion : vérifie que TOUT arrive, dans l'ordre.</li>
+      <li><strong>UDP</strong> = moto : envoie sans vérifier, tant pis si ça se perd.</li>
+    </ul>
+
+    <h3>Encapsulation 📦</h3>
+    <div class="schema">Données → [TCP] → [IP] → [MAC] → bits sur câble
+À l'arrivée : on déballe dans l'autre sens.</div>
+
+    <div class="callout piege" data-icon="⚠️">
+      <span class="label">Piège :</span>
+      <strong>IP</strong> = logique (change) · <strong>MAC</strong> = physique (fixe).
+    </div>
+
+    <h3>L'Encapsulation Animée 🎬</h3>
+    <p>À chaque couche, le système ajoute un <strong>En-tête (Header)</strong>. C'est comme mettre une lettre dans une enveloppe, puis dans un carton, puis dans un camion !</p>
+    <div class="anim-box">
+      <div class="anim-pc">Source<br>PC1</div>
+      <div class="anim-cable"></div>
+      <div class="anim-packet anim-packet-move">DATA</div>
+      <div class="anim-pc" style="left:auto; right: 0;">Dest<br>PC2</div>
+    </div>
+    
+    <div class="mermaid">
+    flowchart TD
+      A[Données / App] -->|La Couche Transport ajoute les ports| B[Segment / Transport]
+      B -->|La Couche Réseau ajoute l'IP| C[Paquet / Réseau]
+      C -->|La Couche Liaison ajoute la MAC| D[Trame / Liaison]
+      D -->|Conversion binaire| E[Bits / Physique]
+    </div>
+
+    
+    <div class="expert-details" style="margin-top: 20px; padding: 15px; border-left: 4px solid var(--purple); background: #f3ecfd; border-radius: 8px;">
+      <h3 style="color: var(--purple); margin-top: 0; font-family:'Caveat',cursive; font-size:1.6rem;">🔬 Détails Techniques (Niveau CCNA)</h3>
+      <p><strong>Couche 2 vs Couche 3 :</strong> La transmission à la Couche 2 (Trame) est <em>strictement locale</em> au LAN. Pour traverser des routeurs et aller sur Internet, la donnée doit être encapsulée dans la Couche 3 (Paquet) avec une IP logique routable.</p>
+      <p><strong>Inspection et TCP :</strong> Un pare-feu qui bloque HTTP (port 80) doit inspecter l'en-tête de la <strong>Couche 4 (Transport)</strong>. En analysant le réseau avec Wireshark, l'établissement d'une session TCP se fait via un mécanisme appelé <strong>Three-Way Handshake</strong> : <code>SYN</code>, puis <code>SYN-ACK</code>, et enfin <code>ACK</code>.</p>
+    </div>
+    
+    <section class="exercices">
+      <h3>Exercices — Chapitre 02 (14 questions)</h3>
+
+      <div class="part">Partie A — QCM</div>
+      <ol>
+        <li>Un switch classique travaille à quelle couche ?
+          <ul class="qcm"><li>a) 1 &nbsp; b) 2 &nbsp; c) 3 &nbsp; d) 4</li></ul>
+        </li>
+        <li>Quel protocole transporte le web (HTTP) ?
+          <ul class="qcm"><li>a) TCP &nbsp; b) UDP &nbsp; c) ICMP &nbsp; d) ARP</li></ul>
+        </li>
+        <li>À quelle couche travaille un routeur ?
+          <ul class="qcm"><li>a) 1 &nbsp; b) 2 &nbsp; c) 3 &nbsp; d) 4</li></ul>
+        </li>
+        <li>Quel protocole est utilisé par la visio (WhatsApp appel) ?
+          <ul class="qcm"><li>a) TCP &nbsp; b) UDP &nbsp; c) FTP &nbsp; d) HTTP</li></ul>
+        </li>
+        <li>Le PDU de la couche 4 s'appelle :
+          <ul class="qcm"><li>a) Bit &nbsp; b) Trame &nbsp; c) Paquet &nbsp; d) Segment</li></ul>
+        </li>
+      </ol>
+
+      <div class="part">Partie B — Association</div>
+      <ol start="6">
+        <li>Associe chaque protocole à sa couche OSI : HTTP · TCP · IP · Ethernet · SSL.</li>
+        <li>Associe chaque PDU à sa couche : Bit · Trame · Paquet · Segment.</li>
+      </ol>
+
+      <div class="part">Partie C — Vrai / Faux</div>
+      <ol start="8">
+        <li>IP est une adresse logique qui peut changer.</li>
+        <li>UDP garantit que tous les paquets arrivent.</li>
+        <li>Le modèle TCP/IP a 4 couches.</li>
+      </ol>
+
+      <div class="part">Partie D — Application</div>
+      <ol start="11">
+        <li>Explique en 2 phrases ce qu'est l'encapsulation.</li>
+        <li>Pourquoi utilise-t-on UDP pour un jeu en ligne mais TCP pour un mail ?</li>
+        <li>Dans quel ordre les en-têtes sont-ils ajoutés quand un PC envoie un ping ?</li>
+        <li>Lequel des deux modèles (OSI ou TCP/IP) est utilisé en pratique ? Pourquoi ?</li>
+      </ol>
+      
+      <hr style="margin: 20px 0; border: 1px dashed var(--orange);">
+      <h3>🎯 Nouveaux Exercices (Niveaux Pro)</h3>
+      <div class="part diff-facile">🟢 Niveau 1 : Facile</div>
+      <ol start="15">
+        <li>Comment s'appelle l'Unité de Données de Protocole (PDU) à la Couche 3 ?</li>
+      </ol>
+      <div class="part diff-moyen">🟠 Niveau 2 : Moyen</div>
+      <ol start="16">
+        <li>Quelle est la différence fondamentale entre la transmission à la couche 2 et celle à la couche 3 ?</li>
+      </ol>
+      <div class="part diff-difficile">🔴 Niveau 3 : Difficile</div>
+      <ol start="17">
+        <li>Un pare-feu (firewall) bloque le port 80 (HTTP). À quelle(s) couche(s) du modèle OSI ce pare-feu doit-il inspecter le trafic pour prendre sa décision ?</li>
+      </ol>
+      <div class="part diff-expert">💀 Niveau 4 : Expert (Troubleshooting Wireshark)</div>
+      <ol start="18">
+        <li>Dans une capture Wireshark, vous voyez des échanges de paquets avec les drapeaux SYN, SYN-ACK, et ACK. À quelle couche OSI et à quel protocole cela correspond-il ? Quel processus est en cours ?</li>
+      </ol>
+    </section>
+
+    <details class="corriges">
+      <summary>Voir les corrigés (Chapitre 02)</summary>
+      <div class="corps">
+        <ol>
+          <li><strong>b) 2.</strong> Un switch L2 lit les adresses MAC.</li>
+          <li><strong>a) TCP.</strong> HTTP a besoin d'être fiable.</li>
+          <li><strong>c) 3.</strong> Un routeur lit les adresses IP.</li>
+          <li><strong>b) UDP.</strong> On préfère la vitesse, on peut perdre une image sans souci.</li>
+          <li><strong>d) Segment.</strong></li>
+          <li>HTTP → 7 · SSL → 6 · TCP → 4 · IP → 3 · Ethernet → 2.</li>
+          <li>Bit → couche 1 · Trame → couche 2 · Paquet → couche 3 · Segment → couche 4.</li>
+          <li><strong>VRAI.</strong> IP peut changer (DHCP par ex.).</li>
+          <li><strong>FAUX.</strong> UDP ne garantit RIEN. Il envoie et espère.</li>
+          <li><strong>VRAI.</strong> Application, Transport, Internet, Accès réseau.</li>
+          <li>L'encapsulation = ajouter une <em>enveloppe</em> (en-tête) à chaque couche avant d'envoyer, et la retirer à l'arrivée (décapsulation).</li>
+          <li><strong>Jeu :</strong> la latence est critique, on perdre une image → UDP. <strong>Mail :</strong> chaque mot compte, on veut un accusé de réception → TCP.</li>
+          <li>Application → Transport (TCP/UDP) → Réseau (IP) → Liaison (MAC) → Physique (bits).</li>
+          <li><strong>TCP/IP</strong> est utilisé en pratique car c'est le modèle d'Internet. OSI sert de référence théorique pour l'enseignement.</li>
+          <hr style="margin:10px 0;border:1px dashed #ccc;">
+          <li>Le <strong>Paquet (Packet)</strong>.</li>
+          <li>La couche 2 (MAC) livre les données <strong>localement</strong> sur le même réseau (domaine de diffusion). La couche 3 (IP) route les données <strong>à travers plusieurs réseaux</strong> (WAN/Internet).</li>
+          <li>Il doit inspecter la <strong>Couche 4 (Transport)</strong> pour lire le numéro de port TCP, et la <strong>Couche 3 (Réseau)</strong> pour lire l'IP source/destination.</li>
+          <li>Cela correspond à la <strong>Couche 4 (Transport)</strong>, protocole <strong>TCP</strong>. C'est le processus de "TCP Three-way Handshake" (poignée de main en trois temps) utilisé pour établir une connexion fiable avant d'envoyer des données.</li>
+        </ol>
+      </div>
+    </details>
+  </article>
+
+  <!-- ================= POSTER 03 ================= -->
+  <article class="poster" id="p3" data-title="ipv4 adressage masque subnetting cidr vlsm">
+    <div class="pin"></div><div class="tape t1"></div>
+    <label class="done-toggle"><input type="checkbox" data-id="p3"> Vu</label>
+    <header class="poster-head">
+      <span class="poster-num">03</span>
+      <h2>Adressage IPv4 &amp; Subnetting</h2>
+      <span class="lvl int">Intermédiaire</span>
+    </header>
+
+    <h3>Une adresse IP, c'est quoi ? 📮</h3>
+    <p>C'est <strong>l'adresse de ta maison</strong> : elle permet qu'un message trouve ton PC parmi des millions.</p>
+    <p>Exemple : <code>192.168.1.10</code> — 4 nombres (0-255) séparés par des points.</p>
+
+    <div class="schema">192  .  168  .   1   .  10
+└─────── Réseau ──────┘  └─ Hôte ─┘</div>
+
+    <h3>Les 5 classes</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Classe</th><th>1er chiffre</th><th>Pour qui ?</th></tr></thead>
+      <tbody>
+        <tr><td><strong>A</strong></td><td>1 → 126</td><td>Très gros réseaux</td></tr>
+        <tr><td><strong>B</strong></td><td>128 → 191</td><td>Moyens réseaux</td></tr>
+        <tr><td><strong>C</strong></td><td>192 → 223</td><td>Petits réseaux</td></tr>
+        <tr><td><strong>D</strong></td><td>224 → 239</td><td>Multicast</td></tr>
+        <tr><td><strong>E</strong></td><td>240 → 255</td><td>Expérimental</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Adresses privées 🔒</h3>
+    <ul>
+      <li><code>10.0.0.0/8</code></li>
+      <li><code>172.16.0.0/12</code></li>
+      <li><code>192.168.0.0/16</code></li>
+    </ul>
+
+    <h3>Table CIDR 🎯</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>CIDR</th><th>Masque</th><th>Adresses</th><th>Hôtes</th></tr></thead>
+      <tbody>
+        <tr><td>/24</td><td>255.255.255.0</td><td>256</td><td>254</td></tr>
+        <tr><td>/25</td><td>255.255.255.128</td><td>128</td><td>126</td></tr>
+        <tr><td>/26</td><td>255.255.255.192</td><td>64</td><td>62</td></tr>
+        <tr><td>/27</td><td>255.255.255.224</td><td>32</td><td>30</td></tr>
+        <tr><td>/28</td><td>255.255.255.240</td><td>16</td><td>14</td></tr>
+        <tr><td>/29</td><td>255.255.255.248</td><td>8</td><td>6</td></tr>
+        <tr><td>/30</td><td>255.255.255.252</td><td>4</td><td>2</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="callout retenir" data-icon="⭐">
+      <span class="label">Formule :</span>
+      <strong>Hôtes = 2^(32 − CIDR) − 2</strong>
+    </div>
+
+    <h3>Le Subnetting Visuel (Schéma) 🍰</h3>
+    <p>Le subnetting consiste à "emprunter" des bits à la partie Hôte pour créer des sous-réseaux. Plus on emprunte de bits, plus on a de sous-réseaux, mais moins on a d'hôtes par réseau.</p>
+    <div class="mermaid">
+    pie title Répartition d'un réseau complet /24 découpé en 4 (/26)
+      "Sous-réseau 1 (.0 - .63)" : 25
+      "Sous-réseau 2 (.64 - .127)" : 25
+      "Sous-réseau 3 (.128 - .191)" : 25
+      "Sous-réseau 4 (.192 - .255)" : 25
+    </div>
+
+    
+    <div class="expert-details" style="margin-top: 20px; padding: 15px; border-left: 4px solid var(--purple); background: #f3ecfd; border-radius: 8px;">
+      <h3 style="color: var(--purple); margin-top: 0; font-family:'Caveat',cursive; font-size:1.6rem;">🔬 Détails Techniques (Niveau CCNA)</h3>
+      <p><strong>VLSM (Variable Length Subnet Mask) :</strong> Le VLSM permet d'emprunter des bits hôtes pour créer des sous-réseaux de tailles différentes, évitant le gaspillage. Pour calculer les hôtes, on utilise <code>2^h - 2</code>. Pour les sous-réseaux, c'est <code>2^s</code>. Lors d'un design, <strong>commencez toujours par le sous-réseau exigeant le plus grand nombre d'hôtes</strong>.</p>
+      <p><strong>Cas Pratique :</strong> Si deux routeurs ont les adresses 192.168.1.5/30 et 192.168.1.9/30 reliées directement, le ping échouera. Pourquoi ? Le masque /30 donne des sous-réseaux par incréments de 4 (.0, .4, .8, .12). L'IP .5 est dans le réseau .4, tandis que l'IP .9 est dans le réseau .8. Ils ne sont pas dans le même réseau de Couche 3 !</p>
+    </div>
+    
+    <section class="exercices">
+      <h3>Exercices — Chapitre 03 (15 questions)</h3>
+
+      <div class="part">Partie A — QCM</div>
+      <ol>
+        <li>Combien d'hôtes utiles dans un /27 ?
+          <ul class="qcm"><li>a) 30 &nbsp; b) 32 &nbsp; c) 62 &nbsp; d) 14</li></ul>
+        </li>
+        <li>172.16.5.10 appartient à quelle classe ?
+          <ul class="qcm"><li>a) A &nbsp; b) B &nbsp; c) C &nbsp; d) D</li></ul>
+        </li>
+        <li>Quel masque pour un /26 ?
+          <ul class="qcm"><li>a) 255.255.255.0 &nbsp; b) 255.255.255.128 &nbsp; c) 255.255.255.192 &nbsp; d) 255.255.255.224</li></ul>
+        </li>
+        <li>Quelle adresse est privée ?
+          <ul class="qcm"><li>a) 8.8.8.8 &nbsp; b) 192.168.1.1 &nbsp; c) 172.15.0.1 &nbsp; d) 200.100.50.25</li></ul>
+        </li>
+        <li>Combien d'hôtes dans un /30 ?
+          <ul class="qcm"><li>a) 2 &nbsp; b) 4 &nbsp; c) 6 &nbsp; d) 8</li></ul>
+        </li>
+      </ol>
+
+      <div class="part">Partie B — Vrai / Faux</div>
+      <ol start="6">
+        <li>192.168.1.0 peut être donné à un PC.</li>
+        <li>10.0.0.0/8 est une plage publique.</li>
+        <li>Une adresse de broadcast a tous les bits hôtes à 1.</li>
+      </ol>
+
+      <div class="part">Partie C — Calculs</div>
+      <ol start="9">
+        <li>Pour <code>192.168.10.0/26</code>, donne : adresse réseau, 1<sup>er</sup> hôte, dernier hôte, broadcast.</li>
+        <li>Découpe <code>10.0.0.0/24</code> en 4 sous-réseaux égaux.</li>
+        <li>Combien d'hôtes dans un /29 ? Quel est son masque décimal ?</li>
+        <li>Pour <code>172.16.5.0/28</code>, quel est l'incrément ? Combien de sous-réseaux possibles dans un /24 parent ?</li>
+      </ol>
+
+      <div class="part">Partie D — Application</div>
+      <ol start="13">
+        <li>Un PC affiche <code>169.254.10.5</code>. Que s'est-il passé ?</li>
+        <li>Tu dois créer 6 sous-réseaux pour 25 postes chacun dans un /24. Quel CIDR utiliser ?</li>
+        <li>Quelle est la wildcard mask pour /26 et pour /28 ?</li>
+      </ol>
+
+      <hr style="margin: 20px 0; border: 1px dashed var(--orange);">
+      <h3>🎯 Nouveaux Exercices (Niveaux Pro)</h3>
+      <div class="part diff-facile">🟢 Niveau 1 : Facile</div>
+      <ol start="16">
+        <li>L'adresse 255.255.255.255 correspond à quel type de diffusion ?</li>
+      </ol>
+      <div class="part diff-moyen">🟠 Niveau 2 : Moyen</div>
+      <ol start="17">
+        <li>Expliquez pourquoi l'adresse IP "127.0.0.1" est spéciale et à quoi elle sert.</li>
+      </ol>
+      <div class="part diff-difficile">🔴 Niveau 3 : Difficile (Opération ET binaire)</div>
+      <ol start="18">
+        <li>L'adresse d'un PC est 192.168.5.135 avec le masque 255.255.255.128. Trouvez son adresse Réseau en appliquant un "ET logique" (AND).</li>
+      </ol>
+      <div class="part diff-expert">💀 Niveau 4 : Expert (Subnetting VLSM avancé)</div>
+      <ol start="19">
+        <li>Un routeur possède 3 interfaces LAN : LAN A a besoin de 60 hôtes, LAN B a besoin de 25 hôtes, LAN C a besoin de 12 hôtes. En partant de l'adresse bloc 192.168.1.0/24, affectez les sous-réseaux de manière optimale en utilisant la méthode VLSM (Variable Length Subnet Mask). Donnez le réseau, le CIDR et la plage de chaque LAN.</li>
+      </ol>
+    </section>
+
+    <details class="corriges">
+      <summary>Voir les corrigés (Chapitre 03)</summary>
+      <div class="corps">
+        <ol>
+          <li><strong>a) 30.</strong> /27 = 32−27 = 5 bits → 2⁵ − 2 = 30.</li>
+          <li><strong>b) B.</strong> 172 est entre 128 et 191.</li>
+          <li><strong>c) 255.255.255.192.</strong></li>
+          <li><strong>b) 192.168.1.1.</strong></li>
+          <li><strong>a) 2.</strong> /30 = 2 bits hôtes → 2² − 2 = 2 (utilisé pour liens point-à-point).</li>
+          <li><strong>FAUX.</strong> .0 est l'adresse réseau, réservée.</li>
+          <li><strong>FAUX.</strong> 10.0.0.0/8 est privée (RFC 1918).</li>
+          <li><strong>VRAI.</strong> C'est la définition du broadcast.</li>
+          <li>Masque /26 → 255.255.255.192, incrément 64.<br>
+              → Réseau : <span class="rep">192.168.10.0</span> · 1<sup>er</sup> hôte : <span class="rep">192.168.10.1</span> · Dernier hôte : <span class="rep">192.168.10.62</span> · Broadcast : <span class="rep">192.168.10.63</span>.
+          </li>
+          <li>4 sous-réseaux = 2 bits → /26, incrément 64 :<br>
+              <span class="rep">10.0.0.0/26</span> · <span class="rep">10.0.0.64/26</span> · <span class="rep">10.0.0.128/26</span> · <span class="rep">10.0.0.192/26</span>.
+          </li>
+          <li>/29 → 3 bits hôtes → 2³ − 2 = <strong>6 hôtes</strong>. Masque : <code>255.255.255.248</code>.</li>
+          <li>/28 → masque 255.255.255.240 → incrément = 256 − 240 = <strong>16</strong>. Sous-réseaux dans un /24 : 2⁴ = <strong>16</strong>.</li>
+          <li>Le PC n'a pas obtenu d'IP DHCP → il s'est auto-attribué une adresse APIPA. Vérifier câble / serveur DHCP, puis <code>ipconfig /renew</code>.</li>
+          <li>6 sous-réseaux → 3 bits (2³ = 8 ≥ 6) → /27. 30 hôtes utiles ≥ 25 → OK.</li>
+          <li>/26 → wildcard <span class="rep">0.0.0.63</span> · /28 → wildcard <span class="rep">0.0.0.15</span>.</li>
+          <hr style="margin:10px 0;border:1px dashed #ccc;">
+          <li>Diffusion globale <strong>Broadcast universel</strong>.</li>
+          <li>C'est l'adresse <strong>Loopback</strong> (boucle locale). Elle sert à tester si la pile TCP/IP du PC est bien installée et fonctionnelle sans rien envoyer sur le réseau réel.</li>
+          <li>Masque .128 = CIDR /25. L'incrément est 128. Les réseaux possibles sont .0 et .128. L'IP 135 tombe dans le 2e réseau. L'adresse réseau est <strong>192.168.5.128</strong>.</li>
+          <li><strong>LAN A (60 hôtes)</strong> : 62 hôtes max nécessaires -> /26. Réseau : <strong>192.168.1.0/26</strong> (Plage: .1 à .62).<br>
+              <strong>LAN B (25 hôtes)</strong> : 30 hôtes max nécessaires -> /27. Réseau : <strong>192.168.1.64/27</strong> (Plage: .65 à .94).<br>
+              <strong>LAN C (12 hôtes)</strong> : 14 hôtes max nécessaires -> /28. Réseau : <strong>192.168.1.96/28</strong> (Plage: .97 à .110).
+          </li>
+        </ol>
+      </div>
+    </details>
+  </article>
+
+  <!-- ================= POSTER 04 ================= -->
+  <article class="poster" id="p4" data-title="ipv6 128 bits link-local slaac ndp">
+    <div class="pin"></div><div class="tape t2"></div>
+    <label class="done-toggle"><input type="checkbox" data-id="p4"> Vu</label>
+    <header class="poster-head">
+      <span class="poster-num">04</span>
+      <h2>IPv6</h2>
+      <span class="lvl int">Inter. → Avancé</span>
+    </header>
+
+    <h3>Pourquoi IPv6 ? 😱</h3>
+    <p>IPv4 a ~4 milliards d'adresses. En 2011 on les a toutes utilisées ! IPv6 apporte <strong>2¹²⁸ adresses</strong> ≈ 340 undécillions.</p>
+
+    <h3>Format</h3>
+    <div class="schema">2001:0db8:0000:0000:0000:ff00:0042:8329
+8 groupes de 4 chiffres hexa séparés par ":"</div>
+
+    <h3>Règles d'écriture ✂️</h3>
+    <ol>
+      <li>Supprimer les zéros en tête : <code>0db8 → db8</code></li>
+      <li>Remplacer une suite de zéros par <code>::</code> (une seule fois)</li>
+    </ol>
+    <p>→ <code>2001:db8::ff00:42:8329</code></p>
+
+    <h3>Types d'adresses</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Type</th><th>Préfixe</th><th>Rôle</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Global</strong></td><td>2000::/3</td><td>Internet</td></tr>
+        <tr><td><strong>Link-local</strong></td><td>fe80::/10</td><td>Communication locale (auto)</td></tr>
+        <tr><td><strong>Unique local</strong></td><td>fc00::/7</td><td>Privée</td></tr>
+        <tr><td><strong>Multicast</strong></td><td>ff00::/8</td><td>Groupe</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="callout astuce" data-icon="💡">
+      <span class="label">Astuce :</span>
+      L'adresse <code>fe80::</code> est créée <em>automatiquement</em> dès qu'on active IPv6 sur une interface.
+    </div>
+
+    
+    <div class="expert-details" style="margin-top: 20px; padding: 15px; border-left: 4px solid var(--purple); background: #f3ecfd; border-radius: 8px;">
+      <h3 style="color: var(--purple); margin-top: 0; font-family:'Caveat',cursive; font-size:1.6rem;">🔬 Détails Techniques (Niveau CCNA)</h3>
+      <p><strong>EUI-64 et Adressage Automatique :</strong> Pour générer automatiquement la partie Hôte (Interface ID, 64 bits), on prend l'adresse MAC (48 bits), on la coupe en deux, on insère <strong>FFFE</strong> au milieu, et on inverse le <strong>7ème bit</strong> (Universal/Local bit) du premier octet.</p>
+      <p><strong>SLAAC et ICMPv6 :</strong> IPv6 n'utilise plus de Broadcast (pas d'ARP). Il utilise le Neighbor Discovery Protocol (NDP). Pour s'auto-configurer, le PC écoute les messages <strong>Router Advertisement (RA)</strong> envoyés en multicast (FF02::2) contenant le préfixe réseau, après avoir sollicité le réseau via un <strong>Router Solicitation (RS)</strong>.</p>
+    </div>
+    
+    <section class="exercices">
+      <h3>Exercices — Chapitre 04 (13 questions)</h3>
+
+      <div class="part">Partie A — QCM</div>
+      <ol>
+        <li>Taille d'une adresse IPv6 ?
+          <ul class="qcm"><li>a) 32 &nbsp; b) 64 &nbsp; c) 128 &nbsp; d) 256 bits</li></ul>
+        </li>
+        <li>Préfixe du link-local ?
+          <ul class="qcm"><li>a) 2000::/3 &nbsp; b) fe80::/10 &nbsp; c) fc00::/7 &nbsp; d) ff00::/8</li></ul>
+        </li>
+        <li>IPv6 utilise quel type de diffusion ?
+          <ul class="qcm"><li>a) Broadcast &nbsp; b) Multicast &nbsp; c) Anycast &nbsp; d) Les 2 : b et c</li></ul>
+        </li>
+        <li>Combien de groupes hexa dans une adresse IPv6 ?
+          <ul class="qcm"><li>a) 4 &nbsp; b) 6 &nbsp; c) 8 &nbsp; d) 16</li></ul>
+        </li>
+      </ol>
+
+      <div class="part">Partie B — Simplification</div>
+      <ol start="5">
+        <li>Simplifie : <code>2001:0db8:0000:0000:0000:0000:0000:0001</code>.</li>
+        <li>Simplifie : <code>fe80:0000:0000:0000:0202:b3ff:fe1e:8329</code>.</li>
+        <li>Simplifie : <code>2001:0db8:00a3:0000:0000:0000:0000:beef</code>.</li>
+      </ol>
+
+      <div class="part">Partie C — Vrai / Faux</div>
+      <ol start="8">
+        <li>IPv6 utilise le broadcast comme IPv4.</li>
+        <li>L'adresse <code>::1</code> est la loopback IPv6.</li>
+        <li>Une adresse IPv6 peut contenir <code>::</code> plusieurs fois.</li>
+      </ol>
+
+      <div class="part">Partie D — Application</div>
+      <ol start="11">
+        <li>Donne l'adresse loopback en IPv6 et en IPv4.</li>
+        <li>Pourquoi IPv6 n'a-t-il plus besoin de NAT ?</li>
+        <li>Qu'est-ce que SLAAC ? En 1 phrase.</li>
+      </ol>
+    </section>
+
+    <details class="corriges">
+      <summary>Voir les corrigés (Chapitre 04)</summary>
+      <div class="corps">
+        <ol>
+          <li><strong>c) 128 bits.</strong></li>
+          <li><strong>b) fe80::/10.</strong></li>
+          <li><strong>d) Multicast et Anycast</strong> (mais pas broadcast).</li>
+          <li><strong>c) 8.</strong></li>
+          <li><span class="rep">2001:db8::1</span></li>
+          <li><span class="rep">fe80::202:b3ff:fe1e:8329</span></li>
+          <li><span class="rep">2001:db8:a3::beef</span></li>
+          <li><strong>FAUX.</strong> IPv6 n'utilise pas de broadcast.</li>
+          <li><strong>VRAI.</strong></li>
+          <li><strong>FAUX.</strong> <code>::</code> ne peut être utilisé qu'UNE fois.</li>
+          <li>IPv6 → <code>::1</code> · IPv4 → <code>127.0.0.1</code>.</li>
+          <li>Parce que l'espace d'adressage est immense : chaque appareil peut avoir sa propre IP publique, pas besoin de partager.</li>
+          <li>SLAAC = Stateless Address Autoconfiguration : le PC se configure tout seul en combinant son adresse MAC et le préfixe annoncé par le routeur.</li>
+        </ol>
+      </div>
+    </details>
+  </article>
+
+  <!-- ================= POSTER 05 ================= -->
+  <article class="poster" id="p5" data-title="équipements switch routeur hub pare-feu collision broadcast">
+    <div class="pin"></div><div class="tape t1"></div>
+    <label class="done-toggle"><input type="checkbox" data-id="p5"> Vu</label>
+    <header class="poster-head">
+      <span class="poster-num">05</span>
+      <h2>Équipements réseau</h2>
+      <span class="lvl deb">Débutant → Inter.</span>
+    </header>
+
+    <h3>Qui fait quoi ? 🎭</h3>
+    <ul>
+      <li><strong>Hub</strong> = crieur public 📢 (répète tout à tout le monde — obsolète)</li>
+      <li><strong>Switch</strong> = facteur intelligent 📬 (livre au bon endroit)</li>
+      <li><strong>Routeur</strong> = carrefour entre quartiers 🚦</li>
+      <li><strong>Pare-feu</strong> = videur 🚪</li>
+      <li><strong>AP</strong> = antenne Wi-Fi 📡</li>
+    </ul>
+
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Équipement</th><th>Couche</th><th>Adressage</th></tr></thead>
+      <tbody>
+        <tr><td>Hub</td><td>1</td><td>Aucun</td></tr>
+        <tr><td>Switch</td><td>2</td><td>MAC</td></tr>
+        <tr><td>Routeur</td><td>3</td><td>IP</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Domaines de collision / broadcast</h3>
+    <ul>
+      <li><strong>Domaine de collision</strong> — chaque port de switch = 1</li>
+      <li><strong>Domaine de broadcast</strong> — un switch = 1 (ou 1 par VLAN) ; un routeur sépare</li>
+    </ul>
+
+    
+    <div class="expert-details" style="margin-top: 20px; padding: 15px; border-left: 4px solid var(--purple); background: #f3ecfd; border-radius: 8px;">
+      <h3 style="color: var(--purple); margin-top: 0; font-family:'Caveat',cursive; font-size:1.6rem;">🔬 Détails Techniques (Niveau CCNA)</h3>
+      <p><strong>Séquence de Démarrage (Boot Process) :</strong> 1. La ROM exécute le POST et lance le Bootstrap. 2. Le Bootstrap charge l'image Cisco IOS depuis la <strong>Mémoire Flash</strong> vers la RAM. 3. L'IOS charge le fichier <code>startup-config</code> depuis la <strong>NVRAM</strong> vers la <strong>RAM</strong>.</p>
+      <p><strong>Récupération de Mot de Passe :</strong> Si le mot de passe est perdu, on redémarre le routeur et on interrompt le processus pour entrer en mode <strong>ROMMON</strong>. On modifie ensuite le <strong>Configuration Register</strong> à <code>0x2142</code> pour forcer le routeur à ignorer la NVRAM au prochain démarrage.</p>
+    </div>
+    
+    <section class="exercices">
+      <h3>Exercices — Chapitre 05 (13 questions)</h3>
+
+      <div class="part">Partie A — QCM</div>
+      <ol>
+        <li>Un switch 24 ports crée combien de domaines de collision ?
+          <ul class="qcm"><li>a) 1 &nbsp; b) 12 &nbsp; c) 24 &nbsp; d) 48</li></ul>
+        </li>
+        <li>Quel équipement sépare les domaines de broadcast ?
+          <ul class="qcm"><li>a) Hub &nbsp; b) Switch L2 &nbsp; c) Routeur &nbsp; d) Répéteur</li></ul>
+        </li>
+        <li>Un hub travaille à quelle couche ?
+          <ul class="qcm"><li>a) 1 &nbsp; b) 2 &nbsp; c) 3 &nbsp; d) 4</li></ul>
+        </li>
+        <li>Un point d'accès relie :
+          <ul class="qcm"><li>a) 2 VLANs &nbsp; b) Filaire et Wi-Fi &nbsp; c) 2 routeurs &nbsp; d) 2 WAN</li></ul>
+        </li>
+      </ol>
+
+      <div class="part">Partie B — Vrai / Faux</div>
+      <ol start="5">
+        <li>Un switch L2 peut router entre 2 VLANs tout seul.</li>
+        <li>Un routeur sépare les domaines de broadcast.</li>
+        <li>Le hub est plus efficace que le switch.</li>
+      </ol>
+
+      <div class="part">Partie C — Application</div>
+      <ol start="8">
+        <li>Un utilisateur se plaint de collisions fréquentes. Quel équipement est probablement en cause ?</li>
+        <li>Pour relier 3 réseaux IP différents, quel équipement faut-il ?</li>
+        <li>Pourquoi les hubs ont-ils disparu ?</li>
+        <li>Cite 3 équipements qui travaillent à la couche 2.</li>
+        <li>Combien de domaines de broadcast dans un réseau avec 3 switchs reliés entre eux (pas de VLAN) ?</li>
+        <li>Un pare-feu travaille à quelles couches ?</li>
+      </ol>
+    </section>
+
+    <details class="corriges">
+      <summary>Voir les corrigés (Chapitre 05)</summary>
+      <div class="corps">
+        <ol>
+          <li><strong>c) 24.</strong> Chaque port = 1 domaine de collision.</li>
+          <li><strong>c) Routeur.</strong></li>
+          <li><strong>a) 1.</strong></li>
+          <li><strong>b) Filaire et Wi-Fi.</strong></li>
+          <li><strong>FAUX.</strong> Il faut un routeur ou un switch L3.</li>
+          <li><strong>VRAI.</strong></li>
+          <li><strong>FAUX.</strong> Le switch est bien supérieur (full-duplex, table MAC, débit dédié par port).</li>
+          <li><strong>Un hub</strong> (ou un vieux répéteur). Solution : les remplacer par un switch.</li>
+          <li><strong>Un routeur</strong> (ou switch L3).</li>
+          <li>Le hub partage la bande passante, génère des collisions et est half-duplex. Le switch fait tout mieux pour le même prix.</li>
+          <li>Switch, point d'accès, pont (bridge), carte réseau.</li>
+          <li><strong>1 seul</strong> domaine de broadcast (pas de routeur pour séparer).</li>
+          <li>De la couche 3 à la couche 7 selon le type (pare-feu stateful L3-4, pare-feu applicatif L7).</li>
+        </ol>
+      </div>
+    </details>
+  </article>
+
+  <!-- ================= POSTER 06 ================= -->
+  <article class="poster" id="p6" data-title="switch stp spanning tree mac table">
+    <div class="pin"></div><div class="tape t2"></div>
+    <label class="done-toggle"><input type="checkbox" data-id="p6"> Vu</label>
+    <header class="poster-head">
+      <span class="poster-num">06</span>
+      <h2>Switch &amp; STP</h2>
+      <span class="lvl int">Intermédiaire</span>
+    </header>
+
+    <h3>Comment un switch apprend ? 🧠</h3>
+    <ol>
+      <li><strong>Apprend</strong> — note la MAC source + port (table MAC)</li>
+      <li><strong>Inonde</strong> — si MAC dest. inconnue, envoie à tous sauf source</li>
+      <li><strong>Livre</strong> — si MAC connue, envoie uniquement sur le bon port</li>
+    </ol>
+
+    <h3>STP — le problème des boucles 🔄</h3>
+    <p>2 câbles entre 2 switchs pour la redondance = boucle = tempête de broadcast 💥. STP bloque logiquement un port.</p>
+
+    <h3>États d'un port STP</h3>
+    <div class="schema">Blocking → Listening → Learning → Forwarding</div>
+
+    <h3>Élection et Blocage STP Animé 🎬</h3>
+    <p>S'il y a une boucle physique, STP envoie des <strong>BPDU</strong> pour élire un <em>Root Bridge</em> et bloquer les ports redondants.</p>
+    <div class="anim-box">
+      <div class="anim-switch">Root SW</div>
+      <div class="anim-cable" style="top: 30%; transform: rotate(15deg); left: 20%; right: 20%;"></div>
+      <div class="anim-cable" style="top: 70%; transform: rotate(-15deg); left: 20%; right: 20%;"></div>
+      <div class="anim-packet anim-packet-bpdu">BPDU</div>
+      <div class="anim-switch" style="position: absolute; right: 5%;">SW2</div>
+      <div style="position: absolute; right: 15%; top: 60%; color: var(--red); font-weight: bold; font-size: 1.8rem;">X</div>
+    </div>
+
+    
+    <div class="expert-details" style="margin-top: 20px; padding: 15px; border-left: 4px solid var(--purple); background: #f3ecfd; border-radius: 8px;">
+      <h3 style="color: var(--purple); margin-top: 0; font-family:'Caveat',cursive; font-size:1.6rem;">🔬 Détails Techniques (Niveau CCNA)</h3>
+      <p><strong>STP (Spanning Tree Protocol) & Élection :</strong> L'élection du Root Bridge L2 se base sur le <strong>Bridge ID (BID)</strong> qui combine la Priorité et l'adresse MAC. La règle d'or : <em>La valeur la plus basse l'emporte</em> (L'adresse IP n'a aucun rôle ici). STP empêche les boucles (Broadcast Storms).</p>
+      <p><strong>RSTP et Sécurité :</strong> RSTP (802.1w) accélère la convergence. Les 3 états des ports sont : <strong>Discarding, Learning, Forwarding</strong>. Pour sécuriser un port vers un PC et supprimer le délai d'écoute de 30s, on active <code>spanning-tree portfast</code> combiné à <code>bpduguard enable</code>. Si une trame BPDU est reçue sur un tel port, il passe en erreur <strong>err-disable</strong> immédiatement.</p>
+    </div>
+    
+    <section class="exercices">
+      <h3>Exercices — Chapitre 06 (13 questions)</h3>
+
+      <div class="part">Partie A — QCM</div>
+      <ol>
+        <li>Un switch reçoit une trame pour une MAC inconnue. Il :
+          <ul class="qcm"><li>a) La jette &nbsp; b) La renvoie &nbsp; c) L'envoie partout sauf à la source &nbsp; d) L'envoie au routeur</li></ul>
+        </li>
+        <li>Vieillissement table MAC par défaut Cisco ?
+          <ul class="qcm"><li>a) 10s &nbsp; b) 30s &nbsp; c) 300s &nbsp; d) 3600s</li></ul>
+        </li>
+        <li>Le Root Bridge STP est élu par :
+          <ul class="qcm"><li>a) La MAC la plus haute &nbsp; b) La priorité la plus basse &nbsp; c) Le plus de ports &nbsp; d) Aléatoire</li></ul>
+        </li>
+        <li>Combien d'états un port STP classique a-t-il ?
+          <ul class="qcm"><li>a) 3 &nbsp; b) 4 &nbsp; c) 5 &nbsp; d) 6</li></ul>
+        </li>
+      </ol>
+
+      <div class="part">Partie B — Vrai / Faux</div>
+      <ol start="5">
+        <li>Un switch apprend les MAC source ET destination.</li>
+        <li>STP bloque physiquement les câbles redondants.</li>
+        <li>Une tempête de broadcast peut saturer tout un réseau.</li>
+      </ol>
+
+      <div class="part">Partie C — Application</div>
+      <ol start="8">
+        <li>Qu'est-ce qu'une tempête de broadcast ?</li>
+        <li>Cite les 4 états d'un port STP dans l'ordre.</li>
+        <li>2 switchs reliés par 2 câbles. Quel protocole empêche la boucle ?</li>
+        <li>Quelle commande affiche la table MAC ?</li>
+        <li>Quelle commande affiche l'état de STP ?</li>
+        <li>Explique en 2 lignes pourquoi on met 2 câbles entre 2 switchs.</li>
+      </ol>
+      
+      <hr style="margin: 20px 0; border: 1px dashed var(--orange);">
+      <h3>🎯 Nouveaux Exercices (Niveaux Pro)</h3>
+      <div class="part diff-facile">🟢 Niveau 1 : Facile</div>
+      <ol start="14">
+        <li>Que signifie le sigle BPDU dans le contexte de STP ?</li>
+      </ol>
+      <div class="part diff-moyen">🟠 Niveau 2 : Moyen</div>
+      <ol start="15">
+        <li>Quelle est la différence de comportement d'un switch quand une adresse de destination MAC est connue vs quand elle est Inconnue (Unknown Unicast) ?</li>
+      </ol>
+      <div class="part diff-difficile">🔴 Niveau 3 : Difficile (STP Election)</div>
+      <ol start="16">
+        <li>SW1 a une priorité STP de 32768 et l'adresse MAC AA:AA:AA:AA:AA:AA. SW2 a une priorité de 32768 et la MAC BB:BB:BB:BB:BB:BB. Lequel devient le Root Bridge et pourquoi ? Si vous vouliez forcer SW2 à devenir Root, quelle commande taperez-vous ?</li>
+      </ol>
+      <div class="part diff-expert">💀 Niveau 4 : Expert (PortFast & BPDUGuard)</div>
+      <ol start="17">
+        <li>Que fait la fonctionnalité "STP PortFast" sur un port connecté à un PC ? Que se passe-t-il si vous activez en plus "BPDU Guard" et qu'un utilisateur vicieux branche un petit switch de bureau sur ce port ?</li>
+      </ol>
+    </section>
+
+    <details class="corriges">
+      <summary>Voir les corrigés (Chapitre 06)</summary>
+      <div class="corps">
+        <ol>
+          <li><strong>c).</strong> Il inonde tous les ports sauf la source.</li>
+          <li><strong>c) 300 s</strong> (5 min).</li>
+          <li><strong>b) Priorité la plus basse</strong>, puis MAC la plus basse si égalité.</li>
+          <li><strong>b) 4</strong> : Blocking, Listening, Learning, Forwarding.</li>
+          <li><strong>FAUX.</strong> Il n'apprend QUE les MAC source (il se sert de la source pour remplir sa table).</li>
+          <li><strong>FAUX.</strong> Il bloque <em>logiquement</em> (pas physiquement) en passant le port en état Blocking.</li>
+          <li><strong>VRAI.</strong></li>
+          <li>Un broadcast (dest. FF:FF:FF:FF:FF:FF) qui tourne en boucle à cause d'une boucle physique → saturation.</li>
+          <li>Blocking → Listening → Learning → Forwarding.</li>
+          <li><strong>STP (Spanning Tree Protocol).</strong></li>
+          <li><code>show mac address-table</code></li>
+          <li><code>show spanning-tree</code></li>
+          <li>Pour la <strong>redondance</strong> : si un câble casse, l'autre prend le relais automatiquement. STP évite la boucle tant que les 2 câbles sont là.</li>
+          <hr style="margin:10px 0;border:1px dashed #ccc;">
+          <li><strong>Bridge Protocol Data Unit</strong>, ce sont les paquets d'échange STP.</li>
+          <li>Connue : le switch fait du <strong>forwarding</strong> ciblé (unicast) sur un seul port. Inconnue : le switch <strong>floode (inonde)</strong> la trame sur tous les autres ports.</li>
+          <li><strong>SW1</strong> gagne car en cas d'égalité de priorité, la MAC la plus basse l'emporte. Pour forcer SW2 : <code>spanning-tree vlan 1 priority 4096</code> (ou root primary).</li>
+          <li>PortFast fait passer le port directement en état <em>Forwarding</em> (évitant les 30 sec d'attente de DHCP). BPDUGuard surveille le port : si un BPDU est reçu (ex: car un switch a été branché), le port est immédiatement <strong>désactivé (err-disable)</strong> par sécurité pour éviter une boucle fatale !</li>
+        </ol>
+      </div>
+    </details>
+  </article>
+
+  <!-- ================= POSTER 07 ================= -->
+  <article class="poster" id="p7" data-title="vlan trunk 802.1q routage inter-vlan">
+    <div class="pin"></div><div class="tape t1"></div>
+    <label class="done-toggle"><input type="checkbox" data-id="p7"> Vu</label>
+    <header class="poster-head">
+      <span class="poster-num">07</span>
+      <h2>VLANs</h2>
+      <span class="lvl int">Intermédiaire</span>
+    </header>
+
+    <h3>C'est quoi un VLAN ? 🏢</h3>
+    <p>Un <strong>VLAN</strong> = un réseau virtuel à l'intérieur d'un switch. Les PC d'un VLAN ne voient pas les autres VLANs.</p>
+
+    <h3>Pourquoi ?</h3>
+    <ul>
+      <li><strong>Sécurité 🔒</strong> — la compta ne voit pas l'IT</li>
+      <li><strong>Performance ⚡</strong> — moins de broadcast</li>
+      <li><strong>Flexibilité 🎯</strong> — regrouper par métier</li>
+    </ul>
+
+    <h3>Access vs Trunk</h3>
+    <ul>
+      <li><strong>Access</strong> — 1 seul VLAN (pour un PC)</li>
+      <li><strong>Trunk</strong> — plusieurs VLANs (lien entre 2 switchs)</li>
+    </ul>
+
+    <h3>Configurer un VLAN</h3>
+    <pre><code><span class="kw">Switch</span>(config)# vlan 10
+<span class="kw">Switch</span>(config-vlan)# name COMPTA
+<span class="kw">Switch</span>(config)# interface fa0/1
+<span class="kw">Switch</span>(config-if)# switchport mode access
+<span class="kw">Switch</span>(config-if)# switchport access vlan 10
+
+<span class="cmt">! Trunk</span>
+<span class="kw">Switch</span>(config)# interface gi0/1
+<span class="kw">Switch</span>(config-if)# switchport mode trunk</code></pre>
+
+    
+    <div class="expert-details" style="margin-top: 20px; padding: 15px; border-left: 4px solid var(--purple); background: #f3ecfd; border-radius: 8px;">
+      <h3 style="color: var(--purple); margin-top: 0; font-family:'Caveat',cursive; font-size:1.6rem;">🔬 Détails Techniques (Niveau CCNA)</h3>
+      <p><strong>Trunking et 802.1Q :</strong> Pour faire passer plusieurs VLANs sur un câble, on crée un Lien Trunk L2. Le standard <strong>802.1Q</strong> insère un tag de 4 octets dans l'en-tête Ethernet. Le VLAN Natif (Native VLAN) est le seul à circuler <em>sans tag</em>.</p>
+      <p><strong>Routage Inter-VLAN (ROAS) :</strong> Si les PC du VLAN 10 ne joignent pas la passerelle G0/0.10, les causes fréquentes sont : le port du switch n'est pas en mode <code>trunk</code>, ou la commande <code>encapsulation dot1Q 10</code> manque sur le routeur. Côté EtherChannel (Agrégation), les modes LACP sont <strong>Active/Passive</strong> tandis que DTP (négociation Trunk) utilise <strong>Dynamic Desirable/Auto</strong>. Si deux switchs sont en mode 'auto', le Trunk ne montera jamais.</p>
+    </div>
+    
+    <section class="exercices">
+      <h3>Exercices — Chapitre 07 (14 questions)</h3>
+
+      <div class="part">Partie A — QCM</div>
+      <ol>
+        <li>Taille du tag 802.1Q ?
+          <ul class="qcm"><li>a) 2 &nbsp; b) 4 &nbsp; c) 8 &nbsp; d) 12 octets</li></ul>
+        </li>
+        <li>Quel VLAN passe sans tag par défaut ?
+          <ul class="qcm"><li>a) 0 &nbsp; b) 1 &nbsp; c) 99 &nbsp; d) Aucun</li></ul>
+        </li>
+        <li>Un port access peut porter combien de VLANs ?
+          <ul class="qcm"><li>a) 1 &nbsp; b) 2 &nbsp; c) 10 &nbsp; d) Illimité</li></ul>
+        </li>
+        <li>Un port trunk peut porter combien de VLANs ?
+          <ul class="qcm"><li>a) 1 &nbsp; b) 2 &nbsp; c) 10 &nbsp; d) Plusieurs</li></ul>
+        </li>
+      </ol>
+
+      <div class="part">Partie B — Vrai / Faux</div>
+      <ol start="5">
+        <li>Un VLAN isole le trafic des autres VLANs.</li>
+        <li>Deux PC dans le même VLAN peuvent communiquer directement via le switch.</li>
+        <li>Deux PC dans des VLANs différents peuvent communiquer sans routeur.</li>
+      </ol>
+
+      <div class="part">Partie C — Pratique</div>
+      <ol start="8">
+        <li>Écris les commandes pour créer le VLAN 30 "DIRECTION" et mettre Fa0/5 en access.</li>
+        <li>Écris la commande pour configurer Gi0/1 en trunk.</li>
+        <li>Écris la commande pour afficher les VLANs.</li>
+      </ol>
+
+      <div class="part">Partie D — Application</div>
+      <ol start="11">
+        <li>Qu'est-ce que le Native VLAN ?</li>
+        <li>3 VLANs (10, 20, 30) doivent communiquer. Quelle méthode ?</li>
+        <li>Deux PC dans le VLAN 10 ne peuvent pas communiquer. Cite 3 causes possibles.</li>
+        <li>Un port access peut-il devenir trunk dynamiquement ? Grâce à quoi ?</li>
+      </ol>
+    </section>
+
+    <details class="corriges">
+      <summary>Voir les corrigés (Chapitre 07)</summary>
+      <div class="corps">
+        <ol>
+          <li><strong>b) 4 octets.</strong></li>
+          <li><strong>b) VLAN 1</strong> (modifiable par sécurité).</li>
+          <li><strong>a) 1.</strong></li>
+          <li><strong>d) Plusieurs.</strong></li>
+          <li><strong>VRAI.</strong> C'est tout l'intérêt.</li>
+          <li><strong>VRAI.</strong></li>
+          <li><strong>FAUX.</strong> Il faut un routeur ou switch L3.</li>
+          <li><code>Switch(config)# vlan 30</code> · <code>Switch(config-vlan)# name DIRECTION</code> · <code>Switch(config)# int fa0/5</code> · <code>Switch(config-if)# switchport mode access</code> · <code>Switch(config-if)# switchport access vlan 30</code></li>
+          <li><code>Switch(config)# interface gi0/1</code> · <code>Switch(config-if)# switchport mode trunk</code></li>
+          <li><code>show vlan brief</code></li>
+          <li>Le Native VLAN = le VLAN dont les trames <em>ne sont pas taguées</em> sur un trunk. Par sécurité, on le change (ex : 999).</li>
+          <li><strong>Switch L3 avec SVI</strong> ou <strong>router-on-a-stick</strong>. Le switch L3 est plus performant.</li>
+          <li>(1) Ports dans des VLANs différents, (2) mauvais câble/trunk, (3) STP bloque un port, (4) masque/IP différents, (5) ACL bloque.</li>
+          <li><strong>Oui</strong>, grâce à <strong>DTP</strong> (Dynamic Trunking Protocol), mais c'est déconseillé pour la sécurité.</li>
+        </ol>
+      </div>
+    </details>
+  </article>
+
+  <!-- ================= POSTER 08 ================= -->
+  <article class="poster" id="p8" data-title="routage ip statique dynamique ospf rip bgp ad">
+    <div class="pin"></div><div class="tape t2"></div>
+    <label class="done-toggle"><input type="checkbox" data-id="p8"> Vu</label>
+    <header class="poster-head">
+      <span class="poster-num">08</span>
+      <h2>Routage IP</h2>
+      <span class="lvl int">Inter. → Avancé</span>
+    </header>
+
+    <h3>À quoi sert un routeur ? 🚦</h3>
+    <p>Il relie plusieurs réseaux et sait par où envoyer chaque paquet grâce à sa <strong>table de routage</strong>.</p>
+
+    <h3>2 façons de remplir la table</h3>
+    <p><strong>Statique</strong> : à la main. <strong>Dynamique</strong> : les routeurs se parlent.</p>
+
+    <h3>Distance Administrative (AD)</h3>
+    <p>Plus l'AD est <strong>bas</strong>, plus la route est fiable :</p>
+    <p><code>Connecté (0) → Statique (1) → eBGP (20) → EIGRP (90) → OSPF (110) → RIP (120)</code></p>
+
+    <h3>Longest Prefix Match</h3>
+    <p>Entre plusieurs routes, on choisit la <strong>plus spécifique</strong> (masque le plus long).</p>
+
+    
+    <div class="expert-details" style="margin-top: 20px; padding: 15px; border-left: 4px solid var(--purple); background: #f3ecfd; border-radius: 8px;">
+      <h3 style="color: var(--purple); margin-top: 0; font-family:'Caveat',cursive; font-size:1.6rem;">🔬 Détails Techniques (Niveau CCNA)</h3>
+      <p><strong>Logique de Routage :</strong> Le routeur choisit le meilleur chemin en regardant d'abord la correspondance la plus précise (<strong>Longest Prefix Match</strong>). En cas d'égalité, il choisit la <strong>Distance Administrative (AD)</strong> la plus basse (Static=1, OSPF=110). Enfin, il regarde la <strong>Métrique</strong>.</p>
+      <p><strong>Floating Static Route :</strong> C'est une route de secours. Si OSPF (AD 110) est actif, on peut configurer une route statique avec une AD de 115 : <code>ip route 0.0.0.0 0.0.0.0 10.0.0.1 115</code>. Tant qu'OSPF fonctionne, cette route statique reste masquée. Elle ne s'activera qu'en cas de panne de l'OSPF.</p>
+    </div>
+    
+    <section class="exercices">
+      <h3>Exercices — Chapitre 08 (14 questions)</h3>
+
+      <div class="part">Partie A — QCM</div>
+      <ol>
+        <li>Distance Administrative d'OSPF ?
+          <ul class="qcm"><li>a) 90 &nbsp; b) 100 &nbsp; c) 110 &nbsp; d) 120</li></ul>
+        </li>
+        <li>Entre /8 et /16 pour joindre 10.1.2.3, laquelle ?
+          <ul class="qcm"><li>a) /8 &nbsp; b) /16 &nbsp; c) Les 2 &nbsp; d) Aucune</li></ul>
+        </li>
+        <li>Quel protocole utilise le nombre de sauts ?
+          <ul class="qcm"><li>a) RIP &nbsp; b) OSPF &nbsp; c) EIGRP &nbsp; d) BGP</li></ul>
+        </li>
+        <li>Quelle route est la plus fiable ?
+          <ul class="qcm"><li>a) RIP &nbsp; b) OSPF &nbsp; c) Statique &nbsp; d) BGP</li></ul>
+        </li>
+      </ol>
+
+      <div class="part">Partie B — Commandes</div>
+      <ol start="5">
+        <li>Écris la commande pour une route statique vers 172.16.0.0/16 via 192.168.1.254.</li>
+        <li>Écris la commande pour une route par défaut via 203.0.113.1.</li>
+        <li>Quelle commande affiche la table de routage ?</li>
+      </ol>
+
+      <div class="part">Partie C — Vrai / Faux</div>
+      <ol start="8">
+        <li>Le routage statique s'adapte automatiquement aux pannes.</li>
+        <li>Une route /24 est plus spécifique qu'une /16.</li>
+        <li>OSPF est un protocole Cisco propriétaire.</li>
+      </ol>
+
+      <div class="part">Partie D — Application</div>
+      <ol start="11">
+        <li>Route statique (AD 1) et OSPF (AD 110) vers le même réseau. Laquelle passe ?</li>
+        <li>2 avantages + 2 inconvénients du routage statique.</li>
+        <li>Pourquoi le longest prefix match est indispensable ?</li>
+        <li>Différence entre distance administrative et métrique ?</li>
+      </ol>
+    </section>
+
+    <details class="corriges">
+      <summary>Voir les corrigés (Chapitre 08)</summary>
+      <div class="corps">
+        <ol>
+          <li><strong>c) 110.</strong></li>
+          <li><strong>b) /16.</strong> Plus spécifique = prioritaire.</li>
+          <li><strong>a) RIP.</strong></li>
+          <li><strong>c) Statique</strong> (AD 1, la plus fiable après connected).</li>
+          <li><code>Router(config)# ip route 172.16.0.0 255.255.0.0 192.168.1.254</code></li>
+          <li><code>Router(config)# ip route 0.0.0.0 0.0.0.0 203.0.113.1</code></li>
+          <li><code>show ip route</code></li>
+          <li><strong>FAUX.</strong> C'est justement son défaut : il ne s'adapte PAS.</li>
+          <li><strong>VRAI.</strong></li>
+          <li><strong>FAUX.</strong> OSPF est un standard ouvert (RFC). EIGRP est Cisco propriétaire.</li>
+          <li><strong>La statique</strong> (AD 1 &lt; 110).</li>
+          <li><strong>Avantages :</strong> simple, prévisible. <strong>Inconvénients :</strong> ne s'adapte pas aux pannes, dur à maintenir sur un grand réseau.</li>
+          <li>Il permet d'avoir une route générale (/16) ET des routes fines (/24). Le routeur choisit la plus fine, sans ambiguïté.</li>
+          <li><strong>Distance administrative</strong> = fiabilité d'une <em>source</em> de route (choix entre protocoles). <strong>Métrique</strong> = coût d'un <em>chemin</em> à l'intérieur d'un protocole.</li>
+        </ol>
+      </div>
+    </details>
+  </article>
+
+  <!-- ================= POSTER 09 ================= -->
+  <article class="poster" id="p9" data-title="ospf dijkstra area abr asbr hello">
+    <div class="pin"></div><div class="tape t1"></div>
+    <label class="done-toggle"><input type="checkbox" data-id="p9"> Vu</label>
+    <header class="poster-head">
+      <span class="poster-num">09</span>
+      <h2>OSPF</h2>
+      <span class="lvl av">Avancé</span>
+    </header>
+
+    <h3>L'idée d'OSPF 🧭</h3>
+    <p>Chaque routeur connaît <strong>toute la carte du réseau</strong> et calcule le plus court chemin tout seul (algorithme de <strong>Dijkstra</strong>).</p>
+
+    <h3>Architecture Multi-Aires (Schéma)</h3>
+    <div class="mermaid">
+    graph TD
+      R1((ABR 1)) ---|Area 0 Backbone| R2((ABR 2))
+      R1 ---|Area 10| R3((Routeur Interne))
+      R2 ---|Area 20| R4((Routeur Interne))
+      R3 ---|Lien Externe| INT[Internet / ASBR]
+      
+      style R1 fill:#d97706,stroke:#333,stroke-width:2px,color:#fff
+      style R2 fill:#d97706,stroke:#333,stroke-width:2px,color:#fff
+    </div>
+    <ul>
+      <li><strong>Area 0</strong> = backbone (obligatoire)</li>
+      <li><strong>ABR</strong> = routeur frontière entre aires</li>
+      <li><strong>ASBR</strong> = frontière avec un autre AS</li>
+    </ul>
+
+    <h3>Configurer OSPF</h3>
+    <pre><code><span class="kw">Router</span>(config)# router ospf 1
+<span class="kw">Router</span>(config-router)# router-id 1.1.1.1
+<span class="kw">Router</span>(config-router)# network 192.168.1.0 0.0.0.255 area 0</code></pre>
+
+    
+    <div class="expert-details" style="margin-top: 20px; padding: 15px; border-left: 4px solid var(--purple); background: #f3ecfd; border-radius: 8px;">
+      <h3 style="color: var(--purple); margin-top: 0; font-family:'Caveat',cursive; font-size:1.6rem;">🔬 Détails Techniques (Niveau CCNA)</h3>
+      <p><strong>Mécanique de OSPFv2 (Link-State) :</strong> OSPF ne partage pas juste des routes, il construit une base de données topologique L3 (<strong>LSDB</strong>) via des paquets <strong>LSA</strong> (Link State Advertisements). Chaque routeur calcule ensuite son arbre grâce à l'algorithme <strong>SPF de Dijkstra</strong>.</p>
+      <p><strong>Élection DR/BDR :</strong> Sur les réseaux partagés (Ethernet), les routeurs élisent un DR (Designated Router) pour centraliser les LSAs. L'élection se base sur la priorité la plus haute, puis sur le <strong>Router-ID</strong> le plus élevé (l'adresse loopback configurée, ou l'IP active la plus haute).</p>
+    </div>
+    
+    <section class="exercices">
+      <h3>Exercices — Chapitre 09 (13 questions)</h3>
+
+      <div class="part">Partie A — QCM</div>
+      <ol>
+        <li>OSPF utilise quel algorithme ?
+          <ul class="qcm"><li>a) Bellman-Ford &nbsp; b) Dijkstra &nbsp; c) DUAL &nbsp; d) Aucun</li></ul>
+        </li>
+        <li>Quelle aire est obligatoire ?
+          <ul class="qcm"><li>a) 1 &nbsp; b) 0 &nbsp; c) 10 &nbsp; d) Aucune</li></ul>
+        </li>
+        <li>Le DR est élu par :
+          <ul class="qcm"><li>a) MAC la plus haute &nbsp; b) Router-ID le plus haut &nbsp; c) Le plus de ports &nbsp; d) Aléatoire</li></ul>
+        </li>
+        <li>Coût OSPF d'un lien Gigabit (référence par défaut) ?
+          <ul class="qcm"><li>a) 0,1 &nbsp; b) 1 &nbsp; c) 10 &nbsp; d) 100</li></ul>
+        </li>
+      </ol>
+
+      <div class="part">Partie B — Vrai / Faux</div>
+      <ol start="5">
+        <li>OSPF envoie toute la topologie toutes les 30 s.</li>
+        <li>Un routeur OSPF peut être connecté à plusieurs aires.</li>
+        <li>L'état "Full" signifie que les bases topologiques sont synchronisées.</li>
+      </ol>
+
+      <div class="part">Partie C — Application</div>
+      <ol start="8">
+        <li>ABR ? ASBR ?</li>
+        <li>2 routeurs OSPF, ID 2.2.2.2 et 3.3.3.3, même priorité. Qui est DR ?</li>
+        <li>Écris les commandes pour activer OSPF (process 1) sur 10.10.10.0/24 en area 0.</li>
+        <li>Cite dans l'ordre les états de voisinage OSPF.</li>
+        <li>Quelle commande montre les voisins OSPF ?</li>
+        <li>Pourquoi OSPF est-il plus adapté qu'un routage statique sur un grand réseau ?</li>
+      </ol>
+      
+      <hr style="margin: 20px 0; border: 1px dashed var(--orange);">
+      <h3>🎯 Nouveaux Exercices (Niveaux Pro)</h3>
+      <div class="part diff-facile">🟢 Niveau 1 : Facile</div>
+      <ol start="14">
+        <li>Sur quoi OSPF se base-t-il pour calculer sa métrique (le coût) ?</li>
+      </ol>
+      <div class="part diff-moyen">🟠 Niveau 2 : Moyen</div>
+      <ol start="15">
+        <li>Pourquoi le routeur DR (Designated Router) n'est-il élu que sur les réseaux de type Broadcast (ex: Ethernet) et pas sur du Point-to-Point ?</li>
+      </ol>
+      <div class="part diff-difficile">🔴 Niveau 3 : Difficile</div>
+      <ol start="16">
+        <li>Que contiennent exactement les LSA (Link State Advertisements) envoyés par les routeurs OSPF ?</li>
+      </ol>
+      <div class="part diff-expert">💀 Niveau 4 : Expert (Troubleshooting)</div>
+      <ol start="17">
+        <li>Deux routeurs OSPF sont directement connectés mais restent bloqués dans l'état "EXSTART/EXCHANGE". La connectivité ping passe. Identifiez au moins deux causes très probables de ce blocage en OSPF.</li>
+      </ol>
+    </section>
+
+    <details class="corriges">
+      <summary>Voir les corrigés (Chapitre 09)</summary>
+      <div class="corps">
+        <ol>
+          <li><strong>b) Dijkstra.</strong></li>
+          <li><strong>b) 0.</strong> Backbone.</li>
+          <li><strong>b) Router-ID le plus haut</strong> (priorité d'abord, puis ID).</li>
+          <li><strong>b) 1</strong> (10⁸ / 10⁹ = 0,1 → plafonné à 1).</li>
+          <li><strong>FAUX.</strong> OSPF envoie des Hello toutes les 10s, mais les mises à jour de topologie sont <em>événementielles</em>.</li>
+          <li><strong>VRAI.</strong> Ce sont les ABR (Area Border Routers).</li>
+          <li><strong>VRAI.</strong></li>
+          <li><strong>ABR</strong> = routeur frontière entre aires · <strong>ASBR</strong> = frontière avec un autre AS (redistribution de routes externes).</li>
+          <li><strong>3.3.3.3</strong> devient DR (ID la plus haute).</li>
+          <li><code>router ospf 1</code> puis <code>network 10.10.10.0 0.0.0.255 area 0</code></li>
+          <li>Down → Init → 2-Way → ExStart → Exchange → Loading → Full.</li>
+          <li><code>show ip ospf neighbor</code></li>
+          <li>Parce qu'il s'adapte automatiquement aux pannes et calcule le meilleur chemin tout seul, sans devoir tout reconfigurer à la main.</li>
+          <hr style="margin:10px 0;border:1px dashed #ccc;">
+          <li>La <strong>bande passante</strong> (Cost = Référence / Bande Passante de l'interface).</li>
+          <li>Pour limiter le nombre de relations de voisinage. Sur un réseau Ethernet (multi-accès), s'il y a 10 routeurs, sans DR on aurait 45 relations croisées. Avec le DR, chaque routeur ne s'adresse qu'au DR/BDR, optimisant grandement le trafic de contrôle.</li>
+          <li>Les LSA contiennent les informations sur l'état des liens locaux d'un routeur : son identifiant, les réseaux IP connectés, l'état de ces interfaces (UP/DOWN) et le coût pour les atteindre.</li>
+          <li>Cause 1 : Un problème de <strong>MTU (Maximum Transmission Unit)</strong> qui ne correspond pas des deux côtés du lien. Cause 2 : Un <strong>Router-ID (RID) en conflit</strong> (les deux ont le même).</li>
+        </ol>
+      </div>
+    </details>
+  </article>
+
+  <!-- ================= POSTER 10 ================= -->
+  <article class="poster" id="p10" data-title="acl standard étendue wildcard permit deny">
+    <div class="pin"></div><div class="tape t2"></div>
+    <label class="done-toggle"><input type="checkbox" data-id="p10"> Vu</label>
+    <header class="poster-head">
+      <span class="poster-num">10</span>
+      <h2>ACL — Filtrage</h2>
+      <span class="lvl av">Avancé</span>
+    </header>
+
+    <h3>C'est quoi ? 🚧</h3>
+    <p>Comme un videur 🚪 : une liste de règles <strong>permit</strong> ✅ / <strong>deny</strong> ❌ pour filtrer les paquets.</p>
+
+    <h3>2 types</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Type</th><th>Numéro</th><th>Filtre</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Standard</strong></td><td>1-99</td><td>IP source seulement</td></tr>
+        <tr><td><strong>Étendue</strong></td><td>100-199</td><td>IP + port + protocole</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="callout piege" data-icon="⚠️">
+      <span class="label">Règles d'or :</span>
+      <ol>
+        <li>Lue <strong>dans l'ordre</strong> — 1ère correspondance gagne</li>
+        <li><strong>deny any</strong> implicite à la fin</li>
+        <li>Standard près de la <em>destination</em> · Étendue près de la <em>source</em></li>
+      </ol>
+    </div>
+
+    
+    <div class="expert-details" style="margin-top: 20px; padding: 15px; border-left: 4px solid var(--purple); background: #f3ecfd; border-radius: 8px;">
+      <h3 style="color: var(--purple); margin-top: 0; font-family:'Caveat',cursive; font-size:1.6rem;">🔬 Détails Techniques (Niveau CCNA)</h3>
+      <p><strong>ACL et Masque Générique (Wildcard) :</strong> L'ACL filtre le trafic L3 et L4. Le Wildcard Mask est l'inverse du sous-réseau : les '0' exigent une correspondance exacte, les '1' ignorent la vérification. L'ACL possède toujours un <strong>Implicit Deny Any Any</strong> invisible à la fin : si aucune ligne ne correspond, le paquet est détruit.</p>
+      <p><strong>Placement Stratégique :</strong> Règle Cisco : l'ACL <strong>Étendue</strong> (qui filtre Source, Destination, et Port) se place le plus <em>proche possible de la source</em> pour bloquer le trafic indésirable rapidement. L'ACL <strong>Standard</strong> (qui ne filtre que la source) se place le plus <em>proche de la destination</em>.</p>
+    </div>
+    
+    <section class="exercices">
+      <h3>Exercices — Chapitre 10 (13 questions)</h3>
+
+      <div class="part">Partie A — QCM</div>
+      <ol>
+        <li>Numéro d'une ACL standard ?
+          <ul class="qcm"><li>a) 1-99 &nbsp; b) 100-199 &nbsp; c) 200-299 &nbsp; d) Aucun</li></ul>
+        </li>
+        <li>Que se passe-t-il à la fin d'une ACL si aucun permit ne correspond ?
+          <ul class="qcm"><li>a) Tout passe &nbsp; b) Tout est bloqué &nbsp; c) Le routeur décide &nbsp; d) Rien</li></ul>
+        </li>
+        <li>Wildcard pour un /24 ?
+          <ul class="qcm"><li>a) 0.0.0.255 &nbsp; b) 255.255.255.0 &nbsp; c) 0.0.0.0 &nbsp; d) 255.255.255.255</li></ul>
+        </li>
+      </ol>
+
+      <div class="part">Partie B — Calculs</div>
+      <ol start="4">
+        <li>Wildcard pour /26 ?</li>
+        <li>Wildcard pour /28 ?</li>
+        <li>Wildcard pour /30 ?</li>
+      </ol>
+
+      <div class="part">Partie C — Pratique</div>
+      <ol start="7">
+        <li>Crée une ACL étendue (100) qui autorise HTTP depuis 192.168.1.0/24.</li>
+        <li>Applique cette ACL en entrée sur g0/0.</li>
+        <li>Quelle commande affiche les ACL ?</li>
+      </ol>
+
+      <div class="part">Partie D — Application</div>
+      <ol start="10">
+        <li>Où placer une ACL standard ? Pourquoi ?</li>
+        <li>Où placer une ACL étendue ? Pourquoi ?</li>
+        <li>Une ACL peut-elle filtrer par numéro de port ?</li>
+        <li>Différence entre "in" et "out" sur une interface ?</li>
+      </ol>
+    </section>
+
+    <details class="corriges">
+      <summary>Voir les corrigés (Chapitre 10)</summary>
+      <div class="corps">
+        <ol>
+          <li><strong>a) 1-99.</strong></li>
+          <li><strong>b) Tout est bloqué.</strong> À cause du deny any implicite.</li>
+          <li><strong>a) 0.0.0.255.</strong></li>
+          <li>/26 → <span class="rep">0.0.0.63</span></li>
+          <li>/28 → <span class="rep">0.0.0.15</span></li>
+          <li>/30 → <span class="rep">0.0.0.3</span></li>
+          <li><code>access-list 100 permit tcp 192.168.1.0 0.0.0.255 any eq 80</code></li>
+          <li><code>interface g0/0</code> puis <code>ip access-group 100 in</code></li>
+          <li><code>show access-lists</code></li>
+          <li>Près de la <strong>destination</strong>, car elle ne filtre que la source. Sinon on bloque du trafic légitime.</li>
+          <li>Près de la <strong>source</strong>, pour éviter de faire voyager du trafic inutile à travers le réseau.</li>
+          <li><strong>OUI</strong>, si étendue (ex : <code>eq 80</code>, <code>eq 22</code>).</li>
+          <li><strong>in</strong> = ACL appliquée sur le trafic qui ENTRE dans l'interface. <strong>out</strong> = sur le trafic qui SORT.</li>
+        </ol>
+      </div>
+    </details>
+  </article>
+
+  <!-- ================= POSTER 11 ================= -->
+  <article class="poster" id="p11" data-title="nat pat overload statique">
+    <div class="pin"></div><div class="tape t1"></div>
+    <label class="done-toggle"><input type="checkbox" data-id="p11"> Vu</label>
+    <header class="poster-head">
+      <span class="poster-num">11</span>
+      <h2>NAT &amp; PAT</h2>
+      <span class="lvl av">Avancé</span>
+    </header>
+
+    <h3>Le problème 🧩</h3>
+    <p>Chez toi tes PC ont des IP privées (<code>192.168.1.x</code>). Sur Internet ces IP n'existent pas ! Il faut <strong>traduire</strong> en IP publique.</p>
+
+    <h3>Les 3 types</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Type</th><th>Fait</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Statique</strong></td><td>1 privée ↔ 1 publique</td></tr>
+        <tr><td><strong>Dynamique</strong></td><td>Pool de publiques</td></tr>
+        <tr><td><strong>PAT / Overload</strong></td><td>Plusieurs privées → 1 publique</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Config PAT</h3>
+    <pre><code><span class="kw">Router</span>(config)# access-list 1 permit 192.168.1.0 0.0.0.255
+<span class="kw">Router</span>(config)# ip nat inside source list 1 interface g0/1 overload
+<span class="kw">Router</span>(config)# int g0/0
+<span class="kw">Router</span>(config-if)# ip nat inside
+<span class="kw">Router</span>(config)# int g0/1
+<span class="kw">Router</span>(config-if)# ip nat outside</code></pre>
+
+    
+    <div class="expert-details" style="margin-top: 20px; padding: 15px; border-left: 4px solid var(--purple); background: #f3ecfd; border-radius: 8px;">
+      <h3 style="color: var(--purple); margin-top: 0; font-family:'Caveat',cursive; font-size:1.6rem;">🔬 Détails Techniques (Niveau CCNA)</h3>
+      <p><strong>Vocabulaire NAT Cisco :</strong> <em>Inside Local</em> = Votre IP privée (192.168.x.x). <em>Inside Global</em> = L'IP publique de votre box internet. <em>Outside Global</em> = L'IP du serveur distant (ex: Google) telle qu'elle est sur le web.</p>
+      <p><strong>PAT (Port Address Translation) :</strong> Aussi appelé NAT Overload. C'est le type de NAT utilisé dans 99% des cas (Box maison/entreprise). Il permet à des milliers de PC privés de partager <strong>une seule IP publique</strong> en modifiant dynamiquement le <strong>Numéro de Port Source (L4)</strong> pour distinguer les sessions.</p>
+    </div>
+    
+    <section class="exercices">
+      <h3>Exercices — Chapitre 11 (13 questions)</h3>
+
+      <div class="part">Partie A — QCM</div>
+      <ol>
+        <li>Quel type de NAT utilise les ports ?
+          <ul class="qcm"><li>a) Statique &nbsp; b) Dynamique &nbsp; c) PAT &nbsp; d) Aucun</li></ul>
+        </li>
+        <li>Combien d'IP publiques pour 100 PC avec PAT ?
+          <ul class="qcm"><li>a) 1 &nbsp; b) 10 &nbsp; c) 100 &nbsp; d) 255</li></ul>
+        </li>
+        <li>Que veut dire overload ?
+          <ul class="qcm"><li>a) Double connexion &nbsp; b) Plusieurs IP sur 1 seule &nbsp; c) Erreur &nbsp; d) Blocage</li></ul>
+        </li>
+      </ol>
+
+      <div class="part">Partie B — Vrai / Faux</div>
+      <ol start="4">
+        <li>NAT permet d'économiser les adresses IPv4 publiques.</li>
+        <li>NAT statique est utilisé pour des serveurs internes accessibles depuis Internet.</li>
+        <li>PAT nécessite une IP publique par PC.</li>
+      </ol>
+
+      <div class="part">Partie C — Pratique</div>
+      <ol start="7">
+        <li>Quelle commande active PAT sur l'interface g0/1 ?</li>
+        <li>Quelle commande marque g0/0 en "inside" ?</li>
+        <li>Quelle commande montre la table NAT ?</li>
+      </ol>
+
+      <div class="part">Partie D — Application</div>
+      <ol start="10">
+        <li>Un serveur web interne (192.168.1.50) doit être joignable depuis Internet. Quel type de NAT ?</li>
+        <li>Pourquoi NAT a-t-il aidé à "sauver" IPv4 ?</li>
+        <li>Différence entre NAT statique et PAT ?</li>
+        <li>Peut-on faire du NAT sur IPv6 ? Pourquoi ?</li>
+      </ol>
+    </section>
+
+    <details class="corriges">
+      <summary>Voir les corrigés (Chapitre 11)</summary>
+      <div class="corps">
+        <ol>
+          <li><strong>c) PAT.</strong></li>
+          <li><strong>a) 1.</strong> Tout l'intérêt du PAT.</li>
+          <li><strong>b) Plusieurs IP sur 1 seule.</strong></li>
+          <li><strong>VRAI.</strong></li>
+          <li><strong>VRAI.</strong> Un mapping fixe pour un serveur accessible depuis Internet.</li>
+          <li><strong>FAUX.</strong> PAT permet justement à plusieurs PC de partager 1 seule IP publique.</li>
+          <li><code>Router(config)# ip nat inside source list 1 interface g0/1 overload</code></li>
+          <li><code>Router(config-if)# ip nat inside</code></li>
+          <li><code>show ip nat translations</code></li>
+          <li><strong>NAT statique.</strong> Mapping 1-1 fixe.</li>
+          <li>Parce que des milliers d'appareils peuvent partager une seule IP publique. Sans NAT, IPv4 aurait été épuisé bien plus tôt.</li>
+          <li><strong>NAT statique</strong> = 1↔1 fixe. <strong>PAT</strong> = plusieurs ↔ 1 grâce aux ports.</li>
+          <li>Techniquement possible mais inutile : on a tellement d'adresses IPv6 qu'on n'a pas besoin de NAT.</li>
+        </ol>
+      </div>
+    </details>
+  </article>
+
+  <!-- ================= POSTER 12 ================= -->
+  <article class="poster" id="p12" data-title="dhcp dns dora ntp enregistrements">
+    <div class="pin"></div><div class="tape t2"></div>
+    <label class="done-toggle"><input type="checkbox" data-id="p12"> Vu</label>
+    <header class="poster-head">
+      <span class="poster-num">12</span>
+      <h2>DHCP &amp; DNS</h2>
+      <span class="lvl int">Intermédiaire</span>
+    </header>
+
+    <h3>DHCP — distribue les IP 🎁</h3>
+    <p>Processus <strong>DORA</strong> :</p>
+    <ol>
+      <li><strong>D</strong>iscover — client crie "y'a quelqu'un ?"</li>
+      <li><strong>O</strong>ffer — serveur répond "tiens cette IP"</li>
+      <li><strong>R</strong>equest — client dit "OK je la prends"</li>
+      <li><strong>A</strong>ck — serveur confirme</li>
+    </ol>
+    
+    <h3>La Danse du D.O.R.A Animée 🕺</h3>
+    <div class="mermaid">
+    sequenceDiagram
+      participant PC
+      participant Serveur
+      PC->>Serveur: 1. DISCOVER (Broadcast)
+      Serveur-->>PC: 2. OFFER (Unicast)
+      PC->>Serveur: 3. REQUEST (Broadcast)
+      Serveur-->>PC: 4. ACK (Unicast)
+    </div>
+
+    <h3>DNS — l'annuaire 📖</h3>
+    <p>Traduit <code>www.google.com</code> → <code>142.250.185.78</code></p>
+
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Type DNS</th><th>Rôle</th></tr></thead>
+      <tbody>
+        <tr><td><strong>A</strong></td><td>Nom → IPv4</td></tr>
+        <tr><td><strong>AAAA</strong></td><td>Nom → IPv6</td></tr>
+        <tr><td><strong>CNAME</strong></td><td>Alias</td></tr>
+        <tr><td><strong>MX</strong></td><td>Serveur mail</td></tr>
+        <tr><td><strong>PTR</strong></td><td>IP → nom</td></tr>
+      </tbody>
+    </table></div>
+
+    
+    <div class="expert-details" style="margin-top: 20px; padding: 15px; border-left: 4px solid var(--purple); background: #f3ecfd; border-radius: 8px;">
+      <h3 style="color: var(--purple); margin-top: 0; font-family:'Caveat',cursive; font-size:1.6rem;">🔬 Détails Techniques (Niveau CCNA)</h3>
+      <p><strong>Le processus DORA :</strong> <code>Discover (Broadcast) -> Offer (Unicast) -> Request (Broadcast) -> Acknowledge (Unicast)</code>. Si le serveur DHCP L3 n'est pas sur le même LAN que le client L2, les routeurs bloquent le broadcast. Il faut configurer un relais avec la commande <code>ip helper-address</code> sur l'interface du routeur !</p>
+      <p><strong>Enregistrements DNS L7 :</strong> Type <strong>A</strong> = Mappe un nom à une adresse IPv4. Type <strong>AAAA</strong> = Mappe vers une IPv6. Type <strong>CNAME</strong> = Alias (surnom) vers un autre nom d'hôte. Type <strong>MX</strong> = Indique l'adresse du serveur d'échange d'Emails.</p>
+    </div>
+    
+    <section class="exercices">
+      <h3>Exercices — Chapitre 12 (13 questions)</h3>
+
+      <div class="part">Partie A — QCM</div>
+      <ol>
+        <li>DORA veut dire ?
+          <ul class="qcm"><li>a) Data-Offer-Route-Ack &nbsp; b) Discover-Offer-Request-Ack &nbsp; c) Direct-Open-Route-Ack &nbsp; d) Aucun</li></ul>
+        </li>
+        <li>Quel DNS pour un alias ?
+          <ul class="qcm"><li>a) A &nbsp; b) AAAA &nbsp; c) CNAME &nbsp; d) MX</li></ul>
+        </li>
+        <li>Quel port utilise DHCP ?
+          <ul class="qcm"><li>a) 22 &nbsp; b) 53 &nbsp; c) 67/68 &nbsp; d) 80</li></ul>
+        </li>
+        <li>Quel port utilise DNS ?
+          <ul class="qcm"><li>a) 22 &nbsp; b) 53 &nbsp; c) 67 &nbsp; d) 80</li></ul>
+        </li>
+      </ol>
+
+      <div class="part">Partie B — Vrai / Faux</div>
+      <ol start="5">
+        <li>DHCP distribue IP, masque, passerelle et DNS.</li>
+        <li>Un bail DHCP peut être permanent.</li>
+        <li>DNS utilise TCP uniquement.</li>
+      </ol>
+
+      <div class="part">Partie C — Pratique</div>
+      <ol start="8">
+        <li>Écris les commandes pour créer un pool DHCP "BUREAU" 10.1.1.0/24 avec routeur 10.1.1.1.</li>
+        <li>Quelle commande montre les baux DHCP attribués ?</li>
+        <li>Quel outil Windows pour vider/renouveler une IP ?</li>
+      </ol>
+
+      <div class="part">Partie D — Application</div>
+      <ol start="11">
+        <li>Ton PC a une IP 169.254.x.x. Que faire ?</li>
+        <li>Pourquoi le DNS est-il vital sur Internet ?</li>
+        <li>À quoi sert NTP ?</li>
+      </ol>
+      
+      <hr style="margin: 20px 0; border: 1px dashed var(--orange);">
+      <h3>🎯 Nouveaux Exercices (Niveaux Pro)</h3>
+      <div class="part diff-facile">🟢 Niveau 1 : Facile</div>
+      <ol start="14">
+        <li>Qu'est-ce qu'un enregistrement DNS de type 'AAAA' ?</li>
+      </ol>
+      <div class="part diff-moyen">🟠 Niveau 2 : Moyen</div>
+      <ol start="15">
+        <li>Lors du processus DHCP DORA, la première trame (DISCOVER) est envoyée à l'adresse MAC FF:FF:FF:FF:FF:FF. Pourquoi ?</li>
+      </ol>
+      <div class="part diff-difficile">🔴 Niveau 3 : Difficile (DHCP Relay)</div>
+      <ol start="16">
+        <li>Si le serveur DHCP est sur le VLAN 100 et le PC client est sur le VLAN 10, le broadcast DHCP ne passera pas le routeur. Quelle commande Cisco permet au routeur de transformer ce broadcast en unicast vers le serveur DHCP ?</li>
+      </ol>
+      <div class="part diff-expert">💀 Niveau 4 : Expert (Troubleshooting)</div>
+      <ol start="17">
+        <li>Un utilisateur n'a plus Internet. Le ping vers '8.8.8.8' fonctionne, mais le ping vers 'google.com' échoue. Identifiez avec certitude l'origine du problème et la solution immédiate.</li>
+      </ol>
+    </section>
+
+    <details class="corriges">
+      <summary>Voir les corrigés (Chapitre 12)</summary>
+      <div class="corps">
+        <ol>
+          <li><strong>b) Discover-Offer-Request-Ack.</strong></li>
+          <li><strong>c) CNAME.</strong></li>
+          <li><strong>c) 67/68.</strong> (serveur 67, client 68)</li>
+          <li><strong>b) 53.</strong></li>
+          <li><strong>VRAI.</strong></li>
+          <li><strong>VRAI</strong> — on peut configurer un bail infini.</li>
+          <li><strong>FAUX.</strong> DNS utilise UDP pour les requêtes simples et TCP pour les transferts de zone.</li>
+          <li><code>ip dhcp pool BUREAU</code> · <code>network 10.1.1.0 255.255.255.0</code> · <code>default-router 10.1.1.1</code></li>
+          <li><code>show ip dhcp binding</code></li>
+          <li><code>ipconfig /release</code> puis <code>ipconfig /renew</code></li>
+          <li>L'IP 169.254.x.x est APIPA : le PC n'a pas eu de DHCP. Vérifie câble + serveur DHCP, puis <code>ipconfig /renew</code>.</li>
+          <li>Sans DNS, il faudrait retenir les IP par cœur. Imagine taper <code>142.250.185.78</code> au lieu de <code>google.com</code> !</li>
+          <li>NTP = Network Time Protocol — synchronise l'heure des équipements (essentiel pour les logs et certificats).</li>
+          <hr style="margin:10px 0;border:1px dashed #ccc;">
+          <li>Il fait la résolution d'un nom de domaine vers une adresse <strong>IPv6</strong> (contrairement au type A pour IPv4).</li>
+          <li>Parce que le PC vient de démarrer, il n'a pas d'adresse IP et il ne connaît pas l'adresse IP/MAC du serveur DHCP local. Il crie donc à tout le monde "Au secours, qui est serveur ici !".</li>
+          <li>C'est la commande <strong>ip helper-address [IP_du_serveur]</strong> appliquée sur l'interface du routeur connectée au VLAN client.</li>
+          <li>Le routeur/connexion IP fonctionne (le ping IP passe). Le problème est 100% lié à la <strong>résolution DNS</strong>. Soit le serveur DNS configuré sur le PC est injoignable/tombé, soit l'IP du DNS est erronée. Solution : paramétrer un DNS public (ex: 8.8.8.8) manuellement sur la carte réseau ou corriger l'option DNS du serveur DHCP.</li>
+        </ol>
+      </div>
+    </details>
+  </article>
+
+  <!-- ================= POSTER 13 ================= -->
+  <article class="poster" id="p13" data-title="sécurité port security ssh aaa dhcp snooping">
+    <div class="pin"></div><div class="tape t1"></div>
+    <label class="done-toggle"><input type="checkbox" data-id="p13"> Vu</label>
+    <header class="poster-head">
+      <span class="poster-num">13</span>
+      <h2>Sécurité réseau</h2>
+      <span class="lvl av">Avancé → CCNA</span>
+    </header>
+
+    <h3>Menaces courantes 🥷</h3>
+    <ul>
+      <li><strong>Sniffing</strong> — écoute du trafic</li>
+      <li><strong>Spoofing</strong> — usurpation</li>
+      <li><strong>DoS / DDoS</strong> — déni de service</li>
+      <li><strong>MITM</strong> — homme du milieu</li>
+    </ul>
+
+    <h3>Sécurité du Réseau (Généré par IA) 📸</h3>
+    <img src="firewall_security.png" alt="Concept de Sécurité Réseau avec Firewall" class="course-img" onerror="this.style.display='none'">
+
+    <h3>Défenses 🛡️</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Attaque</th><th>Défense</th></tr></thead>
+      <tbody>
+        <tr><td>MAC flooding</td><td>Port Security</td></tr>
+        <tr><td>ARP spoofing</td><td>Dynamic ARP Inspection</td></tr>
+        <tr><td>DHCP rogue</td><td>DHCP Snooping</td></tr>
+        <tr><td>Accès non autorisé</td><td>SSH + AAA</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Port Security</h3>
+    <pre><code><span class="kw">Switch</span>(config-if)# switchport port-security
+<span class="kw">Switch</span>(config-if)# switchport port-security maximum 2
+<span class="kw">Switch</span>(config-if)# switchport port-security violation shutdown
+<span class="kw">Switch</span>(config-if)# switchport port-security mac-address sticky</code></pre>
+
+    
+    <div class="expert-details" style="margin-top: 20px; padding: 15px; border-left: 4px solid var(--purple); background: #f3ecfd; border-radius: 8px;">
+      <h3 style="color: var(--purple); margin-top: 0; font-family:'Caveat',cursive; font-size:1.6rem;">🔬 Détails Techniques (Niveau CCNA)</h3>
+      <p><strong>Sécurité L2 et DHCP Snooping :</strong> Pour contrer les Rogue DHCP et le MAC Flooding, le switch L2 utilise DHCP Snooping (bloque les réponses DHCP sauf sur les ports dits "Trusteds") et <strong>Port-Security</strong> (mode <em>Restrict</em> : bloque le trafic pirate, laisse passer les légitimes, incrémente un compteur de violation).</p>
+      <p><strong>Sécurité des Mots de Passe & AAA :</strong> Utilisez <code>enable secret</code> qui chiffre nativement en <strong>MD5 / SHA-256 (Type 5 ou 8)</strong>, et non <code>service password-encryption</code> (Type 7 faible). Pour authentifier les admins via un serveur centralisé, le protocole <strong>TACACS+</strong> chiffre l'ensemble du paquet (idéal pour l'admin), tandis que <strong>RADIUS</strong> ne chiffre que le mot de passe (idéal pour le 802.1X).</p>
+    </div>
+    
+    <section class="exercices">
+      <h3>Exercices — Chapitre 13 (13 questions)</h3>
+
+      <div class="part">Partie A — QCM</div>
+      <ol>
+        <li>Port Security protège contre ?
+          <ul class="qcm"><li>a) DDoS &nbsp; b) MAC flooding &nbsp; c) Virus &nbsp; d) Spam</li></ul>
+        </li>
+        <li>Pourquoi préférer SSH à Telnet ?
+          <ul class="qcm"><li>a) Plus rapide &nbsp; b) Chiffré &nbsp; c) Plus simple &nbsp; d) Moins cher</li></ul>
+        </li>
+        <li>AAA signifie ?
+          <ul class="qcm"><li>a) Auth-Author-Accounting &nbsp; b) Auto-Accès-Admin &nbsp; c) Aucun &nbsp; d) Active-Access-API</li></ul>
+        </li>
+        <li>Quel port utilise SSH ?
+          <ul class="qcm"><li>a) 21 &nbsp; b) 22 &nbsp; c) 23 &nbsp; d) 25</li></ul>
+        </li>
+      </ol>
+
+      <div class="part">Partie B — Vrai / Faux</div>
+      <ol start="5">
+        <li>Telnet chiffre le trafic.</li>
+        <li>Port Security peut limiter le nombre de MAC par port.</li>
+        <li>Un port avec violation shutdown se ferme et nécessite une intervention.</li>
+      </ol>
+
+      <div class="part">Partie C — Pratique</div>
+      <ol start="8">
+        <li>Écris la commande pour générer une clé RSA de 1024 bits.</li>
+        <li>Écris la commande pour limiter à 3 MAC sur un port.</li>
+        <li>Écris la commande pour forcer SSH sur les lignes vty.</li>
+      </ol>
+
+      <div class="part">Partie D — Application</div>
+      <ol start="11">
+        <li>Qu'est-ce que DHCP snooping ?</li>
+        <li>Un port passe automatiquement en shutdown. Quelle fonctionnalité ?</li>
+        <li>Pourquoi chiffrer l'accès admin d'un routeur ?</li>
+      </ol>
+      
+      <hr style="margin: 20px 0; border: 1px dashed var(--orange);">
+      <h3>🎯 Nouveaux Exercices (Niveaux Pro)</h3>
+      <div class="part diff-facile">🟢 Niveau 1 : Facile</div>
+      <ol start="14">
+        <li>En Port-Security, que fait l'option "mac-address sticky" ?</li>
+      </ol>
+      <div class="part diff-moyen">🟠 Niveau 2 : Moyen</div>
+      <ol start="15">
+        <li>Un pirate lance une attaque "Rogue DHCP" sur votre réseau. Quel est le but de cette attaque ?</li>
+      </ol>
+      <div class="part diff-difficile">🔴 Niveau 3 : Difficile</div>
+      <ol start="16">
+        <li>En plus de "shutdown", quels sont les deux autres modes de violation en Port Security, et en quoi diffèrent-ils ?</li>
+      </ol>
+      <div class="part diff-expert">💀 Niveau 4 : Expert (Récupération)</div>
+      <ol start="17">
+        <li>Un port de switch sécurisé a détecté une MAC illicite et a été mis en mode `err-disable`. Expliquez la démarche d'un administrateur (les deux commandes exactes sur l'interface) pour remettre le port en service manuellement.</li>
+      </ol>
+    </section>
+
+    <details class="corriges">
+      <summary>Voir les corrigés (Chapitre 13)</summary>
+      <div class="corps">
+        <ol>
+          <li><strong>b) MAC flooding.</strong></li>
+          <li><strong>b) Chiffré.</strong></li>
+          <li><strong>a) Authentication, Authorization, Accounting.</strong></li>
+          <li><strong>b) 22.</strong></li>
+          <li><strong>FAUX.</strong> Telnet envoie tout en clair, y compris les mots de passe.</li>
+          <li><strong>VRAI.</strong> C'est le but même de Port Security.</li>
+          <li><strong>VRAI.</strong> Il faut <code>shutdown</code> / <code>no shutdown</code> pour le réactiver.</li>
+          <li><code>crypto key generate rsa modulus 1024</code></li>
+          <li><code>switchport port-security maximum 3</code></li>
+          <li><code>line vty 0 4</code> puis <code>transport input ssh</code></li>
+          <li>Fonctionnalité de switch qui n'autorise les réponses DHCP que depuis les ports "trusted" (le vrai serveur), bloquant les faux serveurs DHCP.</li>
+          <li><strong>Port Security</strong> avec violation "shutdown". Le port a vu une MAC non autorisée.</li>
+          <li>Si un pirate intercepte Telnet, il voit le mot de passe en clair. Avec SSH, il ne voit que du chiffré.</li>
+          <hr style="margin:10px 0;border:1px dashed #ccc;">
+          <li>Il permet au switch d'apprendre dynamiquement la première adresse MAC branchée et de l'inscrire <strong>définitivement</strong> dans sa configuration en cours (running-config).</li>
+          <li>Le pirate configure son propre serveur DHCP pour distribuer des adresses IP. Il donne <strong>sa propre adresse IP comme "passerelle par défaut"</strong> aux clients, afin d'intercepter tout leur trafic Internet (attaque Man-In-The-Middle).</li>
+          <li><strong>Protect</strong> (bloque la trame silencieusement) et <strong>Restrict</strong> (bloque la trame et incrémente un compteur + génère un message log SNMP/Syslog). Contrairement à Shutdown, ils ne désactivent pas physiquement le port.</li>
+          <li>L'administrateur doit aller sur l'interface concernée et taper d'abord <code>shutdown</code> (pour fermer complètement le port), puis <code>no shutdown</code> (pour le relancer propre). Sans ce cycle, le port reste en <em>err-disable</em>.</li>
+        </ol>
+      </div>
+    </details>
+  </article>
+
+  <!-- ================= POSTER 14 ================= -->
+  <article class="poster" id="p14" data-title="wlan 802.11 wpa2 wpa3 ssid">
+    <div class="pin"></div><div class="tape t2"></div>
+    <label class="done-toggle"><input type="checkbox" data-id="p14"> Vu</label>
+    <header class="poster-head">
+      <span class="poster-num">14</span>
+      <h2>Réseaux Wi-Fi (WLAN)</h2>
+      <span class="lvl int">Intermédiaire</span>
+    </header>
+
+    <h3>Comment ça marche ? 📡</h3>
+    <p>Wi-Fi = même réseau que filaire mais au lieu d'un câble on utilise des <strong>ondes radio</strong>. Un <strong>point d'accès (AP)</strong> fait le pont.</p>
+
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Norme</th><th>Nom</th><th>Débit max</th></tr></thead>
+      <tbody>
+        <tr><td>802.11b</td><td>Wi-Fi 1</td><td>11 Mbps</td></tr>
+        <tr><td>802.11g</td><td>Wi-Fi 3</td><td>54 Mbps</td></tr>
+        <tr><td>802.11n</td><td>Wi-Fi 4</td><td>600 Mbps</td></tr>
+        <tr><td>802.11ac</td><td>Wi-Fi 5</td><td>1.3 Gbps</td></tr>
+        <tr><td>802.11ax</td><td><strong>Wi-Fi 6</strong></td><td>9.6 Gbps</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Sécurité 🔐</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Protocole</th><th>Sécurité</th></tr></thead>
+      <tbody>
+        <tr><td>WEP</td><td>❌ Cassable</td></tr>
+        <tr><td>WPA</td><td>⚠️ Obsolète</td></tr>
+        <tr><td>WPA2</td><td>✅ Recommandé</td></tr>
+        <tr><td>WPA3</td><td>✅✅ Optimal</td></tr>
+      </tbody>
+    </table></div>
+
+    
+    <div class="expert-details" style="margin-top: 20px; padding: 15px; border-left: 4px solid var(--purple); background: #f3ecfd; border-radius: 8px;">
+      <h3 style="color: var(--purple); margin-top: 0; font-family:'Caveat',cursive; font-size:1.6rem;">🔬 Détails Techniques (Niveau CCNA)</h3>
+      <p><strong>Collision Avoidance (CSMA/CA) :</strong> Le réseau Wi-Fi est un média partagé Half-Duplex. Il utilise l'évitement (Avoidance) de collision via des accusés (ACK). WPA3 modernise la sécurité et empêche le brute-force hors ligne grâce au protocole d'authentification <strong>SAE (Simultaneous Authentication of Equals)</strong>.</p>
+      <p><strong>WLC et Mode FlexConnect :</strong> Dans un réseau d'entreprise, les bornes (AP) montent des tunnels <strong>CAPWAP</strong> (Contrôle UDP 5246, Data UDP 5247) vers le Contrôleur WLC. Si le lien WAN coupe, un AP en mode <strong>FlexConnect</strong> reste opérationnel (Standalone) et commute localement les trames de données au niveau L2 sur le switch distant.</p>
+    </div>
+    
+    <section class="exercices">
+      <h3>Exercices — Chapitre 14 (13 questions)</h3>
+
+      <div class="part">Partie A — QCM</div>
+      <ol>
+        <li>Quelle norme est Wi-Fi 6 ?
+          <ul class="qcm"><li>a) 802.11n &nbsp; b) 802.11ac &nbsp; c) 802.11ax &nbsp; d) 802.11g</li></ul>
+        </li>
+        <li>Lequel est OBSOLÈTE ?
+          <ul class="qcm"><li>a) WPA3 &nbsp; b) WPA2 &nbsp; c) WPA &nbsp; d) Aucun</li></ul>
+        </li>
+        <li>SSID = ?
+          <ul class="qcm"><li>a) Adresse MAC &nbsp; b) Nom du réseau &nbsp; c) Fréquence &nbsp; d) Canal</li></ul>
+        </li>
+        <li>BSSID = ?
+          <ul class="qcm"><li>a) Adresse MAC de l'AP &nbsp; b) Mot de passe &nbsp; c) Port &nbsp; d) SSID chiffré</li></ul>
+        </li>
+      </ol>
+
+      <div class="part">Partie B — Vrai / Faux</div>
+      <ol start="5">
+        <li>Le Wi-Fi utilise la bande 5 GHz uniquement.</li>
+        <li>WPA2 est plus sûr que WEP.</li>
+        <li>Un WLC sert à gérer plusieurs points d'accès.</li>
+      </ol>
+
+      <div class="part">Partie C — Application</div>
+      <ol start="8">
+        <li>SSID vs BSSID ?</li>
+        <li>Un client voit 5 SSID avec le même nom. Comment les distinguer ?</li>
+        <li>Quel protocole choisir pour un hôtel aujourd'hui ?</li>
+        <li>Pourquoi WEP est-il dangereux ?</li>
+        <li>Quelles sont les 2 principales bandes de fréquence Wi-Fi ?</li>
+        <li>Cite 3 avantages du Wi-Fi par rapport au filaire.</li>
+      </ol>
+    </section>
+
+    <details class="corriges">
+      <summary>Voir les corrigés (Chapitre 14)</summary>
+      <div class="corps">
+        <ol>
+          <li><strong>c) 802.11ax.</strong></li>
+          <li><strong>c) WPA.</strong></li>
+          <li><strong>b) Nom du réseau.</strong></li>
+          <li><strong>a) Adresse MAC de l'AP.</strong></li>
+          <li><strong>FAUX.</strong> Le Wi-Fi utilise 2.4 GHz ET 5 GHz (et 6 GHz pour Wi-Fi 6E).</li>
+          <li><strong>VRAI.</strong></li>
+          <li><strong>VRAI.</strong> WLC = Wireless LAN Controller.</li>
+          <li><strong>SSID</strong> = nom logique (visible). <strong>BSSID</strong> = adresse MAC physique de l'AP (unique).</li>
+          <li>Par leur <strong>BSSID</strong> (MAC unique) même si le SSID est identique (roaming).</li>
+          <li><strong>WPA3</strong> (ou minimum WPA2).</li>
+          <li>WEP a des failles cryptographiques : on peut retrouver la clé en quelques minutes. C'est comme une porte avec 3 combinaisons.</li>
+          <li><strong>2.4 GHz</strong> (plus de portée, plus de bruit) et <strong>5 GHz</strong> (plus rapide, moins de portée).</li>
+          <li>Mobilité, pas de câblage, installation rapide. (Bonus : accès invités facile.)</li>
+        </ol>
+      </div>
+    </details>
+  </article>
+
+  <!-- ================= POSTER 15 ================= -->
+  <article class="poster" id="p15" data-title="sdn automatisation api rest json">
+    <div class="pin"></div><div class="tape t1"></div>
+    <label class="done-toggle"><input type="checkbox" data-id="p15"> Vu</label>
+    <header class="poster-head">
+      <span class="poster-num">15</span>
+      <h2>SDN &amp; Automatisation</h2>
+      <span class="lvl ccna">Niveau CCNA</span>
+    </header>
+
+    <h3>L'idée de SDN 🧠</h3>
+    <p><strong>SDN</strong> sépare :</p>
+    <ul>
+      <li><strong>Plan de contrôle</strong> 🧠 (le cerveau qui décide)</li>
+      <li><strong>Plan de données</strong> 💪 (les équipements qui exécutent)</li>
+    </ul>
+    <p>Un <strong>contrôleur central</strong> décide pour tout le monde.</p>
+
+    <h3>API REST</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Méthode</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td><strong>GET</strong></td><td>Lire</td></tr>
+        <tr><td><strong>POST</strong></td><td>Créer</td></tr>
+        <tr><td><strong>PUT</strong></td><td>Modifier</td></tr>
+        <tr><td><strong>DELETE</strong></td><td>Supprimer</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Formats</h3>
+    <pre><code><span class="cmt"># JSON</span>
+{"nom": "routeur1", "ip": "10.0.0.1"}
+
+<span class="cmt"># XML</span>
+&lt;routeur&gt;&lt;nom&gt;routeur1&lt;/nom&gt;&lt;/routeur&gt;
+
+<span class="cmt"># YAML</span>
+nom: routeur1
+ip: 10.0.0.1</code></pre>
+
+    
+    <div class="expert-details" style="margin-top: 20px; padding: 15px; border-left: 4px solid var(--purple); background: #f3ecfd; border-radius: 8px;">
+      <h3 style="color: var(--purple); margin-top: 0; font-family:'Caveat',cursive; font-size:1.6rem;">🔬 Détails Techniques (Niveau CCNA)</h3>
+      <p><strong>Architecture SDN :</strong> Le SDN sépare le <strong>Data Plane</strong> (sur les switchs pour forwarder le trafic via ASICs L1/L2) et le <strong>Control Plane</strong> (la "matière grise", le cerveau, centralisé dans un contrôleur comme Cisco DNA Center L7).</p>
+      <p><strong>Outils et API :</strong> Les scripts communiquent avec les équipements via les méthodes REST API (GET, PUT, POST) et le format de données standard <strong>JSON</strong>. Pour déployer des configurations en masse <em>sans</em> installer de logiciel agent sur les vieux routeurs Cisco, on privilégie <strong>Ansible</strong> (basé sur Python, agentless via SSH) plutôt que Puppet ou Chef (qui requièrent des agents).</p>
+    </div>
+    
+    <section class="exercices">
+      <h3>Exercices — Chapitre 15 (13 questions)</h3>
+
+      <div class="part">Partie A — QCM</div>
+      <ol>
+        <li>SDN sépare quoi ?
+          <ul class="qcm"><li>a) Clients/serveurs &nbsp; b) Plan contrôle/plan données &nbsp; c) LAN/WAN &nbsp; d) TCP/UDP</li></ul>
+        </li>
+        <li>Quelle méthode REST pour lire ?
+          <ul class="qcm"><li>a) GET &nbsp; b) POST &nbsp; c) PUT &nbsp; d) DELETE</li></ul>
+        </li>
+        <li>Quel format est le plus lisible ?
+          <ul class="qcm"><li>a) JSON &nbsp; b) XML &nbsp; c) YAML &nbsp; d) CSV</li></ul>
+        </li>
+      </ol>
+
+      <div class="part">Partie B — Vrai / Faux</div>
+      <ol start="4">
+        <li>Ansible nécessite un agent installé sur chaque équipement.</li>
+        <li>Une API REST est un moyen de communication entre programmes.</li>
+        <li>SDN peut configurer plusieurs équipements depuis un seul point.</li>
+      </ol>
+
+      <div class="part">Partie C — Application</div>
+      <ol start="7">
+        <li>Que fait Ansible ?</li>
+        <li>Pourquoi automatiser un réseau ?</li>
+        <li>Quel est l'avantage d'un contrôleur SDN central ?</li>
+        <li>Cite 3 langages / outils utilisés en automatisation réseau.</li>
+        <li>Que signifie "Intent-Based Networking" ?</li>
+        <li>Pourquoi JSON est-il populaire en automatisation ?</li>
+        <li>Quel outil gratuit pour tester une API REST ?</li>
+      </ol>
+    </section>
+
+    <details class="corriges">
+      <summary>Voir les corrigés (Chapitre 15)</summary>
+      <div class="corps">
+        <ol>
+          <li><strong>b) Plan contrôle / plan données.</strong></li>
+          <li><strong>a) GET.</strong></li>
+          <li><strong>c) YAML.</strong></li>
+          <li><strong>FAUX.</strong> Ansible est <em>agentless</em> — il utilise SSH.</li>
+          <li><strong>VRAI.</strong></li>
+          <li><strong>VRAI.</strong></li>
+          <li>Ansible automatise le déploiement de configurations sur les équipements réseau (via SSH, sans agent).</li>
+          <li>Pour déployer plus vite, réduire les erreurs, et gérer de grands réseaux facilement.</li>
+          <li>Vue centralisée et programmable → on change tout en quelques lignes.</li>
+          <li>Python + Netmiko, Ansible, Puppet/Chef, Terraform.</li>
+          <li>Réseau piloté par l'<strong>intention</strong> : on décrit ce qu'on veut ("le VLAN 10 doit exister partout"), le système s'occupe du "comment".</li>
+          <li>Léger, lisible, standard, natif en JavaScript, très bien supporté par les API REST.</li>
+          <li><strong>Postman.</strong></li>
+        </ol>
+      </div>
+    </details>
+  </article>
+
+  <!-- ================= POSTER 16 ================= -->
+  <article class="poster" id="p16" data-title="dépannage troubleshooting ping show bottom-up">
+    <div class="pin"></div><div class="tape t2"></div>
+    <label class="done-toggle"><input type="checkbox" data-id="p16"> Vu</label>
+    <header class="poster-head">
+      <span class="poster-num">16</span>
+      <h2>Dépannage</h2>
+      <span class="lvl ccna">Niveau CCNA</span>
+    </header>
+
+    <h3>La méthode 🪜 (bottom-up)</h3>
+    <ol>
+      <li><strong>Physique</strong> — câble ? LED ?</li>
+      <li><strong>Liaison</strong> — port UP ? Bon VLAN ? STP ?</li>
+      <li><strong>Réseau</strong> — IP ? masque ? passerelle ? route ?</li>
+      <li><strong>Transport</strong> — ports ouverts ? ACL ?</li>
+      <li><strong>Application</strong> — service actif ?</li>
+    </ol>
+
+    <h3>Commandes magiques 🪄</h3>
+    <pre><code>ping 8.8.8.8
+traceroute 8.8.8.8
+show ip interface brief
+show ip route
+show vlan brief
+show mac address-table
+show running-config
+show cdp neighbors</code></pre>
+
+    
+    <div class="expert-details" style="margin-top: 20px; padding: 15px; border-left: 4px solid var(--purple); background: #f3ecfd; border-radius: 8px;">
+      <h3 style="color: var(--purple); margin-top: 0; font-family:'Caveat',cursive; font-size:1.6rem;">🔬 Détails Techniques (Niveau CCNA)</h3>
+      <p><strong>Découverte du Réseau L2 :</strong> Pour connaître les voisins L2 directement connectés sans avoir de carte réseau, on utilise le protocole propriétaire <strong>CDP (Cisco Discovery Protocol)</strong> ou le standard ouvert <strong>LLDP (Link Layer Discovery Protocol)</strong>.</p>
+      <p><strong>Trace de Chemin L3 :</strong> La commande <code>traceroute</code> (ou tracert sous Windows) identifie les sauts de routeurs en manipulant intelligemment le champ <strong>TTL (Time To Live)</strong> de l'en-tête IPv4. Il envoie un TTL=1 pour obtenir un message d'erreur ICMP du premier routeur, puis TTL=2 pour le second, et ainsi de suite.</p>
+    </div>
+    
+    <section class="exercices">
+      <h3>Exercices — Chapitre 16 (13 questions)</h3>
+
+      <div class="part">Partie A — QCM</div>
+      <ol>
+        <li>On commence le dépannage par quelle couche ?
+          <ul class="qcm"><li>a) 7 &nbsp; b) 4 &nbsp; c) 1 &nbsp; d) 3</li></ul>
+        </li>
+        <li>Quelle commande affiche la table de routage ?
+          <ul class="qcm"><li>a) show route &nbsp; b) show ip route &nbsp; c) show table &nbsp; d) show net</li></ul>
+        </li>
+        <li>Quelle commande teste la connectivité ?
+          <ul class="qcm"><li>a) ping &nbsp; b) trace &nbsp; c) netstat &nbsp; d) route</li></ul>
+        </li>
+        <li>Quelle commande affiche les voisins Cisco ?
+          <ul class="qcm"><li>a) show cdp neighbors &nbsp; b) show lldp &nbsp; c) show net &nbsp; d) show int</li></ul>
+        </li>
+      </ol>
+
+      <div class="part">Partie B — Analyse</div>
+      <ol start="5">
+        <li>Un PC ne ping pas 8.8.8.8 mais ping 192.168.1.1 (son routeur). Problème probable ?</li>
+        <li>Aucun PC du VLAN 10 ne communique avec le VLAN 20. Que manque-t-il ?</li>
+        <li>Un ping échoue en local, mais le voisin répond. Cause probable ?</li>
+      </ol>
+
+      <div class="part">Partie C — Pratique</div>
+      <ol start="8">
+        <li>Quelle commande pour vérifier si un câble est branché ?</li>
+        <li>Quelle commande pour voir la config actuelle ?</li>
+        <li>Quelle commande pour voir les VLANs ?</li>
+      </ol>
+
+      <div class="part">Partie D — Méthode</div>
+      <ol start="11">
+        <li>Pourquoi documenter les incidents ?</li>
+        <li>Décris en 5 étapes ta méthode de dépannage.</li>
+        <li>Différence entre <code>show</code> et <code>debug</code> ?</li>
+      </ol>
+    </section>
+
+    <details class="corriges">
+      <summary>Voir les corrigés (Chapitre 16)</summary>
+      <div class="corps">
+        <ol>
+          <li><strong>c) 1 (Physique).</strong> On commence par le basique.</li>
+          <li><strong>b) show ip route.</strong></li>
+          <li><strong>a) ping.</strong></li>
+          <li><strong>a) show cdp neighbors.</strong></li>
+          <li>Le PC atteint son routeur local mais pas Internet → route par défaut manquante, ou problème chez le FAI, ou NAT mal configuré.</li>
+          <li>Le <strong>routage inter-VLAN</strong> (router-on-a-stick ou switch L3).</li>
+          <li>Problème local au PC : câble, carte réseau, IP mal configurée.</li>
+          <li><code>show ip interface brief</code> ou <code>show interfaces status</code>.</li>
+          <li><code>show running-config</code></li>
+          <li><code>show vlan brief</code></li>
+          <li>Pour gagner du temps si le problème revient, ne pas refaire les erreurs, former les autres.</li>
+          <li>(1) Définir le problème, (2) Collecter les infos, (3) Analyser les hypothèses, (4) Tester/corriger, (5) Vérifier + documenter.</li>
+          <li><code>show</code> = affiche une info figée. <code>debug</code> = affiche les événements en temps réel (très verbeux, à utiliser avec précaution en production).</li>
+        </ol>
+      </div>
+    </details>
+  </article>
+
+  <!-- ================= POSTER 17 ================= -->
+  <article class="poster" id="p17" data-title="labs packet tracer gns3">
+    <div class="pin"></div><div class="tape t1"></div>
+    <label class="done-toggle"><input type="checkbox" data-id="p17"> Vu</label>
+    <header class="poster-head">
+      <span class="poster-num">17</span>
+      <h2>Labs pratiques</h2>
+      <span class="lvl ccna">Tous niveaux</span>
+    </header>
+
+    <h3>10 labs progressifs 🛠️</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>#</th><th>Lab</th><th>Compétence</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>2 PC + 1 switch</td><td>Câblage, ping, IP</td></tr>
+        <tr><td>2</td><td>Créer 3 VLANs</td><td>Isolation</td></tr>
+        <tr><td>3</td><td>Trunk entre 2 switchs</td><td>802.1Q</td></tr>
+        <tr><td>4</td><td>Routage inter-VLAN</td><td>L3</td></tr>
+        <tr><td>5</td><td>Routage statique</td><td>Route</td></tr>
+        <tr><td>6</td><td>OSPF</td><td>Dynamique</td></tr>
+        <tr><td>7</td><td>ACL étendue</td><td>Sécurité</td></tr>
+        <tr><td>8</td><td>NAT / PAT</td><td>Internet</td></tr>
+        <tr><td>9</td><td>DHCP + DNS</td><td>Services</td></tr>
+        <tr><td>10</td><td>SSH + Port Security</td><td>Durcissement</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Outils 🖥️</h3>
+    <ul>
+      <li><strong>Cisco Packet Tracer</strong> — gratuit, officiel</li>
+      <li><strong>GNS3</strong> — plus réaliste</li>
+      <li><strong>EVE-NG</strong> — pro</li>
+      <li><strong>Matériel réel</strong> — si possible</li>
+    </ul>
+
+    <section class="exercices">
+      <h3>Exercices — Chapitre 17 (13 questions)</h3>
+
+      <div class="part">Partie A — QCM</div>
+      <ol>
+        <li>Quel logiciel gratuit et officiel Cisco ?
+          <ul class="qcm"><li>a) GNS3 &nbsp; b) Packet Tracer &nbsp; c) EVE-NG &nbsp; d) VMware</li></ul>
+        </li>
+        <li>GNS3 utilise :
+          <ul class="qcm"><li>a) De vrais IOS &nbsp; b) Un simulateur maison &nbsp; c) Uniquement des switchs &nbsp; d) Rien</li></ul>
+        </li>
+      </ol>
+
+      <div class="part">Partie B — Réflexion</div>
+      <ol start="3">
+        <li>Pourquoi pratiquer sur simulateur avant le matériel réel ?</li>
+        <li>Pourquoi commencer par "2 PC + 1 switch" avant OSPF ?</li>
+        <li>Quel lab est le plus difficile et pourquoi ?</li>
+        <li>Combien de temps par lab pour bien comprendre ?</li>
+        <li>Pourquoi refaire le même lab plusieurs fois ?</li>
+      </ol>
+
+      <div class="part">Partie C — Plan d'action</div>
+      <ol start="8">
+        <li>Écris ton planning d'étude sur 4 semaines.</li>
+        <li>Pourquoi documenter chaque lab dans un cahier ?</li>
+        <li>Combien d'heures par semaine minimum ?</li>
+        <li>Quel lab te servira le plus en entretien d'embauche ?</li>
+        <li>Comment vérifier qu'un lab est réussi ?</li>
+        <li>Pourquoi le ping est-il l'outil numéro 1 ?</li>
+      </ol>
+    </section>
+
+    <details class="corriges">
+      <summary>Voir les corrigés (Chapitre 17)</summary>
+      <div class="corps">
+        <ol>
+          <li><strong>b) Packet Tracer.</strong></li>
+          <li><strong>a) De vrais IOS</strong> (images Cisco importées).</li>
+          <li>Sur simulateur tu peux casser, refaire, tester sans risque ni dépenser. Tu apprends 10× plus vite.</li>
+          <li>Il faut maîtriser les bases (câblage, IP, ping) avant d'attaquer du routage dynamique.</li>
+          <li>Souvent <strong>OSPF multi-aires</strong> ou <strong>NAT/PAT</strong> — concepts abstraits avec plusieurs commandes.</li>
+          <li>1 à 2 heures minimum, en refaisant sans regarder le corrigé jusqu'à ce que ce soit automatique.</li>
+          <li>Pour ancrer les réflexes. La répétition = mémorisation durable.</li>
+          <li>Semaine 1 : Labs 1-3. Semaine 2 : Labs 4-5. Semaine 3 : Labs 6-8. Semaine 4 : Labs 9-10 + révisions.</li>
+          <li>Pour garder une trace, refaire sans tout réinventer, montrer ton travail en entretien.</li>
+          <li>Minimum 10 h/semaine pour progresser en 3-4 mois.</li>
+          <li><strong>Le lab routage inter-VLAN</strong> (très demandé en entretien).</li>
+          <li>Un ping réussi de bout en bout + toutes les commandes <code>show</code> en vert.</li>
+          <li>Il teste la connectivité de bout en bout en un instant, sans configuration complexe.</li>
+        </ol>
+      </div>
+    </details>
+  </article>
+
+  <!-- ================= POSTER 18 ================= -->
+  <article class="poster" id="p18" data-title="checklist examen ccna 200-301">
+    <div class="pin"></div><div class="tape t2"></div>
+    <label class="done-toggle"><input type="checkbox" data-id="p18"> Vu</label>
+    <header class="poster-head">
+      <span class="poster-num">18</span>
+      <h2>Checklist examen CCNA</h2>
+      <span class="lvl ccna">Examen</span>
+    </header>
+
+    <h3>À maîtriser ✅</h3>
+    <ul>
+      <li>Modèle OSI &amp; TCP/IP</li>
+      <li>IPv4 (subnetting, CIDR, VLSM)</li>
+      <li>IPv6 (format, types)</li>
+      <li>Switch (table MAC, STP, VLAN)</li>
+      <li>Routage statique + OSPF</li>
+      <li>ACL standard et étendue</li>
+      <li>NAT / PAT</li>
+      <li>DHCP, DNS, NTP</li>
+      <li>Sécurité (Port Security, SSH, AAA)</li>
+      <li>Wi-Fi (WPA2/WPA3)</li>
+      <li>SDN &amp; API REST</li>
+      <li>Dépannage structuré</li>
+    </ul>
+
+    <h3>Ressources 📚</h3>
+    <ul>
+      <li><strong>Cisco NetAcad</strong></li>
+      <li><strong>Livres</strong> : Lammle, Odom</li>
+      <li><strong>YouTube</strong> : NetworkChuck, Bombal</li>
+      <li><strong>Anki</strong> pour flashcards</li>
+    </ul>
+
+    <h3>Gestion du temps ⏱️</h3>
+    <ul>
+      <li>100–120 questions / 120 min</li>
+      <li>Ne pas bloquer &gt; 2 min</li>
+      <li>Marquer et revenir</li>
+    </ul>
+
+    <section class="exercices">
+      <h3>Exercices finaux (15 questions — révision globale)</h3>
+
+      <div class="part">Partie A — QCM</div>
+      <ol>
+        <li>Quelle couche OSI ajoute l'adresse IP ?
+          <ul class="qcm"><li>a) 2 &nbsp; b) 3 &nbsp; c) 4 &nbsp; d) 7</li></ul>
+        </li>
+        <li>Combien d'hôtes dans un /28 ?
+          <ul class="qcm"><li>a) 14 &nbsp; b) 16 &nbsp; c) 30 &nbsp; d) 62</li></ul>
+        </li>
+        <li>Quel protocole empêche les boucles ?
+          <ul class="qcm"><li>a) OSPF &nbsp; b) STP &nbsp; c) NAT &nbsp; d) DHCP</li></ul>
+        </li>
+        <li>Quelle AD est la plus fiable ?
+          <ul class="qcm"><li>a) 1 &nbsp; b) 90 &nbsp; c) 110 &nbsp; d) 120</li></ul>
+        </li>
+        <li>Quel port utilise HTTPS ?
+          <ul class="qcm"><li>a) 80 &nbsp; b) 443 &nbsp; c) 22 &nbsp; d) 21</li></ul>
+        </li>
+      </ol>
+
+      <div class="part">Partie B — Calculs</div>
+      <ol start="6">
+        <li>Combien d'hôtes dans un /27 ?</li>
+        <li>Wildcard pour un /25 ?</li>
+        <li>Découpe 192.168.5.0/24 en 2 sous-réseaux. Donne-les.</li>
+      </ol>
+
+      <div class="part">Partie C — Définitions</div>
+      <ol start="9">
+        <li>Que fait STP ?</li>
+        <li>Différence NAT vs PAT ?</li>
+        <li>Que veut dire DORA ?</li>
+        <li>Cite 3 protocoles de routage dynamique.</li>
+      </ol>
+
+      <div class="part">Partie D — Pratique</div>
+      <ol start="13">
+        <li>Commande pour voir la config actuelle ?</li>
+        <li>Commande pour créer le VLAN 20 nommé "IT" ?</li>
+        <li>Meilleure façon d'apprendre le CCNA ?</li>
+      </ol>
+    </section>
+
+    <details class="corriges">
+      <summary>Voir les corrigés (Chapitre 18)</summary>
+      <div class="corps">
+        <ol>
+          <li><strong>b) 3.</strong> La couche Réseau ajoute l'IP.</li>
+          <li><strong>a) 14.</strong> /28 = 4 bits hôtes → 2⁴ − 2 = 14.</li>
+          <li><strong>b) STP.</strong></li>
+          <li><strong>a) 1.</strong> Statique (seul "Connected" à 0 fait mieux).</li>
+          <li><strong>b) 443.</strong></li>
+          <li>/27 → 30 hôtes.</li>
+          <li>/25 → wildcard <span class="rep">0.0.0.127</span>.</li>
+          <li>2 sous-réseaux = /25, incrément 128 :<br>
+              <span class="rep">192.168.5.0/25</span> (hôtes .1-.126, bcast .127) · <span class="rep">192.168.5.128/25</span> (hôtes .129-.254, bcast .255).
+          </li>
+          <li>STP empêche les boucles réseau en bloquant certains ports, tout en gardant la redondance en secours.</li>
+          <li><strong>NAT</strong> = 1↔1 ou pool. <strong>PAT</strong> = plusieurs privées → 1 publique grâce aux ports.</li>
+          <li><strong>DORA</strong> = Discover, Offer, Request, Ack (processus DHCP).</li>
+          <li>RIP, OSPF, EIGRP, BGP (au moins 3).</li>
+          <li><code>show running-config</code></li>
+          <li><code>vlan 20</code> puis <code>name IT</code></li>
+          <li><strong>Pratiquer, pratiquer, pratiquer.</strong> Lire c'est bien, mais tant que tu n'as pas configuré un VLAN, un OSPF ou une ACL toi-même, tu ne comprends pas vraiment. Utilise Packet Tracer tous les jours.</li>
+        </ol>
+      </div>
+    </details>
+  </article>
+
+  </main>
+</div>
+
+<div class="no-result" id="noResult">
+  🔍 Aucun chapitre trouvé…
+  <span>Essaie un autre mot-clé (VLAN, OSPF, NAT…)</span>
+</div>
+
+<button id="toTop" title="Retour en haut">↑</button>
+
+<footer>
+  <div>📘 <strong>Formation CCNA Complète</strong> — Cours détaillé + ~250 exercices corrigés · 18 chapitres · 100 % en français</div>
+  <div class="sig">« Apprendre le CCNA, c'est comprendre pourquoi, pas juste mémoriser. » 🌐</div>
+</footer>
+
+<script>
+/* PROGRESSION */
+const STORAGE_KEY = 'ccna-progress-v3';
+const TOTAL = 18;
+
+function loadProgress(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY))||{}}catch(e){return{}}}
+function saveProgress(p){try{localStorage.setItem(STORAGE_KEY, JSON.stringify(p))}catch(e){}}
+
+function refreshProgress(){
+  const progress = loadProgress();
+  let done = 0;
+  document.querySelectorAll('.done-toggle input').forEach(cb=>{
+    const id = cb.dataset.id;
+    cb.checked = !!progress[id];
+    cb.closest('.poster').classList.toggle('is-done', !!progress[id]);
+    if(progress[id]) done++;
+  });
+  document.querySelectorAll('.sidebar a').forEach(a=>{
+    const id = a.getAttribute('href').slice(1);
+    a.classList.toggle('done', !!progress[id]);
+  });
+  const pct = Math.round((done/TOTAL)*100);
+  document.getElementById('progLabel').textContent = done + ' / ' + TOTAL + ' (' + pct + '%)';
+  document.getElementById('progFill').style.width = pct + '%';
+}
+
+document.querySelectorAll('.done-toggle input').forEach(cb=>{
+  cb.addEventListener('change', ()=>{
+    const p = loadProgress();
+    if(cb.checked) p[cb.dataset.id]=true; else delete p[cb.dataset.id];
+    saveProgress(p); refreshProgress();
+  });
+});
+
+document.getElementById('resetBtn').addEventListener('click', ()=>{
+  if(confirm('Réinitialiser la progression ?')){saveProgress({});refreshProgress();}
+});
+
+document.getElementById('openAllCorr').addEventListener('click', ()=>{
+  const all = document.querySelectorAll('details.corriges');
+  const anyClosed = Array.from(all).some(d => !d.open);
+  all.forEach(d => d.open = anyClosed);
+});
+
+refreshProgress();
+
+/* RECHERCHE */
+const searchInput = document.getElementById('search');
+const posters = Array.from(document.querySelectorAll('.poster'));
+const noResult = document.getElementById('noResult');
+
+function normalize(s){return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\s]/g,' ')}
+
+searchInput.addEventListener('input', ()=>{
+  const q = normalize(searchInput.value.trim());
+  let visible = 0;
+  posters.forEach(p=>{
+    if(!q){p.classList.remove('hidden');visible++;return}
+    const hay = normalize((p.dataset.title||'') + ' ' + p.textContent);
+    const match = q.split(/\s+/).every(t => hay.includes(t));
+    p.classList.toggle('hidden', !match);
+    if(match) visible++;
+  });
+  noResult.classList.toggle('show', visible === 0);
+});
+
+/* SCROLL SPY */
+const sidebarLinks = Array.from(document.querySelectorAll('.sidebar a'));
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id = e.target.id;
+      sidebarLinks.forEach(a=>a.classList.toggle('active', a.getAttribute('href')==='#'+id));
+    }
+  });
+}, { rootMargin:'-40% 0px -55% 0px', threshold:0 });
+posters.forEach(p=>observer.observe(p));
+
+/* BACK TO TOP */
+const toTop = document.getElementById('toTop');
+window.addEventListener('scroll', ()=>{toTop.classList.toggle('show', window.scrollY>600)});
+toTop.addEventListener('click', ()=>{window.scrollTo({top:0, behavior:'smooth'})});
+
+/* SHORTCUTS */
+document.addEventListener('keydown', e=>{
+  if(e.key==='/' && document.activeElement!==searchInput){e.preventDefault();searchInput.focus();searchInput.select()}
+  if(e.key==='Escape' && document.activeElement===searchInput){
+    searchInput.value='';searchInput.dispatchEvent(new Event('input'));searchInput.blur();
+  }
+  if((e.key==='c' || e.key==='C') && document.activeElement.tagName !== 'INPUT'){
+    document.querySelectorAll('details.corriges').forEach(d => d.open = true);
+  }
+});
+</script>
+
+<!-- CHATBOT HTML -->
+<div id="chat-widget">
+  <button id="chat-toggle" title="Discuter avec l'IA">💬</button>
+  <div id="chat-panel" class="hidden">
+    <div id="chat-header">
+      <span>🤖 CCNA Bot</span>
+      <button id="chat-close">✖</button>
+    </div>
+    <div id="chat-messages">
+      <div class="cmsg bot">Salut ! Je suis ton assistant CCNA virtuel Pose-moi n'importe quelle question sur le cours ou les exercices !</div>
+    </div>
+    <div id="chat-input-container">
+      <input type="text" id="chat-input" placeholder="Pose ta question..." autocomplete="off"/>
+      <button id="chat-send">Send</button>
+    </div>
+  </div>
+</div>
+<script>
+  const chatToggle = document.getElementById('chat-toggle');
+  const chatPanel = document.getElementById('chat-panel');
+  const chatClose = document.getElementById('chat-close');
+  const chatInput = document.getElementById('chat-input');
+  const chatSend = document.getElementById('chat-send');
+  const chatMessages = document.getElementById('chat-messages');
+
+  chatToggle.addEventListener('click', () => { 
+    chatPanel.classList.remove('hidden'); 
+    chatToggle.style.display = 'none'; 
+    setTimeout(() => chatInput.focus(), 300);
+  });
+  
+  chatClose.addEventListener('click', () => { 
+    chatPanel.classList.add('hidden'); 
+    setTimeout(() => chatToggle.style.display = 'flex', 300); 
+  });
+
+  chatInput.addEventListener('keypress', (e) => { 
+    if(e.key === 'Enter') chatSend.click(); 
+  });
+
+  function parseMarkdown(text) {
+    let html = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+    html = html.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+    html = html.replace(/`(.*?)`/g, '<code>$1</code>');
+    return html.replace(/\n/g, '<br>');
+  }
+
+  chatSend.addEventListener('click', async () => {
+    const text = chatInput.value.trim();
+    if(!text) return;
+    chatInput.value = '';
+    
+    chatMessages.innerHTML += `<div class="cmsg user">${text}</div>`;
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    const loadingId = 'loading-' + Date.now();
+    chatMessages.innerHTML += `<div class="cmsg bot" id="${loadingId}">... en train de réfléchir ...</div>`;
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text })
+      });
+      
+      const data = await res.json();
+      document.getElementById(loadingId).remove();
+      
+      if(data.error) throw new Error(data.error);
+      
+      chatMessages.innerHTML += `<div class="cmsg bot">${parseMarkdown(data.reply)}</div>`;
+    } catch (e) {
+      document.getElementById(loadingId)?.remove();
+      chatMessages.innerHTML += `<div class="cmsg bot error"><b>Erreur :</b> ${e.message}</div>`;
+    }
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  });
+</script>
+
+</body>
+</html>
