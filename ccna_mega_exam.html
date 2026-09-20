@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💯 Mega Examen CCNA - 100 Questions</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Kalam:wght@400;700&family=Patrick+Hand&family=JetBrains+Mono&display=swap" rel="stylesheet">
+<style>
+:root{ --paper:#f7f1e1; --paper-2:#fffdf6; --ink:#1f2d4d; --blue:#2a5db0; --red:#c0392b; --green:#1e7a4c; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Patrick Hand', cursive; background: var(--paper); color: var(--ink); padding: 15px; font-size: 1.15rem; }
+.header { text-align: center; margin: 20px 0 40px; }
+.header h1 { font-family: 'Caveat', cursive; font-size: 3rem; color: var(--blue); line-height:1.1; }
+.header p { color: var(--ink); font-size: 1.2rem; }
+.header a { display: inline-block; margin-top: 15px; padding: 10px 25px; background: var(--ink); color: white; text-decoration: none; border-radius: 20px; font-family:'Kalam',cursive; font-weight:bold; }
+.controls { text-align:center; margin-bottom: 20px; position: sticky; top: 0; background: rgba(247,241,225,0.9); padding: 10px; z-index: 50; border-bottom: 2px dashed var(--ink); backdrop-filter: blur(5px); }
+.controls button { font-family: 'Kalam', cursive; font-size: 1.1rem; padding: 8px 15px; background: var(--green); color: white; border: 2px solid var(--ink); border-radius: 10px; cursor: pointer; font-weight: bold; }
+.exam-container { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 25px; padding-bottom: 100px; }
+.q-card { background: var(--paper-2); border: 2px solid var(--ink); border-radius: 15px; padding: 25px; box-shadow: 4px 4px 0 rgba(31,45,77,.1); }
+.q-card h3 { font-family: 'Kalam', cursive; color: var(--red); margin-bottom: 12px; border-bottom: 2px dashed var(--ink); padding-bottom: 5px; }
+.q-text { font-size: 1.25rem; margin-bottom: 15px; font-weight:bold; }
+.options { list-style: none; margin-bottom: 15px; }
+.options li { margin-bottom: 10px; padding: 12px 15px; background: rgba(0,0,0,0.03); border: 2px solid rgba(0,0,0,0.05); border-radius: 8px; cursor: pointer; transition: 0.2s; }
+.options li:hover { background: rgba(42,93,176,0.1); border-color: var(--blue); }
+.options li.correct { background: #eaf7ef !important; border-color: var(--green) !important; font-weight: bold; }
+.options li.wrong { background: #fdecea !important; border-color: var(--red) !important; text-decoration: line-through; }
+.options li.selected { background: #ffe680; border-color: #d97706; }
+.corrige { margin-top: 15px; padding: 15px; background: #eaf7ef; border: 2px dashed var(--green); border-radius: 8px; display: none; }
+.score-box { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:var(--ink); color:white; padding:15px 30px; border-radius:30px; font-family:'Kalam',cursive; font-size:1.5rem; font-weight:bold; box-shadow:0 5px 15px rgba(0,0,0,0.3); z-index:100; display:none; }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h1>💯 Mega Examen CCNA (100 Questions)</h1>
+    <p>Le simulateur ultime pour s'entraîner à la certification 200-301.</p>
+    <a href="ccna_pro_complet.html">⬅ Retourner au Cours Principal</a>
+  </div>
+  
+  <div class="controls">
+    <button id="btn-submit">Voir mon Score Final</button>
+  </div>
+
+  <div class="exam-container" id="exam-box">
+
+    <div class="q-card" id="q1">
+      <h3>Question 1 - Wildcard Mask</h3>
+      <p class="q-text">Quel est le masque générique (Wildcard Mask) utilisé dans OSPF pour un sous-réseau /29 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='1'><strong>A.</strong> 0.0.0.15</li>
+<li data-idx='1' data-correct='1'><strong>B.</strong> 0.0.0.7</li>
+<li data-idx='2' data-correct='1'><strong>C.</strong> 0.0.0.3</li>
+<li data-idx='3' data-correct='1'><strong>D.</strong> 0.0.0.31</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ B</strong> - Un /29 a un masque de sous-réseau normal. Son Wildcard Mask (inversé) est 0.0.0.7.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q2">
+      <h3>Question 2 - Routage (AD)</h3>
+      <p class="q-text">Quelle est la Distance Administrative (AD) par défaut du protocole Connecté ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='2'><strong>A.</strong> 120</li>
+<li data-idx='1' data-correct='2'><strong>B.</strong> 110</li>
+<li data-idx='2' data-correct='2'><strong>C.</strong> 0</li>
+<li data-idx='3' data-correct='2'><strong>D.</strong> 115</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ C</strong> - L'AD indique la fiabilité. Pour Connecté, c'est 0.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q3">
+      <h3>Question 3 - ACL</h3>
+      <p class="q-text">Quelle plage correspond à une ACL Standard ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='0'><strong>A.</strong> 1-99</li>
+<li data-idx='1' data-correct='0'><strong>B.</strong> 100-199</li>
+<li data-idx='2' data-correct='0'><strong>C.</strong> 1000-1999</li>
+<li data-idx='3' data-correct='0'><strong>D.</strong> 2000-2699</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ A</strong> - 1-99 et 1300-1999 sont pour les ACL standards.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q4">
+      <h3>Question 4 - Subnetting</h3>
+      <p class="q-text">Quelle est l'adresse réseau (Network ID) pour l'IP 192.168.185.103/25 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='3'><strong>A.</strong> 192.168.185.1</li>
+<li data-idx='1' data-correct='3'><strong>B.</strong> 192.168.185.16</li>
+<li data-idx='2' data-correct='3'><strong>C.</strong> 192.168.185.127</li>
+<li data-idx='3' data-correct='3'><strong>D.</strong> 192.168.185.0</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ D</strong> - L'IP 192.168.185.103 avec un /25 appartient au bloc réseau 192.168.185.0.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q5">
+      <h3>Question 5 - OSI</h3>
+      <p class="q-text">À quelle couche OSI fonctionne un routeur ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='2'><strong>A.</strong> Couche 1</li>
+<li data-idx='1' data-correct='2'><strong>B.</strong> Couche 2</li>
+<li data-idx='2' data-correct='2'><strong>C.</strong> Couche 3</li>
+<li data-idx='3' data-correct='2'><strong>D.</strong> Couche 4</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ C</strong> - Le routeur transfère les paquets en se basant sur l'adresse IP (Couche 3).</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q6">
+      <h3>Question 6 - Subnetting</h3>
+      <p class="q-text">Quelle est l'adresse réseau (Network ID) pour l'IP 192.168.112.159/25 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='1'><strong>A.</strong> 192.168.112.127</li>
+<li data-idx='1' data-correct='1'><strong>B.</strong> 192.168.112.128</li>
+<li data-idx='2' data-correct='1'><strong>C.</strong> 192.168.112.129</li>
+<li data-idx='3' data-correct='1'><strong>D.</strong> 192.168.112.255</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ B</strong> - L'IP 192.168.112.159 avec un /25 appartient au bloc réseau 192.168.112.128.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q7">
+      <h3>Question 7 - Dépannage</h3>
+      <p class="q-text">Quelle commande permet de voir la table MAC d'un switch ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='1'><strong>A.</strong> show ip route</li>
+<li data-idx='1' data-correct='1'><strong>B.</strong> show mac address-table</li>
+<li data-idx='2' data-correct='1'><strong>C.</strong> show arp</li>
+<li data-idx='3' data-correct='1'><strong>D.</strong> show interfaces</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ B</strong> - 'show mac address-table' affiche les MAC apprises par le switch.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q8">
+      <h3>Question 8 - Subnetting</h3>
+      <p class="q-text">Quelle est l'adresse de Broadcast pour l'IP 10.6.8.100/28 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='3'><strong>A.</strong> 10.6.8.97</li>
+<li data-idx='1' data-correct='3'><strong>B.</strong> 10.6.8.96</li>
+<li data-idx='2' data-correct='3'><strong>C.</strong> 10.6.8.110</li>
+<li data-idx='3' data-correct='3'><strong>D.</strong> 10.6.8.111</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ D</strong> - L'IP 10.6.8.100 avec un /28 se termine à l'adresse de diffusion 10.6.8.111.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q9">
+      <h3>Question 9 - Routage (AD)</h3>
+      <p class="q-text">Quelle est la Distance Administrative (AD) par défaut du protocole IS-IS ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='1'><strong>A.</strong> 1</li>
+<li data-idx='1' data-correct='1'><strong>B.</strong> 115</li>
+<li data-idx='2' data-correct='1'><strong>C.</strong> 110</li>
+<li data-idx='3' data-correct='1'><strong>D.</strong> 90</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ B</strong> - L'AD indique la fiabilité. Pour IS-IS, c'est 115.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q10">
+      <h3>Question 10 - VLAN</h3>
+      <p class="q-text">Quel est le standard ouvert pour l'encapsulation Trunk ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='1'><strong>A.</strong> ISL</li>
+<li data-idx='1' data-correct='1'><strong>B.</strong> 802.1Q</li>
+<li data-idx='2' data-correct='1'><strong>C.</strong> HDLC</li>
+<li data-idx='3' data-correct='1'><strong>D.</strong> PPP</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ B</strong> - 802.1Q est le standard IEEE. ISL est propriétaire Cisco.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q11">
+      <h3>Question 11 - Ports TCP/UDP</h3>
+      <p class="q-text">Quel port par défaut est utilisé par le protocole HTTP ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='1'><strong>A.</strong> 21</li>
+<li data-idx='1' data-correct='1'><strong>B.</strong> 80</li>
+<li data-idx='2' data-correct='1'><strong>C.</strong> 53</li>
+<li data-idx='3' data-correct='1'><strong>D.</strong> 123</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ B</strong> - Le protocole HTTP utilise le port standard 80.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q12">
+      <h3>Question 12 - Subnetting</h3>
+      <p class="q-text">Quelle est l'adresse réseau (Network ID) pour l'IP 192.168.81.84/30 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='2'><strong>A.</strong> 192.168.81.83</li>
+<li data-idx='1' data-correct='2'><strong>B.</strong> 192.168.81.87</li>
+<li data-idx='2' data-correct='2'><strong>C.</strong> 192.168.81.84</li>
+<li data-idx='3' data-correct='2'><strong>D.</strong> 192.168.81.87</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ C</strong> - L'IP 192.168.81.84 avec un /30 appartient au bloc réseau 192.168.81.84.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q13">
+      <h3>Question 13 - SDN</h3>
+      <p class="q-text">Quelle API est utilisée pour que le contrôleur SDN parle aux switchs physiques ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='1'><strong>A.</strong> Northbound</li>
+<li data-idx='1' data-correct='1'><strong>B.</strong> Southbound</li>
+<li data-idx='2' data-correct='1'><strong>C.</strong> Eastbound</li>
+<li data-idx='3' data-correct='1'><strong>D.</strong> Westbound</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ B</strong> - Southbound API (ex: OpenFlow, NETCONF) descend vers le matériel.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q14">
+      <h3>Question 14 - Ports TCP/UDP</h3>
+      <p class="q-text">Quel port par défaut est utilisé par le protocole SSH ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='0'><strong>A.</strong> 22</li>
+<li data-idx='1' data-correct='0'><strong>B.</strong> 21</li>
+<li data-idx='2' data-correct='0'><strong>C.</strong> 443</li>
+<li data-idx='3' data-correct='0'><strong>D.</strong> 23</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ A</strong> - Le protocole SSH utilise le port standard 22.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q15">
+      <h3>Question 15 - Subnetting</h3>
+      <p class="q-text">Quelle est l'adresse de Broadcast pour l'IP 10.7.9.159/29 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='1'><strong>A.</strong> 10.7.9.153</li>
+<li data-idx='1' data-correct='1'><strong>B.</strong> 10.7.9.159</li>
+<li data-idx='2' data-correct='1'><strong>C.</strong> 10.7.9.152</li>
+<li data-idx='3' data-correct='1'><strong>D.</strong> 10.7.9.158</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ B</strong> - L'IP 10.7.9.159 avec un /29 se termine à l'adresse de diffusion 10.7.9.159.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q16">
+      <h3>Question 16 - Subnetting</h3>
+      <p class="q-text">Quelle est l'adresse de Broadcast pour l'IP 10.2.8.144/26 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='3'><strong>A.</strong> 10.2.8.190</li>
+<li data-idx='1' data-correct='3'><strong>B.</strong> 10.2.8.129</li>
+<li data-idx='2' data-correct='3'><strong>C.</strong> 10.2.8.128</li>
+<li data-idx='3' data-correct='3'><strong>D.</strong> 10.2.8.191</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ D</strong> - L'IP 10.2.8.144 avec un /26 se termine à l'adresse de diffusion 10.2.8.191.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q17">
+      <h3>Question 17 - Ports TCP/UDP</h3>
+      <p class="q-text">Quel port par défaut est utilisé par le protocole DNS ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='2'><strong>A.</strong> 23</li>
+<li data-idx='1' data-correct='2'><strong>B.</strong> 80</li>
+<li data-idx='2' data-correct='2'><strong>C.</strong> 53</li>
+<li data-idx='3' data-correct='2'><strong>D.</strong> 123</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ C</strong> - Le protocole DNS utilise le port standard 53.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q18">
+      <h3>Question 18 - HSRP</h3>
+      <p class="q-text">Quelle est l'adresse MAC virtuelle par défaut de HSRP v1 pour le groupe 10 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='0'><strong>A.</strong> 0000.0c07.ac0a</li>
+<li data-idx='1' data-correct='0'><strong>B.</strong> 0000.0c9f.f00a</li>
+<li data-idx='2' data-correct='0'><strong>C.</strong> 0000.0c07.ac10</li>
+<li data-idx='3' data-correct='0'><strong>D.</strong> ffff.ffff.ffff</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ A</strong> - 0a est l'hexadécimal de 10. Le préfixe est 0000.0c07.acXX.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q19">
+      <h3>Question 19 - Routage (AD)</h3>
+      <p class="q-text">Quelle est la Distance Administrative (AD) par défaut du protocole eBGP ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='2'><strong>A.</strong> 115</li>
+<li data-idx='1' data-correct='2'><strong>B.</strong> 1</li>
+<li data-idx='2' data-correct='2'><strong>C.</strong> 20</li>
+<li data-idx='3' data-correct='2'><strong>D.</strong> 110</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ C</strong> - L'AD indique la fiabilité. Pour eBGP, c'est 20.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q20">
+      <h3>Question 20 - Wildcard Mask</h3>
+      <p class="q-text">Quel est le masque générique (Wildcard Mask) utilisé dans OSPF pour un sous-réseau /26 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='0'><strong>A.</strong> 0.0.0.63</li>
+<li data-idx='1' data-correct='0'><strong>B.</strong> 0.0.0.15</li>
+<li data-idx='2' data-correct='0'><strong>C.</strong> 0.0.0.127</li>
+<li data-idx='3' data-correct='0'><strong>D.</strong> 0.0.0.31</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ A</strong> - Un /26 a un masque de sous-réseau normal. Son Wildcard Mask (inversé) est 0.0.0.63.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q21">
+      <h3>Question 21 - Subnetting</h3>
+      <p class="q-text">Quelle est l'adresse réseau (Network ID) pour l'IP 192.168.217.15/26 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='2'><strong>A.</strong> 192.168.217.3</li>
+<li data-idx='1' data-correct='2'><strong>B.</strong> 192.168.217.16</li>
+<li data-idx='2' data-correct='2'><strong>C.</strong> 192.168.217.0</li>
+<li data-idx='3' data-correct='2'><strong>D.</strong> 192.168.217.63</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ C</strong> - L'IP 192.168.217.15 avec un /26 appartient au bloc réseau 192.168.217.0.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q22">
+      <h3>Question 22 - Ports TCP/UDP</h3>
+      <p class="q-text">Quel port par défaut est utilisé par le protocole Telnet ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='3'><strong>A.</strong> 80</li>
+<li data-idx='1' data-correct='3'><strong>B.</strong> 67</li>
+<li data-idx='2' data-correct='3'><strong>C.</strong> 25</li>
+<li data-idx='3' data-correct='3'><strong>D.</strong> 23</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ D</strong> - Le protocole Telnet utilise le port standard 23.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q23">
+      <h3>Question 23 - SDN</h3>
+      <p class="q-text">Quel format de données est le plus utilisé avec les API REST ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='1'><strong>A.</strong> XML</li>
+<li data-idx='1' data-correct='1'><strong>B.</strong> JSON</li>
+<li data-idx='2' data-correct='1'><strong>C.</strong> CSV</li>
+<li data-idx='3' data-correct='1'><strong>D.</strong> YAML</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ B</strong> - JSON est le format dominant pour les API REST grâce à sa légèreté.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q24">
+      <h3>Question 24 - Subnetting</h3>
+      <p class="q-text">Quelle est l'adresse de Broadcast pour l'IP 10.2.3.149/27 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='1'><strong>A.</strong> 10.2.3.158</li>
+<li data-idx='1' data-correct='1'><strong>B.</strong> 10.2.3.159</li>
+<li data-idx='2' data-correct='1'><strong>C.</strong> 10.2.3.128</li>
+<li data-idx='3' data-correct='1'><strong>D.</strong> 10.2.3.129</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ B</strong> - L'IP 10.2.3.149 avec un /27 se termine à l'adresse de diffusion 10.2.3.159.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q25">
+      <h3>Question 25 - Wildcard Mask</h3>
+      <p class="q-text">Quel est le masque générique (Wildcard Mask) utilisé dans OSPF pour un sous-réseau /25 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='2'><strong>A.</strong> 0.0.0.7</li>
+<li data-idx='1' data-correct='2'><strong>B.</strong> 0.0.0.15</li>
+<li data-idx='2' data-correct='2'><strong>C.</strong> 0.0.0.127</li>
+<li data-idx='3' data-correct='2'><strong>D.</strong> 0.0.0.31</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ C</strong> - Un /25 a un masque de sous-réseau normal. Son Wildcard Mask (inversé) est 0.0.0.127.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q26">
+      <h3>Question 26 - Subnetting</h3>
+      <p class="q-text">Quelle est l'adresse de Broadcast pour l'IP 10.1.9.122/28 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='3'><strong>A.</strong> 10.1.9.126</li>
+<li data-idx='1' data-correct='3'><strong>B.</strong> 10.1.9.112</li>
+<li data-idx='2' data-correct='3'><strong>C.</strong> 10.1.9.113</li>
+<li data-idx='3' data-correct='3'><strong>D.</strong> 10.1.9.127</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ D</strong> - L'IP 10.1.9.122 avec un /28 se termine à l'adresse de diffusion 10.1.9.127.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q27">
+      <h3>Question 27 - LLDP</h3>
+      <p class="q-text">Quelle est la différence entre CDP et LLDP ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='1'><strong>A.</strong> LLDP est plus rapide</li>
+<li data-idx='1' data-correct='1'><strong>B.</strong> LLDP est un standard ouvert (IEEE), CDP est propriétaire Cisco</li>
+<li data-idx='2' data-correct='1'><strong>C.</strong> CDP utilise IPv6</li>
+<li data-idx='3' data-correct='1'><strong>D.</strong> LLDP ne marche que sur les routeurs</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ B</strong> - LLDP (802.1AB) est supporté par tous les constructeurs, contrairement à CDP.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q28">
+      <h3>Question 28 - Dépannage</h3>
+      <p class="q-text">Laquelle de ces adresses est une APIPA (adresse privée automatique) ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='2'><strong>A.</strong> 10.0.0.1</li>
+<li data-idx='1' data-correct='2'><strong>B.</strong> 172.16.1.1</li>
+<li data-idx='2' data-correct='2'><strong>C.</strong> 169.254.x.x</li>
+<li data-idx='3' data-correct='2'><strong>D.</strong> 192.168.1.1</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ C</strong> - Windows assigne une IP 169.254.x.x si le serveur DHCP est injoignable.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q29">
+      <h3>Question 29 - Automatisation</h3>
+      <p class="q-text">Lequel de ces outils n'utilise PAS d'agent sur l'équipement réseau ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='2'><strong>A.</strong> Chef</li>
+<li data-idx='1' data-correct='2'><strong>B.</strong> Puppet</li>
+<li data-idx='2' data-correct='2'><strong>C.</strong> Ansible</li>
+<li data-idx='3' data-correct='2'><strong>D.</strong> Docker</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ C</strong> - Ansible est 'Agentless' et se connecte simplement via SSH.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q30">
+      <h3>Question 30 - Wi-Fi</h3>
+      <p class="q-text">Quelle norme de sécurité Wi-Fi utilise SAE ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='3'><strong>A.</strong> WEP</li>
+<li data-idx='1' data-correct='3'><strong>B.</strong> WPA</li>
+<li data-idx='2' data-correct='3'><strong>C.</strong> WPA2</li>
+<li data-idx='3' data-correct='3'><strong>D.</strong> WPA3</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ D</strong> - WPA3 remplace le PSK par SAE (Simultaneous Authentication of Equals).</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q31">
+      <h3>Question 31 - OSPF</h3>
+      <p class="q-text">Que signifie l'état FULL dans OSPF ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='1'><strong>A.</strong> Les routeurs ont échangé des Hello</li>
+<li data-idx='1' data-correct='1'><strong>B.</strong> Les bases de données (LSDB) sont 100% synchronisées</li>
+<li data-idx='2' data-correct='1'><strong>C.</strong> Le routeur est élu DR</li>
+<li data-idx='3' data-correct='1'><strong>D.</strong> Le réseau est en panne</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ B</strong> - FULL signifie que les routeurs adjacents ont des LSDB identiques.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q32">
+      <h3>Question 32 - Routage (AD)</h3>
+      <p class="q-text">Quelle est la Distance Administrative (AD) par défaut du protocole Statique ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='2'><strong>A.</strong> 110</li>
+<li data-idx='1' data-correct='2'><strong>B.</strong> 120</li>
+<li data-idx='2' data-correct='2'><strong>C.</strong> 1</li>
+<li data-idx='3' data-correct='2'><strong>D.</strong> 0</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ C</strong> - L'AD indique la fiabilité. Pour Statique, c'est 1.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q33">
+      <h3>Question 33 - Ports TCP/UDP</h3>
+      <p class="q-text">Quel port par défaut est utilisé par le protocole HTTPS ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='3'><strong>A.</strong> 25</li>
+<li data-idx='1' data-correct='3'><strong>B.</strong> 53</li>
+<li data-idx='2' data-correct='3'><strong>C.</strong> 69</li>
+<li data-idx='3' data-correct='3'><strong>D.</strong> 443</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ D</strong> - Le protocole HTTPS utilise le port standard 443.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q34">
+      <h3>Question 34 - Subnetting</h3>
+      <p class="q-text">Quelle est l'adresse réseau (Network ID) pour l'IP 192.168.160.210/27 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='3'><strong>A.</strong> 192.168.160.191</li>
+<li data-idx='1' data-correct='3'><strong>B.</strong> 192.168.160.223</li>
+<li data-idx='2' data-correct='3'><strong>C.</strong> 192.168.160.195</li>
+<li data-idx='3' data-correct='3'><strong>D.</strong> 192.168.160.192</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ D</strong> - L'IP 192.168.160.210 avec un /27 appartient au bloc réseau 192.168.160.192.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q35">
+      <h3>Question 35 - Wildcard Mask</h3>
+      <p class="q-text">Quel est le masque générique (Wildcard Mask) utilisé dans OSPF pour un sous-réseau /24 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='0'><strong>A.</strong> 0.0.0.255</li>
+<li data-idx='1' data-correct='0'><strong>B.</strong> 0.0.0.127</li>
+<li data-idx='2' data-correct='0'><strong>C.</strong> 0.0.0.63</li>
+<li data-idx='3' data-correct='0'><strong>D.</strong> 0.0.0.15</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ A</strong> - Un /24 a un masque de sous-réseau normal. Son Wildcard Mask (inversé) est 0.0.0.255.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q36">
+      <h3>Question 36 - Subnetting</h3>
+      <p class="q-text">Quelle est l'adresse de Broadcast pour l'IP 10.4.5.136/28 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='1'><strong>A.</strong> 10.4.5.129</li>
+<li data-idx='1' data-correct='1'><strong>B.</strong> 10.4.5.143</li>
+<li data-idx='2' data-correct='1'><strong>C.</strong> 10.4.5.142</li>
+<li data-idx='3' data-correct='1'><strong>D.</strong> 10.4.5.128</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ B</strong> - L'IP 10.4.5.136 avec un /28 se termine à l'adresse de diffusion 10.4.5.143.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q37">
+      <h3>Question 37 - STP</h3>
+      <p class="q-text">Dans STP, comment est élu le Root Bridge ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='2'><strong>A.</strong> Plus haute IP</li>
+<li data-idx='1' data-correct='2'><strong>B.</strong> Plus haute MAC</li>
+<li data-idx='2' data-correct='2'><strong>C.</strong> Plus faible Priorité + MAC</li>
+<li data-idx='3' data-correct='2'><strong>D.</strong> Plus haute Priorité</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ C</strong> - Le switch avec le plus faible Bridge ID (Priorité par défaut 32768 + MAC) devient le Root.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q38">
+      <h3>Question 38 - RSTP</h3>
+      <p class="q-text">Quel état n'existe PAS dans Rapid STP (802.1w) ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='3'><strong>A.</strong> Discarding</li>
+<li data-idx='1' data-correct='3'><strong>B.</strong> Learning</li>
+<li data-idx='2' data-correct='3'><strong>C.</strong> Forwarding</li>
+<li data-idx='3' data-correct='3'><strong>D.</strong> Listening</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ D</strong> - RSTP fusionne Blocking et Listening en un seul état : Discarding.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q39">
+      <h3>Question 39 - Subnetting</h3>
+      <p class="q-text">Quelle est l'adresse réseau (Network ID) pour l'IP 192.168.122.41/30 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='0'><strong>A.</strong> 192.168.122.40</li>
+<li data-idx='1' data-correct='0'><strong>B.</strong> 192.168.122.39</li>
+<li data-idx='2' data-correct='0'><strong>C.</strong> 192.168.122.41</li>
+<li data-idx='3' data-correct='0'><strong>D.</strong> 192.168.122.43</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ A</strong> - L'IP 192.168.122.41 avec un /30 appartient au bloc réseau 192.168.122.40.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q40">
+      <h3>Question 40 - Subnetting</h3>
+      <p class="q-text">Quelle est l'adresse réseau (Network ID) pour l'IP 192.168.86.225/26 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='0'><strong>A.</strong> 192.168.86.192</li>
+<li data-idx='1' data-correct='0'><strong>B.</strong> 192.168.86.191</li>
+<li data-idx='2' data-correct='0'><strong>C.</strong> 192.168.86.255</li>
+<li data-idx='3' data-correct='0'><strong>D.</strong> 192.168.86.194</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ A</strong> - L'IP 192.168.86.225 avec un /26 appartient au bloc réseau 192.168.86.192.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q41">
+      <h3>Question 41 - Subnetting</h3>
+      <p class="q-text">Quelle est l'adresse réseau (Network ID) pour l'IP 192.168.65.25/30 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='2'><strong>A.</strong> 192.168.65.23</li>
+<li data-idx='1' data-correct='2'><strong>B.</strong> 192.168.65.27</li>
+<li data-idx='2' data-correct='2'><strong>C.</strong> 192.168.65.24</li>
+<li data-idx='3' data-correct='2'><strong>D.</strong> 192.168.65.27</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ C</strong> - L'IP 192.168.65.25 avec un /30 appartient au bloc réseau 192.168.65.24.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q42">
+      <h3>Question 42 - IPv6</h3>
+      <p class="q-text">Combien de bits compose une adresse IPv6 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='2'><strong>A.</strong> 32</li>
+<li data-idx='1' data-correct='2'><strong>B.</strong> 64</li>
+<li data-idx='2' data-correct='2'><strong>C.</strong> 128</li>
+<li data-idx='3' data-correct='2'><strong>D.</strong> 256</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ C</strong> - IPv6 utilise 128 bits, exprimés en hexadécimal.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q43">
+      <h3>Question 43 - Ports TCP/UDP</h3>
+      <p class="q-text">Quel port par défaut est utilisé par le protocole NTP ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='2'><strong>A.</strong> 67</li>
+<li data-idx='1' data-correct='2'><strong>B.</strong> 443</li>
+<li data-idx='2' data-correct='2'><strong>C.</strong> 123</li>
+<li data-idx='3' data-correct='2'><strong>D.</strong> 23</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ C</strong> - Le protocole NTP utilise le port standard 123.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q44">
+      <h3>Question 44 - Subnetting</h3>
+      <p class="q-text">Quelle est l'adresse réseau (Network ID) pour l'IP 192.168.234.166/28 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='2'><strong>A.</strong> 192.168.234.162</li>
+<li data-idx='1' data-correct='2'><strong>B.</strong> 192.168.234.159</li>
+<li data-idx='2' data-correct='2'><strong>C.</strong> 192.168.234.160</li>
+<li data-idx='3' data-correct='2'><strong>D.</strong> 192.168.234.175</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ C</strong> - L'IP 192.168.234.166 avec un /28 appartient au bloc réseau 192.168.234.160.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q45">
+      <h3>Question 45 - OSPF</h3>
+      <p class="q-text">Quelle adresse Multicast est utilisée par les routeurs OSPF (All-OSPF) ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='2'><strong>A.</strong> 224.0.0.9</li>
+<li data-idx='1' data-correct='2'><strong>B.</strong> 224.0.0.10</li>
+<li data-idx='2' data-correct='2'><strong>C.</strong> 224.0.0.5</li>
+<li data-idx='3' data-correct='2'><strong>D.</strong> 224.0.0.1</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ C</strong> - 224.0.0.5 touche tous les routeurs OSPF. 224.0.0.6 touche les DR/BDR.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q46">
+      <h3>Question 46 - OSI</h3>
+      <p class="q-text">Quel protocole fonctionne à la couche Transport ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='1'><strong>A.</strong> IP</li>
+<li data-idx='1' data-correct='1'><strong>B.</strong> TCP</li>
+<li data-idx='2' data-correct='1'><strong>C.</strong> HTTP</li>
+<li data-idx='3' data-correct='1'><strong>D.</strong> Ethernet</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ B</strong> - TCP et UDP sont les protocoles de la couche Transport (Couche 4).</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q47">
+      <h3>Question 47 - Subnetting</h3>
+      <p class="q-text">Quelle est l'adresse réseau (Network ID) pour l'IP 192.168.103.66/27 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='3'><strong>A.</strong> 192.168.103.95</li>
+<li data-idx='1' data-correct='3'><strong>B.</strong> 192.168.103.66</li>
+<li data-idx='2' data-correct='3'><strong>C.</strong> 192.168.103.63</li>
+<li data-idx='3' data-correct='3'><strong>D.</strong> 192.168.103.64</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ D</strong> - L'IP 192.168.103.66 avec un /27 appartient au bloc réseau 192.168.103.64.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q48">
+      <h3>Question 48 - Subnetting</h3>
+      <p class="q-text">Quelle est l'adresse réseau (Network ID) pour l'IP 192.168.160.87/28 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='1'><strong>A.</strong> 192.168.160.79</li>
+<li data-idx='1' data-correct='1'><strong>B.</strong> 192.168.160.80</li>
+<li data-idx='2' data-correct='1'><strong>C.</strong> 192.168.160.81</li>
+<li data-idx='3' data-correct='1'><strong>D.</strong> 192.168.160.95</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ B</strong> - L'IP 192.168.160.87 avec un /28 appartient au bloc réseau 192.168.160.80.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q49">
+      <h3>Question 49 - CDP</h3>
+      <p class="q-text">Quel est le but de Cisco Discovery Protocol (CDP) ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='0'><strong>A.</strong> Découvrir les voisins Cisco directement connectés</li>
+<li data-idx='1' data-correct='0'><strong>B.</strong> Trouver la route la plus courte</li>
+<li data-idx='2' data-correct='0'><strong>C.</strong> Attribuer des IP</li>
+<li data-idx='3' data-correct='0'><strong>D.</strong> Bloquer les boucles</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ A</strong> - CDP permet d'obtenir des informations (IP, port, modèle) sur les équipements Cisco voisins.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q50">
+      <h3>Question 50 - Routage (AD)</h3>
+      <p class="q-text">Quelle est la Distance Administrative (AD) par défaut du protocole OSPF ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='0'><strong>A.</strong> 110</li>
+<li data-idx='1' data-correct='0'><strong>B.</strong> 120</li>
+<li data-idx='2' data-correct='0'><strong>C.</strong> 0</li>
+<li data-idx='3' data-correct='0'><strong>D.</strong> 90</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ A</strong> - L'AD indique la fiabilité. Pour OSPF, c'est 110.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q51">
+      <h3>Question 51 - Subnetting</h3>
+      <p class="q-text">Quelle est l'adresse réseau (Network ID) pour l'IP 192.168.174.10/29 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='3'><strong>A.</strong> 192.168.174.7</li>
+<li data-idx='1' data-correct='3'><strong>B.</strong> 192.168.174.15</li>
+<li data-idx='2' data-correct='3'><strong>C.</strong> 192.168.174.10</li>
+<li data-idx='3' data-correct='3'><strong>D.</strong> 192.168.174.8</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ D</strong> - L'IP 192.168.174.10 avec un /29 appartient au bloc réseau 192.168.174.8.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q52">
+      <h3>Question 52 - Wi-Fi</h3>
+      <p class="q-text">Quel équipement centralise la gestion des points d'accès légers (LAP) ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='2'><strong>A.</strong> Routeur</li>
+<li data-idx='1' data-correct='2'><strong>B.</strong> Switch Core</li>
+<li data-idx='2' data-correct='2'><strong>C.</strong> WLC (Wireless LAN Controller)</li>
+<li data-idx='3' data-correct='2'><strong>D.</strong> Firewall</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ C</strong> - Le WLC gère les LAPs via le tunnel CAPWAP.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q53">
+      <h3>Question 53 - Ports TCP/UDP</h3>
+      <p class="q-text">Quel port par défaut est utilisé par le protocole TFTP ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='2'><strong>A.</strong> 80</li>
+<li data-idx='1' data-correct='2'><strong>B.</strong> 67</li>
+<li data-idx='2' data-correct='2'><strong>C.</strong> 69</li>
+<li data-idx='3' data-correct='2'><strong>D.</strong> 25</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ C</strong> - Le protocole TFTP utilise le port standard 69.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q54">
+      <h3>Question 54 - Subnetting</h3>
+      <p class="q-text">Quelle est l'adresse de Broadcast pour l'IP 10.5.2.65/29 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='1'><strong>A.</strong> 10.5.2.64</li>
+<li data-idx='1' data-correct='1'><strong>B.</strong> 10.5.2.71</li>
+<li data-idx='2' data-correct='1'><strong>C.</strong> 10.5.2.65</li>
+<li data-idx='3' data-correct='1'><strong>D.</strong> 10.5.2.70</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ B</strong> - L'IP 10.5.2.65 avec un /29 se termine à l'adresse de diffusion 10.5.2.71.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q55">
+      <h3>Question 55 - STP</h3>
+      <p class="q-text">Que fait la commande 'spanning-tree portfast' ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='1'><strong>A.</strong> Désactive STP</li>
+<li data-idx='1' data-correct='1'><strong>B.</strong> Passe le port directement en état Forwarding</li>
+<li data-idx='2' data-correct='1'><strong>C.</strong> Accélère les BPDUs</li>
+<li data-idx='3' data-correct='1'><strong>D.</strong> Bloque le port</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ B</strong> - PortFast ignore les états Listening/Learning pour les PCs/Serveurs afin qu'ils se connectent instantanément.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q56">
+      <h3>Question 56 - Wildcard Mask</h3>
+      <p class="q-text">Quel est le masque générique (Wildcard Mask) utilisé dans OSPF pour un sous-réseau /27 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='2'><strong>A.</strong> 0.0.0.63</li>
+<li data-idx='1' data-correct='2'><strong>B.</strong> 0.0.0.127</li>
+<li data-idx='2' data-correct='2'><strong>C.</strong> 0.0.0.31</li>
+<li data-idx='3' data-correct='2'><strong>D.</strong> 0.0.0.3</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ C</strong> - Un /27 a un masque de sous-réseau normal. Son Wildcard Mask (inversé) est 0.0.0.31.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q57">
+      <h3>Question 57 - BPDU Guard</h3>
+      <p class="q-text">Que se passe-t-il si un port avec PortFast et BPDU Guard reçoit un BPDU ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='2'><strong>A.</strong> Il devient Root Port</li>
+<li data-idx='1' data-correct='2'><strong>B.</strong> Il ignore le BPDU</li>
+<li data-idx='2' data-correct='2'><strong>C.</strong> Il se met en err-disable (Shutdown)</li>
+<li data-idx='3' data-correct='2'><strong>D.</strong> Il change de VLAN</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ C</strong> - BPDU Guard désactive le port pour empêcher la création d'une boucle par un switch non autorisé.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q58">
+      <h3>Question 58 - Subnetting</h3>
+      <p class="q-text">Quelle est l'adresse de Broadcast pour l'IP 10.6.4.159/29 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='1'><strong>A.</strong> 10.6.4.158</li>
+<li data-idx='1' data-correct='1'><strong>B.</strong> 10.6.4.159</li>
+<li data-idx='2' data-correct='1'><strong>C.</strong> 10.6.4.153</li>
+<li data-idx='3' data-correct='1'><strong>D.</strong> 10.6.4.152</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ B</strong> - L'IP 10.6.4.159 avec un /29 se termine à l'adresse de diffusion 10.6.4.159.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q59">
+      <h3>Question 59 - Wildcard Mask</h3>
+      <p class="q-text">Quel est le masque générique (Wildcard Mask) utilisé dans OSPF pour un sous-réseau /28 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='3'><strong>A.</strong> 0.0.0.7</li>
+<li data-idx='1' data-correct='3'><strong>B.</strong> 0.0.0.255</li>
+<li data-idx='2' data-correct='3'><strong>C.</strong> 0.0.0.127</li>
+<li data-idx='3' data-correct='3'><strong>D.</strong> 0.0.0.15</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ D</strong> - Un /28 a un masque de sous-réseau normal. Son Wildcard Mask (inversé) est 0.0.0.15.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q60">
+      <h3>Question 60 - DNS</h3>
+      <p class="q-text">Quel type d'enregistrement DNS mappe un nom à une adresse IPv6 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='3'><strong>A.</strong> A</li>
+<li data-idx='1' data-correct='3'><strong>B.</strong> CNAME</li>
+<li data-idx='2' data-correct='3'><strong>C.</strong> MX</li>
+<li data-idx='3' data-correct='3'><strong>D.</strong> AAAA</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ D</strong> - 'A' est pour IPv4, 'AAAA' est pour IPv6.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q61">
+      <h3>Question 61 - OSPF</h3>
+      <p class="q-text">Quel est l'intervalle Hello par défaut d'OSPF sur un réseau Ethernet ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='1'><strong>A.</strong> 5 secondes</li>
+<li data-idx='1' data-correct='1'><strong>B.</strong> 10 secondes</li>
+<li data-idx='2' data-correct='1'><strong>C.</strong> 30 secondes</li>
+<li data-idx='3' data-correct='1'><strong>D.</strong> 40 secondes</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ B</strong> - Sur les réseaux Broadcast (Ethernet), l'intervalle Hello est de 10s (Dead = 40s).</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q62">
+      <h3>Question 62 - Sécurité</h3>
+      <p class="q-text">Quel est le mot de passe recommandé pour chiffrer l'accès au mode privilégié ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='1'><strong>A.</strong> enable password</li>
+<li data-idx='1' data-correct='1'><strong>B.</strong> enable secret</li>
+<li data-idx='2' data-correct='1'><strong>C.</strong> service password-encryption</li>
+<li data-idx='3' data-correct='1'><strong>D.</strong> line vty</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ B</strong> - 'enable secret' utilise un hash MD5/SHA sécurisé, contrairement à 'enable password' qui est en clair.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q63">
+      <h3>Question 63 - Subnetting</h3>
+      <p class="q-text">Quelle est l'adresse réseau (Network ID) pour l'IP 192.168.98.71/27 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='3'><strong>A.</strong> 192.168.98.63</li>
+<li data-idx='1' data-correct='3'><strong>B.</strong> 192.168.98.67</li>
+<li data-idx='2' data-correct='3'><strong>C.</strong> 192.168.98.95</li>
+<li data-idx='3' data-correct='3'><strong>D.</strong> 192.168.98.64</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ D</strong> - L'IP 192.168.98.71 avec un /27 appartient au bloc réseau 192.168.98.64.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q64">
+      <h3>Question 64 - Subnetting</h3>
+      <p class="q-text">Quelle est l'adresse réseau (Network ID) pour l'IP 192.168.97.115/28 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='0'><strong>A.</strong> 192.168.97.112</li>
+<li data-idx='1' data-correct='0'><strong>B.</strong> 192.168.97.115</li>
+<li data-idx='2' data-correct='0'><strong>C.</strong> 192.168.97.127</li>
+<li data-idx='3' data-correct='0'><strong>D.</strong> 192.168.97.111</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ A</strong> - L'IP 192.168.97.115 avec un /28 appartient au bloc réseau 192.168.97.112.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q65">
+      <h3>Question 65 - Sécurité</h3>
+      <p class="q-text">Port Security : Quel est le mode de violation par défaut ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='2'><strong>A.</strong> Protect</li>
+<li data-idx='1' data-correct='2'><strong>B.</strong> Restrict</li>
+<li data-idx='2' data-correct='2'><strong>C.</strong> Shutdown</li>
+<li data-idx='3' data-correct='2'><strong>D.</strong> Err-disable</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ C</strong> - Le port est mis en état 'Shutdown' (err-disabled) s'il y a violation.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q66">
+      <h3>Question 66 - NTP</h3>
+      <p class="q-text">Quel port utilise NTP pour synchroniser l'heure ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='1'><strong>A.</strong> TCP 80</li>
+<li data-idx='1' data-correct='1'><strong>B.</strong> UDP 123</li>
+<li data-idx='2' data-correct='1'><strong>C.</strong> TCP 123</li>
+<li data-idx='3' data-correct='1'><strong>D.</strong> UDP 53</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ B</strong> - NTP utilise le port UDP 123.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q67">
+      <h3>Question 67 - Dépannage</h3>
+      <p class="q-text">Quel protocole est utilisé par la commande 'ping' ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='2'><strong>A.</strong> TCP</li>
+<li data-idx='1' data-correct='2'><strong>B.</strong> UDP</li>
+<li data-idx='2' data-correct='2'><strong>C.</strong> ICMP</li>
+<li data-idx='3' data-correct='2'><strong>D.</strong> IGMP</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ C</strong> - Ping utilise les messages ICMP Echo Request et Echo Reply.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q68">
+      <h3>Question 68 - NAT</h3>
+      <p class="q-text">Quel type de NAT utilise des numéros de ports pour partager une seule IP publique ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='2'><strong>A.</strong> NAT Statique</li>
+<li data-idx='1' data-correct='2'><strong>B.</strong> NAT Dynamique</li>
+<li data-idx='2' data-correct='2'><strong>C.</strong> PAT (Overload)</li>
+<li data-idx='3' data-correct='2'><strong>D.</strong> NAT IPv6</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ C</strong> - Port Address Translation (PAT) mappe plusieurs IP privées sur une seule publique via les ports TCP/UDP.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q69">
+      <h3>Question 69 - IPv4</h3>
+      <p class="q-text">Quelle est la taille d'une adresse IPv4 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='1'><strong>A.</strong> 16 bits</li>
+<li data-idx='1' data-correct='1'><strong>B.</strong> 32 bits</li>
+<li data-idx='2' data-correct='1'><strong>C.</strong> 64 bits</li>
+<li data-idx='3' data-correct='1'><strong>D.</strong> 128 bits</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ B</strong> - L'IPv4 est codée sur 32 bits (4 octets).</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q70">
+      <h3>Question 70 - Subnetting</h3>
+      <p class="q-text">Quelle est l'adresse de Broadcast pour l'IP 10.5.2.136/27 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='2'><strong>A.</strong> 10.5.2.128</li>
+<li data-idx='1' data-correct='2'><strong>B.</strong> 10.5.2.129</li>
+<li data-idx='2' data-correct='2'><strong>C.</strong> 10.5.2.159</li>
+<li data-idx='3' data-correct='2'><strong>D.</strong> 10.5.2.158</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ C</strong> - L'IP 10.5.2.136 avec un /27 se termine à l'adresse de diffusion 10.5.2.159.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q71">
+      <h3>Question 71 - Subnetting</h3>
+      <p class="q-text">Quelle est l'adresse de Broadcast pour l'IP 10.8.7.197/29 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='0'><strong>A.</strong> 10.8.7.199</li>
+<li data-idx='1' data-correct='0'><strong>B.</strong> 10.8.7.192</li>
+<li data-idx='2' data-correct='0'><strong>C.</strong> 10.8.7.198</li>
+<li data-idx='3' data-correct='0'><strong>D.</strong> 10.8.7.193</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ A</strong> - L'IP 10.8.7.197 avec un /29 se termine à l'adresse de diffusion 10.8.7.199.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q72">
+      <h3>Question 72 - EtherChannel</h3>
+      <p class="q-text">Quel protocole EtherChannel est un standard IEEE ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='1'><strong>A.</strong> PAgP</li>
+<li data-idx='1' data-correct='1'><strong>B.</strong> LACP</li>
+<li data-idx='2' data-correct='1'><strong>C.</strong> VTP</li>
+<li data-idx='3' data-correct='1'><strong>D.</strong> STP</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ B</strong> - LACP (802.3ad) est le standard. PAgP est propriétaire Cisco.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q73">
+      <h3>Question 73 - Subnetting</h3>
+      <p class="q-text">Quelle est l'adresse de Broadcast pour l'IP 10.6.5.128/27 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='1'><strong>A.</strong> 10.6.5.158</li>
+<li data-idx='1' data-correct='1'><strong>B.</strong> 10.6.5.159</li>
+<li data-idx='2' data-correct='1'><strong>C.</strong> 10.6.5.128</li>
+<li data-idx='3' data-correct='1'><strong>D.</strong> 10.6.5.129</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ B</strong> - L'IP 10.6.5.128 avec un /27 se termine à l'adresse de diffusion 10.6.5.159.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q74">
+      <h3>Question 74 - AAA</h3>
+      <p class="q-text">Quels sont les deux protocoles serveur utilisés pour l'authentification AAA ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='0'><strong>A.</strong> RADIUS et TACACS+</li>
+<li data-idx='1' data-correct='0'><strong>B.</strong> SSH et Telnet</li>
+<li data-idx='2' data-correct='0'><strong>C.</strong> HTTP et HTTPS</li>
+<li data-idx='3' data-correct='0'><strong>D.</strong> OSPF et EIGRP</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ A</strong> - RADIUS (ouvert) et TACACS+ (Cisco) sont les serveurs AAA principaux.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q75">
+      <h3>Question 75 - Routage</h3>
+      <p class="q-text">Quelle est la distance administrative d'une route statique ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='0'><strong>A.</strong> 1</li>
+<li data-idx='1' data-correct='0'><strong>B.</strong> 90</li>
+<li data-idx='2' data-correct='0'><strong>C.</strong> 110</li>
+<li data-idx='3' data-correct='0'><strong>D.</strong> 120</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ A</strong> - Une route statique a une AD de 1 (très fiable).</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q76">
+      <h3>Question 76 - Syslog</h3>
+      <p class="q-text">Quel niveau Syslog (Severity) correspond à 'Critical' ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='2'><strong>A.</strong> 0</li>
+<li data-idx='1' data-correct='2'><strong>B.</strong> 1</li>
+<li data-idx='2' data-correct='2'><strong>C.</strong> 2</li>
+<li data-idx='3' data-correct='2'><strong>D.</strong> 3</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ C</strong> - 0=Emerg, 1=Alert, 2=Crit, 3=Err, 4=Warn, 5=Notice, 6=Info, 7=Debug.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q77">
+      <h3>Question 77 - DHCP</h3>
+      <p class="q-text">Quel message le serveur DHCP envoie-t-il pour proposer une IP ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='1'><strong>A.</strong> DHCP Discover</li>
+<li data-idx='1' data-correct='1'><strong>B.</strong> DHCP Offer</li>
+<li data-idx='2' data-correct='1'><strong>C.</strong> DHCP Request</li>
+<li data-idx='3' data-correct='1'><strong>D.</strong> DHCP Ack</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ B</strong> - DORA : Discover (Client), Offer (Serveur), Request (Client), Ack (Serveur).</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q78">
+      <h3>Question 78 - Subnetting</h3>
+      <p class="q-text">Quelle est l'adresse réseau (Network ID) pour l'IP 192.168.145.148/26 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='2'><strong>A.</strong> 192.168.145.127</li>
+<li data-idx='1' data-correct='2'><strong>B.</strong> 192.168.145.191</li>
+<li data-idx='2' data-correct='2'><strong>C.</strong> 192.168.145.128</li>
+<li data-idx='3' data-correct='2'><strong>D.</strong> 192.168.145.130</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ C</strong> - L'IP 192.168.145.148 avec un /26 appartient au bloc réseau 192.168.145.128.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q79">
+      <h3>Question 79 - VLAN</h3>
+      <p class="q-text">Quel protocole est utilisé pour négocier un lien Trunk ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='2'><strong>A.</strong> VTP</li>
+<li data-idx='1' data-correct='2'><strong>B.</strong> STP</li>
+<li data-idx='2' data-correct='2'><strong>C.</strong> DTP</li>
+<li data-idx='3' data-correct='2'><strong>D.</strong> LACP</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ C</strong> - Dynamic Trunking Protocol (DTP) gère la négociation des Trunks.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q80">
+      <h3>Question 80 - Commutation</h3>
+      <p class="q-text">Que fait un switch avec une trame 'Unknown Unicast' ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='1'><strong>A.</strong> Il la supprime</li>
+<li data-idx='1' data-correct='1'><strong>B.</strong> Il la diffuse sur tous les ports (Flooding)</li>
+<li data-idx='2' data-correct='1'><strong>C.</strong> Il l'envoie au routeur</li>
+<li data-idx='3' data-correct='1'><strong>D.</strong> Il la renvoie à l'expéditeur</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ B</strong> - Si l'adresse MAC n'est pas dans la table, le switch l'envoie sur tous les ports sauf le port source.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q81">
+      <h3>Question 81 - Subnetting</h3>
+      <p class="q-text">Quelle est l'adresse de Broadcast pour l'IP 10.9.4.139/27 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='2'><strong>A.</strong> 10.9.4.129</li>
+<li data-idx='1' data-correct='2'><strong>B.</strong> 10.9.4.128</li>
+<li data-idx='2' data-correct='2'><strong>C.</strong> 10.9.4.159</li>
+<li data-idx='3' data-correct='2'><strong>D.</strong> 10.9.4.158</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ C</strong> - L'IP 10.9.4.139 avec un /27 se termine à l'adresse de diffusion 10.9.4.159.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q82">
+      <h3>Question 82 - Routage (AD)</h3>
+      <p class="q-text">Quelle est la Distance Administrative (AD) par défaut du protocole RIP ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='0'><strong>A.</strong> 120</li>
+<li data-idx='1' data-correct='0'><strong>B.</strong> 0</li>
+<li data-idx='2' data-correct='0'><strong>C.</strong> 20</li>
+<li data-idx='3' data-correct='0'><strong>D.</strong> 110</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ A</strong> - L'AD indique la fiabilité. Pour RIP, c'est 120.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q83">
+      <h3>Question 83 - Ports TCP/UDP</h3>
+      <p class="q-text">Quel port par défaut est utilisé par le protocole DHCP (Serveur) ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='1'><strong>A.</strong> 25</li>
+<li data-idx='1' data-correct='1'><strong>B.</strong> 67</li>
+<li data-idx='2' data-correct='1'><strong>C.</strong> 21</li>
+<li data-idx='3' data-correct='1'><strong>D.</strong> 53</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ B</strong> - Le protocole DHCP (Serveur) utilise le port standard 67.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q84">
+      <h3>Question 84 - Subnetting</h3>
+      <p class="q-text">Quelle est l'adresse de Broadcast pour l'IP 10.6.9.69/25 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='2'><strong>A.</strong> 10.6.9.126</li>
+<li data-idx='1' data-correct='2'><strong>B.</strong> 10.6.9.1</li>
+<li data-idx='2' data-correct='2'><strong>C.</strong> 10.6.9.127</li>
+<li data-idx='3' data-correct='2'><strong>D.</strong> 10.6.9.0</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ C</strong> - L'IP 10.6.9.69 avec un /25 se termine à l'adresse de diffusion 10.6.9.127.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q85">
+      <h3>Question 85 - IPv6</h3>
+      <p class="q-text">Quelle adresse IPv6 est l'équivalent de 127.0.0.1 (Loopback) ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='2'><strong>A.</strong> FE80::1</li>
+<li data-idx='1' data-correct='2'><strong>B.</strong> FF02::1</li>
+<li data-idx='2' data-correct='2'><strong>C.</strong> ::1</li>
+<li data-idx='3' data-correct='2'><strong>D.</strong> 2001::1</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ C</strong> - ::1 est l'adresse de loopback en IPv6.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q86">
+      <h3>Question 86 - Routage (AD)</h3>
+      <p class="q-text">Quelle est la Distance Administrative (AD) par défaut du protocole EIGRP (Interne) ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='2'><strong>A.</strong> 120</li>
+<li data-idx='1' data-correct='2'><strong>B.</strong> 1</li>
+<li data-idx='2' data-correct='2'><strong>C.</strong> 90</li>
+<li data-idx='3' data-correct='2'><strong>D.</strong> 115</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ C</strong> - L'AD indique la fiabilité. Pour EIGRP (Interne), c'est 90.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q87">
+      <h3>Question 87 - Ports TCP/UDP</h3>
+      <p class="q-text">Quel port par défaut est utilisé par le protocole SMTP ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='3'><strong>A.</strong> 23</li>
+<li data-idx='1' data-correct='3'><strong>B.</strong> 80</li>
+<li data-idx='2' data-correct='3'><strong>C.</strong> 67</li>
+<li data-idx='3' data-correct='3'><strong>D.</strong> 25</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ D</strong> - Le protocole SMTP utilise le port standard 25.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q88">
+      <h3>Question 88 - Routage</h3>
+      <p class="q-text">Dans la table de routage, que signifie la lettre 'C' ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='0'><strong>A.</strong> Connecté directement</li>
+<li data-idx='1' data-correct='0'><strong>B.</strong> OSPF</li>
+<li data-idx='2' data-correct='0'><strong>C.</strong> Statique</li>
+<li data-idx='3' data-correct='0'><strong>D.</strong> EIGRP</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ A</strong> - 'C' = Connected, 'L' = Local, 'O' = OSPF, 'S' = Static.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q89">
+      <h3>Question 89 - Sécurité</h3>
+      <p class="q-text">Que bloque DHCP Snooping ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='1'><strong>A.</strong> Les attaques DDoS</li>
+<li data-idx='1' data-correct='1'><strong>B.</strong> Les faux serveurs DHCP (Rogue DHCP)</li>
+<li data-idx='2' data-correct='1'><strong>C.</strong> Le trafic HTTP</li>
+<li data-idx='3' data-correct='1'><strong>D.</strong> Le Spanning Tree</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ B</strong> - Il empêche les serveurs non autorisés d'attribuer de fausses adresses IP.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q90">
+      <h3>Question 90 - Subnetting</h3>
+      <p class="q-text">Quelle est l'adresse de Broadcast pour l'IP 10.8.10.16/26 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='2'><strong>A.</strong> 10.8.10.0</li>
+<li data-idx='1' data-correct='2'><strong>B.</strong> 10.8.10.62</li>
+<li data-idx='2' data-correct='2'><strong>C.</strong> 10.8.10.63</li>
+<li data-idx='3' data-correct='2'><strong>D.</strong> 10.8.10.1</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ C</strong> - L'IP 10.8.10.16 avec un /26 se termine à l'adresse de diffusion 10.8.10.63.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q91">
+      <h3>Question 91 - Wildcard Mask</h3>
+      <p class="q-text">Quel est le masque générique (Wildcard Mask) utilisé dans OSPF pour un sous-réseau /30 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='1'><strong>A.</strong> 0.0.0.7</li>
+<li data-idx='1' data-correct='1'><strong>B.</strong> 0.0.0.3</li>
+<li data-idx='2' data-correct='1'><strong>C.</strong> 0.0.0.255</li>
+<li data-idx='3' data-correct='1'><strong>D.</strong> 0.0.0.31</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ B</strong> - Un /30 a un masque de sous-réseau normal. Son Wildcard Mask (inversé) est 0.0.0.3.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q92">
+      <h3>Question 92 - Ports TCP/UDP</h3>
+      <p class="q-text">Quel port par défaut est utilisé par le protocole FTP ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='2'><strong>A.</strong> 23</li>
+<li data-idx='1' data-correct='2'><strong>B.</strong> 22</li>
+<li data-idx='2' data-correct='2'><strong>C.</strong> 21</li>
+<li data-idx='3' data-correct='2'><strong>D.</strong> 443</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ C</strong> - Le protocole FTP utilise le port standard 21.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q93">
+      <h3>Question 93 - Subnetting</h3>
+      <p class="q-text">Quelle est l'adresse de Broadcast pour l'IP 10.8.10.23/29 ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='2'><strong>A.</strong> 10.8.10.22</li>
+<li data-idx='1' data-correct='2'><strong>B.</strong> 10.8.10.17</li>
+<li data-idx='2' data-correct='2'><strong>C.</strong> 10.8.10.23</li>
+<li data-idx='3' data-correct='2'><strong>D.</strong> 10.8.10.16</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ C</strong> - L'IP 10.8.10.23 avec un /29 se termine à l'adresse de diffusion 10.8.10.23.</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="q94">
+      <h3>Question 94 - HSRP</h3>
+      <p class="q-text">Dans HSRP, quel routeur transmet les paquets ?</p>
+      <ul class="options">
+        <li data-idx='0' data-correct='1'><strong>A.</strong> Standby Router</li>
+<li data-idx='1' data-correct='1'><strong>B.</strong> Active Router</li>
+<li data-idx='2' data-correct='1'><strong>C.</strong> Backup Router</li>
+<li data-idx='3' data-correct='1'><strong>D.</strong> Passive Router</li>
+
+      </ul>
+      <div class="corrige">
+        <p><strong>✅ B</strong> - Le routeur Active est celui qui traite tout le trafic pour l'IP virtuelle.</p>
+      </div>
+    </div>
+
+  </div>
+  
+  <div class="score-box" id="score-box">Score : 0 / 100</div>
+
+  <script>
+    let score = 0;
+    let answered = 0;
+
+    // Interaction de sélection
+    document.querySelectorAll('.options li').forEach(li => {
+      li.addEventListener('click', function() {
+        const ul = this.parentNode;
+        if(ul.dataset.locked) return; // Empêche de changer la réponse après validation globale si on veut, mais ici on permet de changer avant le submit
+        
+        ul.querySelectorAll('li').forEach(el => el.classList.remove('selected'));
+        this.classList.add('selected');
+      });
+    });
+
+    // Bouton de validation globale
+    document.getElementById('btn-submit').addEventListener('click', () => {
+      score = 0;
+      let total_answered = 0;
+
+      document.querySelectorAll('.options').forEach(ul => {
+        ul.dataset.locked = "true"; // Bloque les clics
+        const selected = ul.querySelector('li.selected');
+        const correct_idx = ul.querySelector('li').dataset.correct;
+        
+        // Afficher la correction
+        ul.parentNode.querySelector('.corrige').style.display = 'block';
+
+        if(selected) {
+          total_answered++;
+          if(selected.dataset.idx === correct_idx) {
+            selected.classList.add('correct');
+            score++;
+          } else {
+            selected.classList.add('wrong');
+            // Mettre en vert la bonne
+            ul.querySelector(`li[data-idx="${correct_idx}"]`).classList.add('correct');
+          }
+        } else {
+          // Si rien n'est sélectionné, juste montrer la bonne
+          ul.querySelector(`li[data-idx="${correct_idx}"]`).classList.add('correct');
+        }
+      });
+
+      const scoreBox = document.getElementById('score-box');
+      scoreBox.innerHTML = `Score : ${score} / 100`;
+      scoreBox.style.display = 'block';
+      
+      // Scroll smoothly to top to see score or let them browse
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
