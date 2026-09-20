@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🚀 50 Labs Cisco Packet Tracer - De Débutant à Expert</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Kalam:wght@400;700&family=Patrick+Hand&family=JetBrains+Mono&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@9.3.0/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({ startOnLoad: true, theme: 'base' });
+</script>
+<style>
+:root{ --paper:#f7f1e1; --paper-2:#fffdf6; --ink:#1f2d4d; --blue:#2a5db0; --red:#c0392b; --green:#1e7a4c; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Patrick Hand', cursive; background: var(--paper); color: var(--ink); padding: 15px; font-size: 1.15rem; }
+.header { text-align: center; margin: 20px 0 30px; }
+.header h1 { font-family: 'Caveat', cursive; font-size: 3rem; color: var(--blue); line-height:1.1; }
+.header img { max-width: 100%; border-radius: 12px; border: 3px solid var(--ink); margin: 20px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+.header a { display: inline-block; margin-top: 15px; padding: 10px 25px; background: var(--ink); color: white; text-decoration: none; border-radius: 20px; font-family:'Kalam',cursive; font-weight:bold; }
+
+/* Grid des 50 labs */
+#dashboard { max-width: 1000px; margin: 0 auto; }
+.lab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; margin-top: 20px; }
+.lab-btn { background: var(--paper-2); border: 2px solid var(--ink); border-radius: 12px; padding: 15px 5px; text-align: center; cursor: pointer; transition: 0.2s; box-shadow: 3px 3px 0 rgba(31,45,77,.1); font-family: 'Kalam', cursive; font-size: 1.1rem; font-weight: bold; color: var(--ink); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.lab-btn:hover { transform: translateY(-3px); box-shadow: 4px 6px 0 rgba(31,45,77,.15); }
+.b-deb { border-color: #27ae60; color: #27ae60; }
+.b-int { border-color: #e67e22; color: #e67e22; }
+.b-ava { border-color: #8e44ad; color: #8e44ad; }
+.b-exp { border-color: #c0392b; color: #c0392b; }
+
+/* Lab View */
+#lab-view { display: none; max-width: 900px; margin: 0 auto; padding-bottom: 100px; }
+.lab-header { display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: rgba(247,241,225,0.95); padding: 10px 20px; z-index: 50; border-bottom: 2px dashed var(--ink); backdrop-filter: blur(5px); margin-bottom: 20px; border-radius: 10px; }
+.lab-header h2 { font-family: 'Caveat', cursive; font-size: 2rem; }
+.btn-back { background: var(--ink); color: white; border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-family: 'Kalam', cursive; font-weight: bold; font-size: 1.1rem; }
+
+.q-card { background: var(--paper-2); border: 2px solid var(--ink); border-radius: 15px; padding: 25px; box-shadow: 4px 4px 0 rgba(31,45,77,.1); margin-bottom: 20px; }
+.objectif { background: #eaf2f8; padding: 15px; border-left: 5px solid var(--blue); border-radius: 8px; margin-bottom: 20px; }
+.schema-box { background: white; border: 2px solid #ccc; padding: 20px; border-radius: 8px; margin-bottom: 20px; text-align: center; overflow-x: auto; }
+
+/* Cisco Packet Tracer Terminal CSS */
+.pt-terminal { background-color: #000; color: #00ff00; font-family: 'JetBrains Mono', 'Courier New', Courier, monospace; padding: 15px; border-radius: 8px; border: 4px solid #555; overflow-x: auto; font-size: 0.95rem; line-height: 1.4; margin-top: 15px; box-shadow: inset 0 0 10px rgba(0,255,0,0.1); }
+.pt-terminal::before { content: "Router(config)# _"; display: block; background: #333; color: #fff; padding: 5px 10px; margin: -15px -15px 15px -15px; border-radius: 4px 4px 0 0; font-family: sans-serif; font-size: 0.8rem; font-weight: normal;}
+
+/* Packet Tracer Mockup GUI */
+.pt-mockup { border: 2px solid #888; border-radius: 8px; overflow: hidden; margin-bottom: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+.pt-mockup-header { background: #dcdcdc; border-bottom: 1px solid #aaa; padding: 6px 12px; font-family: sans-serif; font-size: 0.85rem; display: flex; align-items: center; gap: 10px; }
+.pt-mockup-header::before { content: "🔴 🟡 🟢"; letter-spacing: 2px; font-size: 0.7rem; }
+.pt-mockup-title { font-weight: bold; color: #333; flex-grow: 1; text-align: left; }
+.pt-mockup-toolbar { background: #eeeeee; border-bottom: 1px solid #ccc; padding: 5px 10px; display: flex; gap: 15px; font-size: 0.8rem; font-family: sans-serif; color: #555; }
+.pt-mockup-workspace { background: #ffffff; padding: 30px 20px; text-align: center; overflow-x: auto; background-image: radial-gradient(#d5d5d5 1px, transparent 1px); background-size: 20px 20px; }
+
+details { margin-top: 20px; }
+summary { background: var(--green); color: white; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-family: 'Kalam', cursive; font-weight: bold; font-size: 1.2rem; display: inline-block; box-shadow: 2px 2px 0 rgba(0,0,0,0.2); }
+summary::-webkit-details-marker { display:none; }
+</style>
+</head>
+<body>
+
+  <div class="header" id="main-header">
+    <h1>🚀 50 Labs Cisco Packet Tracer</h1>
+    <p>Des scénarios réels avec <strong>Topologies exactes interactives</strong> et Code CLI.</p>
+    <a href="ccna_pro_complet.html">⬅ Retourner au Cours Principal</a>
+  </div>
+
+  <div id="dashboard">
+    <h2 style="font-family:'Caveat', cursive; font-size:2.5rem; text-align:center;">Choisissez un Lab</h2>
+    <div style="text-align:center; margin-bottom: 20px; font-family:'Kalam',cursive;">
+      <span style="color:#27ae60; font-weight:bold;">🟢 Débutant (1-10)</span> | 
+      <span style="color:#e67e22; font-weight:bold;">🟠 Intermédiaire (11-30)</span> | 
+      <span style="color:#8e44ad; font-weight:bold;">🟣 Avancé (31-45)</span> | 
+      <span style="color:#c0392b; font-weight:bold;">🔴 Expert (46-50)</span>
+    </div>
+    <div class="lab-grid" id="lab-grid"></div>
+  </div>
+
+  <div id="lab-view">
+    <div class="lab-header">
+      <button class="btn-back" onclick="closeLab()">🔙 Retour aux Labs</button>
+      <h2 id="lab-title">Lab X</h2>
+      <div style="width: 80px;"></div> <!-- Spacer -->
+    </div>
+    <div id="lab-content"></div>
+  </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-deb" onclick="openLab(1)">Lab 1<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟢 Débutant</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[1] = {
+    title: "Lab 1: Configuration Initiale Routeur",
+    obj: "Configurer le nom d'hôte, les mots de passe console et enable secret sur un nouveau routeur.",
+    sch: `graph TD; R1((Router R1))`,
+    cli: `Router> enable<br>Router# configure terminal<br>Router(config)# hostname R1<br>R1(config)# enable secret cisco123<br>R1(config)# line console 0<br>R1(config-line)# password ptccna<br>R1(config-line)# login<br>R1(config-line)# exit`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-deb" onclick="openLab(2)">Lab 2<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟢 Débutant</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[2] = {
+    title: "Lab 2: Configuration IP et Ping",
+    obj: "Assigner une adresse IP au routeur et vérifier la connectivité avec un PC.",
+    sch: `graph LR; R1((R1)) ---|Gig0/0| PC1[PC1]`,
+    cli: `R1(config)# interface gigabitethernet 0/0<br>R1(config-if)# ip address 192.168.1.1 255.255.255.0<br>R1(config-if)# no shutdown<br>R1(config-if)# exit<br><br>// Sur le PC1, configurer l'IP 192.168.1.10 et la passerelle 192.168.1.1<br><br>R1# ping 192.168.1.10<br>Type escape sequence to abort.<br>Sending 5, 100-byte ICMP Echos... <br>!!!!!`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-deb" onclick="openLab(3)">Lab 3<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟢 Débutant</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[3] = {
+    title: "Lab 3: Accès Sécurisé SSH",
+    obj: "Activer l'accès SSH en créant un domaine, des clés RSA et un utilisateur local.",
+    sch: `graph TD; R1((R1))`,
+    cli: `R1(config)# ip domain-name ccna.com<br>R1(config)# crypto key generate rsa<br>How many bits in the modulus? 1024<br>R1(config)# username admin privilege 15 secret admin123<br>R1(config)# line vty 0 4<br>R1(config-line)# login local<br>R1(config-line)# transport input ssh`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-deb" onclick="openLab(4)">Lab 4<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟢 Débutant</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[4] = {
+    title: "Lab 4: Création de VLANs",
+    obj: "Créer le VLAN 10 (Compta) et VLAN 20 (RH) sur un Switch.",
+    sch: `graph TD; SW1[Switch SW1]`,
+    cli: `SW1(config)# vlan 10<br>SW1(config-vlan)# name COMPTA<br>SW1(config-vlan)# exit<br>SW1(config)# vlan 20<br>SW1(config-vlan)# name RH<br>SW1(config-vlan)# exit<br>SW1# show vlan brief`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-deb" onclick="openLab(5)">Lab 5<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟢 Débutant</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[5] = {
+    title: "Lab 5: Assignation de Ports (Access)",
+    obj: "Placer les ports connectés aux PCs dans les VLANs appropriés.",
+    sch: `graph TD; SW1 ---|Fa0/1| PC1(VLAN 10); SW1 ---|Fa0/2| PC2(VLAN 20)`,
+    cli: `SW1(config)# interface fastethernet 0/1<br>SW1(config-if)# switchport mode access<br>SW1(config-if)# switchport access vlan 10<br>SW1(config)# interface fastethernet 0/2<br>SW1(config-if)# switchport mode access<br>SW1(config-if)# switchport access vlan 20`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-deb" onclick="openLab(6)">Lab 6<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟢 Débutant</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[6] = {
+    title: "Lab 6: Lien Trunk 802.1Q",
+    obj: "Configurer un lien Trunk entre deux Switchs pour faire passer tous les VLANs.",
+    sch: `graph LR; SW1 ---|Gig0/1| SW2`,
+    cli: `SW1(config)# interface gigabitethernet 0/1<br>SW1(config-if)# switchport trunk encapsulation dot1q<br>SW1(config-if)# switchport mode trunk<br>SW1(config-if)# switchport trunk allowed vlan 10,20,30<br>SW1(config-if)# exit<br>SW1# show interfaces trunk`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-deb" onclick="openLab(7)">Lab 7<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟢 Débutant</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[7] = {
+    title: "Lab 7: Routage Inter-VLAN (ROAS)",
+    obj: "Configurer un Routeur (Router-on-a-stick) pour router le trafic entre le VLAN 10 et 20.",
+    sch: `graph TD; R1((R1)) ---|Gig0/0| SW1; SW1 --- PC1; SW1 --- PC2`,
+    cli: `R1(config)# interface gigabitethernet 0/0<br>R1(config-if)# no shutdown<br>R1(config)# interface gigabitethernet 0/0.10<br>R1(config-subif)# encapsulation dot1Q 10<br>R1(config-subif)# ip address 192.168.10.254 255.255.255.0<br>R1(config)# interface gigabitethernet 0/0.20<br>R1(config-subif)# encapsulation dot1Q 20<br>R1(config-subif)# ip address 192.168.20.254 255.255.255.0`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-deb" onclick="openLab(8)">Lab 8<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟢 Débutant</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[8] = {
+    title: "Lab 8: Port Security",
+    obj: "Limiter le port Fa0/1 à une seule adresse MAC et éteindre le port en cas de violation.",
+    sch: `graph TD; SW1 ---|Fa0/1| PC1`,
+    cli: `SW1(config)# interface fastethernet 0/1<br>SW1(config-if)# switchport mode access<br>SW1(config-if)# switchport port-security<br>SW1(config-if)# switchport port-security maximum 1<br>SW1(config-if)# switchport port-security mac-address sticky<br>SW1(config-if)# switchport port-security violation shutdown`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-deb" onclick="openLab(9)">Lab 9<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟢 Débutant</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[9] = {
+    title: "Lab 9: Routage Statique IPv4",
+    obj: "Ajouter une route statique sur R1 pour atteindre le LAN de R2 (192.168.2.0/24).",
+    sch: `graph LR; R1((R1)) ---|10.0.0.0/30| R2((R2)); R2 --- LAN2`,
+    cli: `R1(config)# ip route 192.168.2.0 255.255.255.0 10.0.0.2<br><br>// Vérification<br>R1# show ip route static<br>S    192.168.2.0/24 [1/0] via 10.0.0.2`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-deb" onclick="openLab(10)">Lab 10<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟢 Débutant</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[10] = {
+    title: "Lab 10: Route Statique par Défaut",
+    obj: "Configurer R1 pour envoyer tout le trafic inconnu vers le FAI (ISP).",
+    sch: `graph LR; R1((R1)) ---|Serial0| ISP((ISP))`,
+    cli: `R1(config)# ip route 0.0.0.0 0.0.0.0 203.0.113.1<br><br>// Le trafic destiné à internet passera par le FAI<br>R1# show ip route<br>S*   0.0.0.0/0 [1/0] via 203.0.113.1`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-int" onclick="openLab(11)">Lab 11<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟠 Intermédiaire</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[11] = {
+    title: "Lab 11: Serveur DHCP (IPv4)",
+    obj: "Configurer R1 comme serveur DHCP pour le LAN 192.168.10.0/24 (exclure .1 à .10).",
+    sch: `graph TD; R1((R1)) --- SW1 --- PC1`,
+    cli: `R1(config)# ip dhcp excluded-address 192.168.10.1 192.168.10.10<br>R1(config)# ip dhcp pool LAN_COMPTA<br>R1(dhcp-config)# network 192.168.10.0 255.255.255.0<br>R1(dhcp-config)# default-router 192.168.10.1<br>R1(dhcp-config)# dns-server 8.8.8.8<br>R1(dhcp-config)# exit`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-int" onclick="openLab(12)">Lab 12<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟠 Intermédiaire</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[12] = {
+    title: "Lab 12: EtherChannel LACP",
+    obj: "Agréger les ports Gig0/1 et Gig0/2 entre SW1 et SW2 avec LACP (Active).",
+    sch: `graph LR; SW1 ===|Gig0/1 & Gig0/2| SW2`,
+    cli: `SW1(config)# interface range gigabitethernet 0/1 - 2<br>SW1(config-if-range)# channel-group 1 mode active<br>SW1(config-if-range)# exit<br>SW1(config)# interface port-channel 1<br>SW1(config-if)# switchport mode trunk<br>SW1# show etherchannel summary`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-int" onclick="openLab(13)">Lab 13<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟠 Intermédiaire</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[13] = {
+    title: "Lab 13: OSPFv2 Single-Area",
+    obj: "Activer OSPF (Process 1) sur R1 dans l'Area 0.",
+    sch: `graph LR; R1((R1)) --- R2((R2))`,
+    cli: `R1(config)# router ospf 1<br>R1(config-router)# router-id 1.1.1.1<br>R1(config-router)# network 10.0.0.0 0.0.0.3 area 0<br>R1(config-router)# network 192.168.10.0 0.0.0.255 area 0<br>R1(config-router)# passive-interface gigabitethernet 0/0`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-int" onclick="openLab(14)">Lab 14<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟠 Intermédiaire</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[14] = {
+    title: "Lab 14: ACL Standard",
+    obj: "Créer une ACL 10 pour empêcher le PC 192.168.1.50 d'accéder au Serveur.",
+    sch: `graph LR; PC1 --- R1((R1)) --- Serveur`,
+    cli: `R1(config)# access-list 10 deny host 192.168.1.50<br>R1(config)# access-list 10 permit any<br>R1(config)# interface gigabitethernet 0/1<br>// Application au plus près de la destination<br>R1(config-if)# ip access-group 10 out`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-int" onclick="openLab(15)">Lab 15<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟠 Intermédiaire</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[15] = {
+    title: "Lab 15: NAT Overload (PAT)",
+    obj: "Traduire les adresses IP privées du LAN vers l'IP publique de l'interface WAN (Gig0/1).",
+    sch: `graph LR; LAN --- R1((R1)) ---|Gig0/1| ISP`,
+    cli: `R1(config)# access-list 1 permit 192.168.1.0 0.0.0.255<br>R1(config)# ip nat inside source list 1 interface gigabitethernet 0/1 overload<br>R1(config)# interface gigabitethernet 0/0<br>R1(config-if)# ip nat inside<br>R1(config)# interface gigabitethernet 0/1<br>R1(config-if)# ip nat outside`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-int" onclick="openLab(16)">Lab 16<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟠 Intermédiaire</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[16] = {
+    title: "Lab 16: Routage OSPF Multi-Area (Scénario 16)",
+    obj: "Configurer R1 (ABR) avec l'interface Serial dans l'Area 0 et le LAN dans l'Area 51.",
+    sch: `graph TD; R1((Routeur R1)) --- SW1[Switch Local] --- PC1; R1 ---|WAN| R2((Routeur R2))`,
+    cli: `R1(config)# router ospf 10<br>R1(config-router)# network 10.1.1.0 0.0.0.3 area 0<br>R1(config-router)# network 192.168.51.0 0.0.0.255 area 51`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-int" onclick="openLab(17)">Lab 17<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟠 Intermédiaire</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[17] = {
+    title: "Lab 17: HSRP (First Hop Redundancy) (Scénario 17)",
+    obj: "Configurer R1 comme passerelle active (Active) HSRP pour l'IP virtuelle 192.168.23.254.",
+    sch: `graph TD; R1((Routeur R1)) --- SW1[Switch Local] --- PC1; R1 ---|WAN| R2((Routeur R2))`,
+    cli: `R1(config)# interface gigabitethernet 0/0<br>R1(config-if)# standby 1 ip 192.168.23.254<br>R1(config-if)# standby 1 priority 110<br>R1(config-if)# standby 1 preempt`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-int" onclick="openLab(18)">Lab 18<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟠 Intermédiaire</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[18] = {
+    title: "Lab 18: ACL Étendue (Extended) (Scénario 18)",
+    obj: "Bloquer uniquement le trafic HTTP (port 80) du LAN 14 vers Internet.",
+    sch: `graph TD; R1((Routeur R1)) --- SW1[Switch Local] --- PC1; R1 ---|WAN| R2((Routeur R2))`,
+    cli: `R1(config)# access-list 101 deny tcp 192.168.14.0 0.0.0.255 any eq 80<br>R1(config)# access-list 101 permit ip any any<br>R1(config)# interface gig 0/0<br>R1(config-if)# ip access-group 101 in`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-int" onclick="openLab(19)">Lab 19<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟠 Intermédiaire</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[19] = {
+    title: "Lab 19: ACL Étendue (Extended) (Scénario 19)",
+    obj: "Bloquer uniquement le trafic HTTP (port 80) du LAN 25 vers Internet.",
+    sch: `graph TD; R1((Routeur R1)) --- SW1[Switch Local] --- PC1; R1 ---|WAN| R2((Routeur R2))`,
+    cli: `R1(config)# access-list 101 deny tcp 192.168.25.0 0.0.0.255 any eq 80<br>R1(config)# access-list 101 permit ip any any<br>R1(config)# interface gig 0/0<br>R1(config-if)# ip access-group 101 in`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-int" onclick="openLab(20)">Lab 20<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟠 Intermédiaire</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[20] = {
+    title: "Lab 20: Configuration de BGP (eBGP) (Scénario 20)",
+    obj: "Configurer R1 (AS 650035) avec le voisin R2 (AS 650043) via BGP.",
+    sch: `graph TD; R1((Routeur R1)) --- SW1[Switch Local] --- PC1; R1 ---|WAN| R2((Routeur R2))`,
+    cli: `R1(config)# router bgp 650035<br>R1(config-router)# neighbor 10.1.1.2 remote-as 650043<br>R1(config-router)# network 192.168.35.0 mask 255.255.255.0`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-int" onclick="openLab(21)">Lab 21<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟠 Intermédiaire</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[21] = {
+    title: "Lab 21: ACL Étendue (Extended) (Scénario 21)",
+    obj: "Bloquer uniquement le trafic HTTP (port 80) du LAN 42 vers Internet.",
+    sch: `graph TD; R1((Routeur R1)) --- SW1[Switch Local] --- PC1; R1 ---|WAN| R2((Routeur R2))`,
+    cli: `R1(config)# access-list 101 deny tcp 192.168.42.0 0.0.0.255 any eq 80<br>R1(config)# access-list 101 permit ip any any<br>R1(config)# interface gig 0/0<br>R1(config-if)# ip access-group 101 in`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-int" onclick="openLab(22)">Lab 22<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟠 Intermédiaire</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[22] = {
+    title: "Lab 22: Sécurité des mots de passe (Scénario 22)",
+    obj: "Chiffrer tous les mots de passe en clair dans la configuration.",
+    sch: `graph TD; R1((Routeur R1)) --- SW1[Switch Local] --- PC1; R1 ---|WAN| R2((Routeur R2))`,
+    cli: `R1(config)# service password-encryption<br>R1(config)# security passwords min-length 8`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-int" onclick="openLab(23)">Lab 23<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟠 Intermédiaire</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[23] = {
+    title: "Lab 23: IPv6 OSPFv3 (Scénario 23)",
+    obj: "Activer OSPFv3 sur l'interface Gig0/0 dans l'Area 0.",
+    sch: `graph TD; R1((Routeur R1)) --- SW1[Switch Local] --- PC1; R1 ---|WAN| R2((Routeur R2))`,
+    cli: `R1(config)# ipv6 router ospf 1<br>R1(config-rtr)# router-id 1.1.1.1<br>R1(config)# interface gigabitethernet 0/0<br>R1(config-if)# ipv6 ospf 1 area 0`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-int" onclick="openLab(24)">Lab 24<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟠 Intermédiaire</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[24] = {
+    title: "Lab 24: IPv6 OSPFv3 (Scénario 24)",
+    obj: "Activer OSPFv3 sur l'interface Gig0/0 dans l'Area 0.",
+    sch: `graph TD; R1((Routeur R1)) --- SW1[Switch Local] --- PC1; R1 ---|WAN| R2((Routeur R2))`,
+    cli: `R1(config)# ipv6 router ospf 1<br>R1(config-rtr)# router-id 1.1.1.1<br>R1(config)# interface gigabitethernet 0/0<br>R1(config-if)# ipv6 ospf 1 area 0`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-int" onclick="openLab(25)">Lab 25<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟠 Intermédiaire</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[25] = {
+    title: "Lab 25: IPv6 Adresse Statique (Scénario 25)",
+    obj: "Assigner l'adresse IPv6 2001:DB8:ACAD:39::1/64 à l'interface Gig0/0.",
+    sch: `graph TD; R1((Routeur R1)) --- SW1[Switch Local] --- PC1; R1 ---|WAN| R2((Routeur R2))`,
+    cli: `R1(config)# ipv6 unicast-routing<br>R1(config)# interface gigabitethernet 0/0<br>R1(config-if)# ipv6 address 2001:DB8:ACAD:39::1/64<br>R1(config-if)# no shut`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-int" onclick="openLab(26)">Lab 26<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟠 Intermédiaire</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[26] = {
+    title: "Lab 26: DTP (Dynamic Trunking) (Scénario 26)",
+    obj: "Forcer l'interface Fa0/96 en mode Trunk sans négociation DTP.",
+    sch: `graph TD; R1((Routeur R1)) --- SW1[Switch Local] --- PC1; R1 ---|WAN| R2((Routeur R2))`,
+    cli: `SW1(config)# interface fastethernet 0/96<br>SW1(config-if)# switchport mode trunk<br>SW1(config-if)# switchport nonegotiate`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-int" onclick="openLab(27)">Lab 27<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟠 Intermédiaire</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[27] = {
+    title: "Lab 27: Configuration de BGP (eBGP) (Scénario 27)",
+    obj: "Configurer R1 (AS 650083) avec le voisin R2 (AS 650071) via BGP.",
+    sch: `graph TD; R1((Routeur R1)) --- SW1[Switch Local] --- PC1; R1 ---|WAN| R2((Routeur R2))`,
+    cli: `R1(config)# router bgp 650083<br>R1(config-router)# neighbor 10.1.1.2 remote-as 650071<br>R1(config-router)# network 192.168.83.0 mask 255.255.255.0`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-int" onclick="openLab(28)">Lab 28<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟠 Intermédiaire</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[28] = {
+    title: "Lab 28: DTP (Dynamic Trunking) (Scénario 28)",
+    obj: "Forcer l'interface Fa0/11 en mode Trunk sans négociation DTP.",
+    sch: `graph TD; R1((Routeur R1)) --- SW1[Switch Local] --- PC1; R1 ---|WAN| R2((Routeur R2))`,
+    cli: `SW1(config)# interface fastethernet 0/11<br>SW1(config-if)# switchport mode trunk<br>SW1(config-if)# switchport nonegotiate`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-int" onclick="openLab(29)">Lab 29<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟠 Intermédiaire</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[29] = {
+    title: "Lab 29: IPv6 OSPFv3 (Scénario 29)",
+    obj: "Activer OSPFv3 sur l'interface Gig0/0 dans l'Area 0.",
+    sch: `graph TD; R1((Routeur R1)) --- SW1[Switch Local] --- PC1; R1 ---|WAN| R2((Routeur R2))`,
+    cli: `R1(config)# ipv6 router ospf 1<br>R1(config-rtr)# router-id 1.1.1.1<br>R1(config)# interface gigabitethernet 0/0<br>R1(config-if)# ipv6 ospf 1 area 0`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-int" onclick="openLab(30)">Lab 30<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟠 Intermédiaire</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[30] = {
+    title: "Lab 30: HSRP (First Hop Redundancy) (Scénario 30)",
+    obj: "Configurer R1 comme passerelle active (Active) HSRP pour l'IP virtuelle 192.168.37.254.",
+    sch: `graph TD; R1((Routeur R1)) --- SW1[Switch Local] --- PC1; R1 ---|WAN| R2((Routeur R2))`,
+    cli: `R1(config)# interface gigabitethernet 0/0<br>R1(config-if)# standby 1 ip 192.168.37.254<br>R1(config-if)# standby 1 priority 110<br>R1(config-if)# standby 1 preempt`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-ava" onclick="openLab(31)">Lab 31<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟣 Avancé</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[31] = {
+    title: "Lab 31: DHCP Snooping (Scénario 31)",
+    obj: "Activer DHCP Snooping et déclarer le port Gig0/1 comme 'Trust' (connecté au vrai serveur DHCP).",
+    sch: `graph TD; R1((Routeur R1)) --- SW1[Switch Local] --- PC1; R1 ---|WAN| R2((Routeur R2))`,
+    cli: `SW1(config)# ip dhcp snooping<br>SW1(config)# ip dhcp snooping vlan 35<br>SW1(config)# interface gigabitethernet 0/1<br>SW1(config-if)# ip dhcp snooping trust`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-ava" onclick="openLab(32)">Lab 32<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟣 Avancé</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[32] = {
+    title: "Lab 32: IPv6 OSPFv3 (Scénario 32)",
+    obj: "Activer OSPFv3 sur l'interface Gig0/0 dans l'Area 0.",
+    sch: `graph TD; R1((Routeur R1)) --- SW1[Switch Local] --- PC1; R1 ---|WAN| R2((Routeur R2))`,
+    cli: `R1(config)# ipv6 router ospf 1<br>R1(config-rtr)# router-id 1.1.1.1<br>R1(config)# interface gigabitethernet 0/0<br>R1(config-if)# ipv6 ospf 1 area 0`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-ava" onclick="openLab(33)">Lab 33<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟣 Avancé</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[33] = {
+    title: "Lab 33: IPv6 OSPFv3 (Scénario 33)",
+    obj: "Activer OSPFv3 sur l'interface Gig0/0 dans l'Area 0.",
+    sch: `graph TD; R1((Routeur R1)) --- SW1[Switch Local] --- PC1; R1 ---|WAN| R2((Routeur R2))`,
+    cli: `R1(config)# ipv6 router ospf 1<br>R1(config-rtr)# router-id 1.1.1.1<br>R1(config)# interface gigabitethernet 0/0<br>R1(config-if)# ipv6 ospf 1 area 0`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-ava" onclick="openLab(34)">Lab 34<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟣 Avancé</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[34] = {
+    title: "Lab 34: CDP et LLDP (Scénario 34)",
+    obj: "Désactiver CDP globalement et activer LLDP (standard ouvert).",
+    sch: `graph TD; R1((Routeur R1)) --- SW1[Switch Local] --- PC1; R1 ---|WAN| R2((Routeur R2))`,
+    cli: `R1(config)# no cdp run<br>R1(config)# lldp run<br>R1# show lldp neighbors`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-ava" onclick="openLab(35)">Lab 35<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟣 Avancé</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[35] = {
+    title: "Lab 35: Routage OSPF Multi-Area (Scénario 35)",
+    obj: "Configurer R1 (ABR) avec l'interface Serial dans l'Area 0 et le LAN dans l'Area 14.",
+    sch: `graph TD; R1((Routeur R1)) --- SW1[Switch Local] --- PC1; R1 ---|WAN| R2((Routeur R2))`,
+    cli: `R1(config)# router ospf 10<br>R1(config-router)# network 10.1.1.0 0.0.0.3 area 0<br>R1(config-router)# network 192.168.14.0 0.0.0.255 area 14`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-ava" onclick="openLab(36)">Lab 36<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟣 Avancé</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[36] = {
+    title: "Lab 36: DHCP Snooping (Scénario 36)",
+    obj: "Activer DHCP Snooping et déclarer le port Gig0/1 comme 'Trust' (connecté au vrai serveur DHCP).",
+    sch: `graph TD; R1((Routeur R1)) --- SW1[Switch Local] --- PC1; R1 ---|WAN| R2((Routeur R2))`,
+    cli: `SW1(config)# ip dhcp snooping<br>SW1(config)# ip dhcp snooping vlan 71<br>SW1(config)# interface gigabitethernet 0/1<br>SW1(config-if)# ip dhcp snooping trust`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-ava" onclick="openLab(37)">Lab 37<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟣 Avancé</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[37] = {
+    title: "Lab 37: Routage OSPF Multi-Area (Scénario 37)",
+    obj: "Configurer R1 (ABR) avec l'interface Serial dans l'Area 0 et le LAN dans l'Area 72.",
+    sch: `graph TD; R1((Routeur R1)) --- SW1[Switch Local] --- PC1; R1 ---|WAN| R2((Routeur R2))`,
+    cli: `R1(config)# router ospf 10<br>R1(config-router)# network 10.1.1.0 0.0.0.3 area 0<br>R1(config-router)# network 192.168.72.0 0.0.0.255 area 72`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-ava" onclick="openLab(38)">Lab 38<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟣 Avancé</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[38] = {
+    title: "Lab 38: DHCP Snooping (Scénario 38)",
+    obj: "Activer DHCP Snooping et déclarer le port Gig0/1 comme 'Trust' (connecté au vrai serveur DHCP).",
+    sch: `graph TD; R1((Routeur R1)) --- SW1[Switch Local] --- PC1; R1 ---|WAN| R2((Routeur R2))`,
+    cli: `SW1(config)# ip dhcp snooping<br>SW1(config)# ip dhcp snooping vlan 19<br>SW1(config)# interface gigabitethernet 0/1<br>SW1(config-if)# ip dhcp snooping trust`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-ava" onclick="openLab(39)">Lab 39<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟣 Avancé</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[39] = {
+    title: "Lab 39: IPv6 OSPFv3 (Scénario 39)",
+    obj: "Activer OSPFv3 sur l'interface Gig0/0 dans l'Area 0.",
+    sch: `graph TD; R1((Routeur R1)) --- SW1[Switch Local] --- PC1; R1 ---|WAN| R2((Routeur R2))`,
+    cli: `R1(config)# ipv6 router ospf 1<br>R1(config-rtr)# router-id 1.1.1.1<br>R1(config)# interface gigabitethernet 0/0<br>R1(config-if)# ipv6 ospf 1 area 0`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-ava" onclick="openLab(40)">Lab 40<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟣 Avancé</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[40] = {
+    title: "Lab 40: HSRP (First Hop Redundancy) (Scénario 40)",
+    obj: "Configurer R1 comme passerelle active (Active) HSRP pour l'IP virtuelle 192.168.23.254.",
+    sch: `graph TD; R1((Routeur R1)) --- SW1[Switch Local] --- PC1; R1 ---|WAN| R2((Routeur R2))`,
+    cli: `R1(config)# interface gigabitethernet 0/0<br>R1(config-if)# standby 1 ip 192.168.23.254<br>R1(config-if)# standby 1 priority 110<br>R1(config-if)# standby 1 preempt`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-ava" onclick="openLab(41)">Lab 41<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟣 Avancé</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[41] = {
+    title: "Lab 41: IPv6 OSPFv3 (Scénario 41)",
+    obj: "Activer OSPFv3 sur l'interface Gig0/0 dans l'Area 0.",
+    sch: `graph TD; R1((Routeur R1)) --- SW1[Switch Local] --- PC1; R1 ---|WAN| R2((Routeur R2))`,
+    cli: `R1(config)# ipv6 router ospf 1<br>R1(config-rtr)# router-id 1.1.1.1<br>R1(config)# interface gigabitethernet 0/0<br>R1(config-if)# ipv6 ospf 1 area 0`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-ava" onclick="openLab(42)">Lab 42<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟣 Avancé</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[42] = {
+    title: "Lab 42: ACL Étendue (Extended) (Scénario 42)",
+    obj: "Bloquer uniquement le trafic HTTP (port 80) du LAN 89 vers Internet.",
+    sch: `graph TD; R1((Routeur R1)) --- SW1[Switch Local] --- PC1; R1 ---|WAN| R2((Routeur R2))`,
+    cli: `R1(config)# access-list 101 deny tcp 192.168.89.0 0.0.0.255 any eq 80<br>R1(config)# access-list 101 permit ip any any<br>R1(config)# interface gig 0/0<br>R1(config-if)# ip access-group 101 in`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-ava" onclick="openLab(43)">Lab 43<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟣 Avancé</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[43] = {
+    title: "Lab 43: DHCP Snooping (Scénario 43)",
+    obj: "Activer DHCP Snooping et déclarer le port Gig0/1 comme 'Trust' (connecté au vrai serveur DHCP).",
+    sch: `graph TD; R1((Routeur R1)) --- SW1[Switch Local] --- PC1; R1 ---|WAN| R2((Routeur R2))`,
+    cli: `SW1(config)# ip dhcp snooping<br>SW1(config)# ip dhcp snooping vlan 18<br>SW1(config)# interface gigabitethernet 0/1<br>SW1(config-if)# ip dhcp snooping trust`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-ava" onclick="openLab(44)">Lab 44<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟣 Avancé</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[44] = {
+    title: "Lab 44: Routage OSPF Multi-Area (Scénario 44)",
+    obj: "Configurer R1 (ABR) avec l'interface Serial dans l'Area 0 et le LAN dans l'Area 86.",
+    sch: `graph TD; R1((Routeur R1)) --- SW1[Switch Local] --- PC1; R1 ---|WAN| R2((Routeur R2))`,
+    cli: `R1(config)# router ospf 10<br>R1(config-router)# network 10.1.1.0 0.0.0.3 area 0<br>R1(config-router)# network 192.168.86.0 0.0.0.255 area 86`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-ava" onclick="openLab(45)">Lab 45<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🟣 Avancé</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[45] = {
+    title: "Lab 45: DTP (Dynamic Trunking) (Scénario 45)",
+    obj: "Forcer l'interface Fa0/12 en mode Trunk sans négociation DTP.",
+    sch: `graph TD; R1((Routeur R1)) --- SW1[Switch Local] --- PC1; R1 ---|WAN| R2((Routeur R2))`,
+    cli: `SW1(config)# interface fastethernet 0/12<br>SW1(config-if)# switchport mode trunk<br>SW1(config-if)# switchport nonegotiate`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-exp" onclick="openLab(46)">Lab 46<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🔴 Expert</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[46] = {
+    title: "Lab 46: IPv6 Adresse Statique (Scénario 46)",
+    obj: "Assigner l'adresse IPv6 2001:DB8:ACAD:93::1/64 à l'interface Gig0/0.",
+    sch: `graph TD; R1((Routeur R1)) --- SW1[Switch Local] --- PC1; R1 ---|WAN| R2((Routeur R2))`,
+    cli: `R1(config)# ipv6 unicast-routing<br>R1(config)# interface gigabitethernet 0/0<br>R1(config-if)# ipv6 address 2001:DB8:ACAD:93::1/64<br>R1(config-if)# no shut`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-exp" onclick="openLab(47)">Lab 47<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🔴 Expert</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[47] = {
+    title: "Lab 47: IPv6 OSPFv3 (Scénario 47)",
+    obj: "Activer OSPFv3 sur l'interface Gig0/0 dans l'Area 0.",
+    sch: `graph TD; R1((Routeur R1)) --- SW1[Switch Local] --- PC1; R1 ---|WAN| R2((Routeur R2))`,
+    cli: `R1(config)# ipv6 router ospf 1<br>R1(config-rtr)# router-id 1.1.1.1<br>R1(config)# interface gigabitethernet 0/0<br>R1(config-if)# ipv6 ospf 1 area 0`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-exp" onclick="openLab(48)">Lab 48<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🔴 Expert</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[48] = {
+    title: "Lab 48: Routage OSPF Multi-Area (Scénario 48)",
+    obj: "Configurer R1 (ABR) avec l'interface Serial dans l'Area 0 et le LAN dans l'Area 54.",
+    sch: `graph TD; R1((Routeur R1)) --- SW1[Switch Local] --- PC1; R1 ---|WAN| R2((Routeur R2))`,
+    cli: `R1(config)# router ospf 10<br>R1(config-router)# network 10.1.1.0 0.0.0.3 area 0<br>R1(config-router)# network 192.168.54.0 0.0.0.255 area 54`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-exp" onclick="openLab(49)">Lab 49<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🔴 Expert</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[49] = {
+    title: "Lab 49: DHCP Snooping (Scénario 49)",
+    obj: "Activer DHCP Snooping et déclarer le port Gig0/1 comme 'Trust' (connecté au vrai serveur DHCP).",
+    sch: `graph TD; R1((Routeur R1)) --- SW1[Switch Local] --- PC1; R1 ---|WAN| R2((Routeur R2))`,
+    cli: `SW1(config)# ip dhcp snooping<br>SW1(config)# ip dhcp snooping vlan 10<br>SW1(config)# interface gigabitethernet 0/1<br>SW1(config-if)# ip dhcp snooping trust`
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const grid = document.getElementById('lab-grid');
+    grid.innerHTML += `<div class="lab-btn b-exp" onclick="openLab(50)">Lab 50<br><span style="font-size:0.8rem; font-weight:normal; color:inherit;">🔴 Expert</span></div>`;
+});
+</script>
+
+<script>
+window.labsData = window.labsData || {};
+window.labsData[50] = {
+    title: "Lab 50: Sécurité des mots de passe (Scénario 50)",
+    obj: "Chiffrer tous les mots de passe en clair dans la configuration.",
+    sch: `graph TD; R1((Routeur R1)) --- SW1[Switch Local] --- PC1; R1 ---|WAN| R2((Routeur R2))`,
+    cli: `R1(config)# service password-encryption<br>R1(config)# security passwords min-length 8`
+};
+</script>
+
+<script>
+function openLab(id) {
+    document.getElementById('dashboard').style.display = 'none';
+    document.getElementById('main-header').style.display = 'none';
+    document.getElementById('lab-view').style.display = 'block';
+    
+    const lab = window.labsData[id];
+    document.getElementById('lab-title').innerText = lab.title;
+    
+    const content = `
+      <div class="q-card">
+        <div class="objectif">
+          <h3 style="margin-top:0; color:var(--blue);"><span style="font-size:1.5rem;">🎯</span> Objectif du Lab</h3>
+          <p style="font-size: 1.2rem;">${lab.obj}</p>
+        </div>
+        
+        <p style="font-size:0.9rem; color:#666; margin-bottom:10px;"><em>Cette fenêtre simule l'interface de Packet Tracer.</em></p>
+        <div class="pt-mockup">
+          <div class="pt-mockup-header">
+            <span class="pt-mockup-title">Cisco Packet Tracer - Topology.pkt</span>
+          </div>
+          <div class="pt-mockup-toolbar">
+            <span>File</span><span>Edit</span><span>Options</span><span>View</span><span>Tools</span>
+          </div>
+          <div class="pt-mockup-workspace">
+            <div class="mermaid">${lab.sch}</div>
+          </div>
+        </div>
+        
+        <details>
+          <summary>✅ Afficher la Solution (Cisco CLI)</summary>
+          <div class="pt-terminal">${lab.cli}</div>
+        </details>
+      </div>
+    `;
+    
+    document.getElementById('lab-content').innerHTML = content;
+    mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+    window.scrollTo(0,0);
+}
+
+function closeLab() {
+    document.getElementById('lab-view').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    document.getElementById('main-header').style.display = 'block';
+    window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>
