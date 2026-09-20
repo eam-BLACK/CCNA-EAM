@@ -25,7 +25,7 @@ export default async function handler(req, res) {
         'Authorization': `Bearer ${apiKey}`
       },
       body: JSON.stringify({
-        model: "llama3-8b-8192", // Modèle ultra-rapide et gratuit
+        model: "openai/gpt-oss-120b", // Modèle demandé par l'utilisateur
         messages: [
           {
             role: "system",
